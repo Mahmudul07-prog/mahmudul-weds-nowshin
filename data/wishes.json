@@ -1,0 +1,34 @@
+[
+  {
+    "id": "wish-1794228039123-dsd6e",
+    "name": "Shakil Khan",
+    "relation": "Brother",
+    "message": "Shuvo Bibaho!",
+    "emoji": "??",
+    "createdAt": "2026-11-09T12:40:39.123Z"
+  },
+  {
+    "id": "wish-1",
+    "name": "Tanvir Ahmed",
+    "relation": "Friend",
+    "message": "মাবরুক! অনেক অনেক শুভকামনা ও দোয়া রইল তোমাদের নতুন জীবনের জন্য। আল্লাহ তোমাদের দাম্পত্য জীবনে অফুরন্ত বরকত দান করুন।",
+    "emoji": "🤲",
+    "createdAt": "2026-11-09T12:00:00.000Z"
+  },
+  {
+    "id": "wish-2",
+    "name": "Sumaiya & Rafiq",
+    "relation": "Cousin",
+    "message": "Heartiest congratulations! May your journey together be blessed with endless happiness, love, and understanding.",
+    "emoji": "💐",
+    "createdAt": "2026-11-09T13:30:00.000Z"
+  },
+  {
+    "id": "wish-3",
+    "name": "Dr. Kamrul Hasan",
+    "relation": "Family Friend",
+    "message": "Barakallahu lakuma wa baraka alaikuma wa jama'a bainakuma fi khair! Wishing you both a lifetime of peace and affection.",
+    "emoji": "💍",
+    "createdAt": "2026-11-09T14:15:00.000Z"
+  }
+]

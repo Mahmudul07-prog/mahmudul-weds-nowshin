@@ -1,26 +1,137 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg-royal-dark: #0b1411;
+    --bg-royal-card: #13241f;
+    --gold-primary: #d4af37;
+    --gold-light: #fbe285;
+    --gold-dark: #aa8214;
+    --rose-accent: #f472b6;
+    --ivory: #faf7f2;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #08110e;
+    color: #f7f4ed;
+    overflow-x: hidden;
+    font-family: var(--font-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  ::selection {
+    background-color: #d4af37;
+    color: #0b1411;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom Gold Shimmer Text */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #fce09b 0%, #d4af37 50%, #f3c25b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-gradient-border {
+  border-image: linear-gradient(135deg, #d4af37, #8c6d1f, #fce09b) 1;
+}
+
+/* Glassmorphism Card with Gold Border */
+.royal-glass {
+  background: rgba(19, 36, 31, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  box-shadow: 0 10px 35px -5px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+}
+
+.royal-glass-hover:hover {
+  border-color: rgba(212, 175, 55, 0.45);
+  box-shadow: 0 14px 45px -5px rgba(212, 175, 55, 0.15), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Radial Glows */
+.gold-glow {
+  box-shadow: 0 0 40px -10px rgba(212, 175, 55, 0.35);
+}
+
+.emerald-glow {
+  box-shadow: 0 0 50px -10px rgba(16, 185, 129, 0.2);
+}
+
+/* Keyframes & Animations */
+@keyframes floatPetal {
+  0% {
+    transform: translateY(-10%) rotate(0deg) translateX(0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.8;
+  }
+  85% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg) translateX(50px);
+    opacity: 0;
+  }
+}
+
+.animate-petal {
+  animation: floatPetal linear infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 6s ease-in-out infinite;
+}
+
+/* Wax seal break / unlock */
+@keyframes sealPop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15) rotate(5deg);
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+}
+
+.animate-seal-break {
+  animation: sealPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #08110e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #23453a;
+  border-radius: 4px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d4af37;
 }

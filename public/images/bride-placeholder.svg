@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgBride" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a1420" />
+      <stop offset="100%" stop-color="#140910" />
+    </linearGradient>
+    <linearGradient id="roseGoldBride" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbc2eb" />
+      <stop offset="50%" stop-color="#a6c1ee" />
+      <stop offset="100%" stop-color="#e2b0c4" />
+    </linearGradient>
+    <linearGradient id="goldAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f6d365" />
+      <stop offset="100%" stop-color="#d4af37" />
+    </linearGradient>
+    <filter id="glowBride">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="400" height="400" rx="40" fill="url(#bgBride)" />
+  <circle cx="200" cy="200" r="185" fill="none" stroke="url(#goldAccent)" stroke-width="2" stroke-dasharray="6,6" opacity="0.6"/>
+  <circle cx="200" cy="200" r="175" fill="none" stroke="url(#roseGoldBride)" stroke-width="1" opacity="0.3"/>
+  
+  <!-- Bride Silhouette with Dupatta / Veil & Tikka hint -->
+  <g fill="url(#goldAccent)" opacity="0.88" filter="url(#glowBride)">
+    <!-- Head -->
+    <circle cx="200" cy="142" r="42" />
+    <!-- Maang Tikka -->
+    <circle cx="200" cy="120" r="4" fill="#ffffff" />
+    <path d="M200 102 L200 120" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+    
+    <!-- Dupatta / Veil flow -->
+    <path d="M140 145 C130 190, 125 240, 115 285 C145 280, 160 250, 175 220 C185 240, 195 245, 200 245 C205 245, 215 240, 225 220 C240 250, 255 280, 285 285 C275 240, 270 190, 260 145 C250 120, 150 120, 140 145 Z" fill="url(#roseGoldBride)" opacity="0.5" />
+    
+    <!-- Torso / Saree / Lehenga neckline -->
+    <path d="M150 270 C150 215, 170 200, 200 200 C230 200, 250 215, 250 270 C250 290, 150 290, 150 270 Z" />
+    
+    <!-- Necklace / Jewelry hint -->
+    <path d="M182 205 Q200 220 218 205" fill="none" stroke="#f6d365" stroke-width="2.5" />
+    <circle cx="200" cy="216" r="3" fill="#ffffff" />
+  </g>
+  
+  <text x="200" y="340" text-anchor="middle" fill="#fbc2eb" font-family="Georgia, serif" font-size="16" letter-spacing="4">THE BRIDE</text>
+  <text x="200" y="360" text-anchor="middle" fill="#d4af37" font-family="Arial, sans-serif" font-size="11" opacity="0.8">AWAITING OUR FIRST MEET ✨</text>
+</svg>
