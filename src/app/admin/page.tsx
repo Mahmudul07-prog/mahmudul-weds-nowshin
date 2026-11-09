@@ -33,7 +33,7 @@ export default function AdminDashboard() {
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<"all" | "yes" | "tentative" | "no">("all");
 
-  const correctPin = "1234"; // Default security PIN
+  const correctPin = "6300"; // Secret Host Security PIN
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,7 +42,7 @@ export default function AdminDashboard() {
       setPinError("");
       loadData();
     } else {
-      setPinError("ভুল পিন কোড! সঠিক পিন দিন (ডিফল্ট: 1234)");
+      setPinError("ভুল পিন কোড! সঠিক পিন দিন।");
     }
   };
 
@@ -160,7 +160,7 @@ export default function AdminDashboard() {
                 maxLength={6}
                 value={pin}
                 onChange={(e) => setPin(e.target.value)}
-                placeholder="PIN দিন (Default: 1234)"
+                placeholder="PIN দিন"
                 className="w-full text-center tracking-widest text-lg font-bold px-4 py-3 rounded-xl bg-[#0a1813] border border-[#d4af37]/40 text-[#fce09b] placeholder-stone-500 focus:outline-none focus:border-[#d4af37]"
                 autoFocus
               />
