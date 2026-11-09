@@ -16,6 +16,7 @@ function readRsvpsFromFile(): RsvpEntry[] {
       const data = fs.readFileSync(filePath, "utf-8");
       const parsed = JSON.parse(data);
       if (Array.isArray(parsed)) {
+        inMemoryRsvps = parsed;
         return parsed;
       }
     }
@@ -34,7 +35,7 @@ function writeRsvpsToFile(rsvps: RsvpEntry[]) {
     }
     fs.writeFileSync(filePath, JSON.stringify(rsvps, null, 2), "utf-8");
   } catch (error) {
-    console.warn("Could not write RSVPs to disk (likely serverless environment):", error);
+    console.warn("Could not write RSVPs to disk:", error);
   }
 }
 
@@ -78,5 +79,33 @@ export async function POST(req: Request) {
       { success: false, error: "Failed to process RSVP" },
       { status: 500 }
     );
+  }
+}
+
+export async function DELETE(req: Request) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+    const action = searchParams.get("action");
+
+    if (action === "clear-all") {
+      inMemoryRsvps = [];
+      writeRsvpsToFile([]);
+      return NextResponse.json({ success: true, message: "All RSVPs cleared" });
+    }
+
+    if (!id) {
+      return NextResponse.json({ success: false, error: "ID required" }, { status: 400 });
+    }
+
+    const current = readRsvpsFromFile();
+    const filtered = current.filter((item) => item.id !== id);
+    inMemoryRsvps = filtered;
+    writeRsvpsToFile(filtered);
+
+    return NextResponse.json({ success: true, message: "Deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting RSVP:", error);
+    return NextResponse.json({ success: false, error: "Failed to delete" }, { status: 500 });
   }
 }

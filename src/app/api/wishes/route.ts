@@ -43,6 +43,7 @@ function readWishesFromFile(): Wish[] {
       const data = fs.readFileSync(filePath, "utf-8");
       const parsed = JSON.parse(data);
       if (Array.isArray(parsed) && parsed.length > 0) {
+        inMemoryWishes = parsed;
         return parsed;
       }
     }
@@ -61,7 +62,7 @@ function writeWishesToFile(wishes: Wish[]) {
     }
     fs.writeFileSync(filePath, JSON.stringify(wishes, null, 2), "utf-8");
   } catch (error) {
-    console.warn("Could not write wishes to disk (likely read-only serverless environment):", error);
+    console.warn("Could not write wishes to disk:", error);
   }
 }
 
@@ -103,5 +104,26 @@ export async function POST(req: Request) {
       { success: false, error: "Failed to submit wish" },
       { status: 500 }
     );
+  }
+}
+
+export async function DELETE(req: Request) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json({ success: false, error: "ID required" }, { status: 400 });
+    }
+
+    const current = readWishesFromFile();
+    const filtered = current.filter((item) => item.id !== id);
+    inMemoryWishes = filtered;
+    writeWishesToFile(filtered);
+
+    return NextResponse.json({ success: true, message: "Wish deleted" });
+  } catch (error) {
+    console.error("Error deleting wish:", error);
+    return NextResponse.json({ success: false, error: "Failed to delete wish" }, { status: 500 });
   }
 }

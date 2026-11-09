@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { Heart, Phone, MessageCircle, Mail } from "lucide-react";
+import Link from "next/link";
+import { Heart, Phone, MessageCircle, Mail, Lock } from "lucide-react";
 import { WeddingConfig } from "@/types";
 
 interface FooterProps {
@@ -60,10 +61,20 @@ export default function Footer({ config, lang }: FooterProps) {
           </a>
         </div>
 
-        <div className="text-[11px] text-stone-500 flex items-center justify-center gap-1">
-          <span>Crafted with</span>
-          <Heart className="w-3 h-3 text-red-500 fill-red-500 inline" />
-          <span>for Mahmudul&apos;s Royal Wedding Celebration</span>
+        <div className="text-[11px] text-stone-500 flex flex-wrap items-center justify-center gap-3">
+          <div className="flex items-center gap-1">
+            <span>Crafted with</span>
+            <Heart className="w-3 h-3 text-red-500 fill-red-500 inline" />
+            <span>for Mahmudul&apos;s Royal Wedding Celebration</span>
+          </div>
+          <span>•</span>
+          <Link
+            href="/admin"
+            className="inline-flex items-center gap-1 text-[#d4af37]/70 hover:text-[#d4af37] transition font-medium"
+          >
+            <Lock className="w-3 h-3" />
+            <span>Host / Admin Panel</span>
+          </Link>
         </div>
       </div>
     </footer>
