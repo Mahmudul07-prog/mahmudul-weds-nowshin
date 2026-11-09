@@ -60,8 +60,8 @@ export const weddingData: WeddingConfig = {
       id: "step-1",
       title: "Family Talks & Destiny",
       titleBn: "পারিবারিক আলাপ ও শুভসূচনা",
-      date: "Late 2026",
-      dateBn: "২০২৬",
+      date: "07 November 2026",
+      dateBn: "০৭ নভেম্বর ২০২৬",
       description:
         "Two families connecting with heart and prayers, laying the foundation for a lifetime of togetherness.",
       descriptionBn:
