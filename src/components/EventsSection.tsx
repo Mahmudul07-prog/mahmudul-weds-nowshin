@@ -75,8 +75,8 @@ END:VCALENDAR`;
             <Sparkles className="w-4 h-4 text-[#d4af37]" />
             <span>
               {lang === "en"
-                ? "Note: Exact dates and venue addresses are currently tentative. Confirmed details will be posted right here soon InshaAllah!"
-                : "বিশেষ দ্রষ্টব্য: ভেন্যু ও চূড়ান্ত তারিখ নির্ধারণের কাজ চলছে। বিস্তারিত তথ্য চূড়ান্ত হওয়া মাত্রই এখানে আপডেট করে দেওয়া হবে ইনশাআল্লাহ।"}
+                ? "All auspicious ceremonies will be hosted at our ancestral residence: Pir Bari, Aushpara, Laksam, Cumilla."
+                : "বিবাহের সকল শুভ অনুষ্ঠান বরের নিজস্ব বাসভবন—পীর বাড়ি, আউশপাড়া, লাকসাম, কুমিল্লাতে অনুষ্ঠিত হবে ইনশাআল্লাহ।"}
             </span>
           </p>
         </div>

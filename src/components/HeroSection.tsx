@@ -126,7 +126,7 @@ export default function HeroSection({ config, lang, guestName }: HeroSectionProp
             </span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#13241f] border border-[#d4af37]/30">
               <MapPin className="w-3.5 h-3.5 text-[#d4af37]" />
-              {lang === "en" ? "Dhaka, Bangladesh" : "ঢাকা, বাংলাদেশ"}
+              {lang === "en" ? "Pir Bari, Laksam, Cumilla" : "পীর বাড়ি, লাকসাম, কুমিল্লা"}
             </span>
           </div>
         </div>
