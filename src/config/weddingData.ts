@@ -22,7 +22,7 @@ export const weddingData: WeddingConfig = {
       bio: "A passionate soul from Pir Bari, Aushpara, Laksam, ready to embark on life's most sacred and beautiful chapter with love and family blessings.",
       fatherName: "Khaza Md Aminul Ahsan",
       motherName: "Kohinur Begum",
-      image: "/images/groom.jpg",
+      image: "/images/mahmudul-groom.jpg",
     },
     bride: {
       name: "The Special One",
