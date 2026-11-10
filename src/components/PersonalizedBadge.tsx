@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { UserCheck, Share2, Globe, Volume2, VolumeX } from "lucide-react";
+import { UserCheck, Share2, Globe, Volume2, VolumeX, Menu, X, Compass, Calendar, Heart, Send, CheckCircle2 } from "lucide-react";
 import LinkGeneratorModal from "./LinkGeneratorModal";
 
 interface PersonalizedBadgeProps {
@@ -22,29 +22,82 @@ export default function PersonalizedBadge({
   onToggleMute,
 }: PersonalizedBadgeProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const navLinks = [
+    {
+      href: "#laksam",
+      labelEn: "Explore Laksam",
+      labelBn: "লাকসাম দর্শন",
+      highlight: true,
+      icon: <Compass className="w-3.5 h-3.5 text-[#d4af37]" />,
+    },
+    {
+      href: "#events",
+      labelEn: "Schedule",
+      labelBn: "অনুষ্ঠান সূচি",
+      icon: <Calendar className="w-3.5 h-3.5" />,
+    },
+    {
+      href: "#journey",
+      labelEn: "Our Story",
+      labelBn: "আমাদের গল্প",
+      icon: <Heart className="w-3.5 h-3.5" />,
+    },
+    {
+      href: "#rsvp",
+      labelEn: "RSVP",
+      labelBn: "উপস্থিতি (RSVP)",
+      icon: <CheckCircle2 className="w-3.5 h-3.5" />,
+    },
+    {
+      href: "#wishes",
+      labelEn: "Wishes",
+      labelBn: "দোয়ার বার্তা",
+      icon: <Send className="w-3.5 h-3.5" />,
+    },
+  ];
 
   return (
     <>
-      <header className="fixed top-0 inset-x-0 z-40 bg-[#08110e]/90 backdrop-blur-md border-b border-[#d4af37]/20 py-2.5 px-4">
+      <header className="fixed top-0 inset-x-0 z-40 bg-[#08110e]/95 backdrop-blur-md border-b border-[#d4af37]/25 py-2.5 px-4 shadow-lg">
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-3">
           {/* Guest Greeting Pill */}
-          <div className="flex items-center gap-2 overflow-hidden">
+          <div className="flex items-center gap-2 overflow-hidden flex-shrink-0">
             <span className="flex-shrink-0 flex items-center justify-center w-7 h-7 rounded-full bg-[#d4af37]/20 border border-[#d4af37]/50 text-[#d4af37]">
               <UserCheck className="w-3.5 h-3.5" />
             </span>
             <div className="flex flex-col truncate">
-              <span className="text-[10px] uppercase tracking-wider text-stone-400 font-medium">
-                {lang === "en" ? "Invitation For" : "আমন্ত্রণপত্র গ্রাহক"}
+              <span className="text-[9px] uppercase tracking-wider text-stone-400 font-medium">
+                {lang === "en" ? "Invited Guest" : "আমন্ত্রিত মেহমান"}
               </span>
-              <span className="text-xs sm:text-sm font-semibold text-[#fce09b] truncate">
+              <span className="text-xs sm:text-sm font-semibold text-[#fce09b] truncate max-w-[120px] sm:max-w-[180px]">
                 {guestName}
               </span>
             </div>
           </div>
 
+          {/* Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center gap-1.5 bg-[#0e1d17]/80 px-3 py-1 rounded-full border border-[#d4af37]/20">
+            {navLinks.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition ${
+                  item.highlight
+                    ? "bg-[#d4af37]/20 text-[#fce09b] border border-[#d4af37]/50 shadow-[0_0_10px_rgba(212,175,55,0.25)] hover:bg-[#d4af37]/30"
+                    : "text-stone-300 hover:text-white hover:bg-white/5"
+                }`}
+              >
+                {item.icon}
+                <span>{lang === "en" ? item.labelEn : item.labelBn}</span>
+              </a>
+            ))}
+          </nav>
+
           {/* Quick Actions */}
           <div className="flex items-center gap-2">
-            {/* Quick Mute / Unmute Button in Header */}
+            {/* Quick Mute / Unmute Button */}
             {onToggleMute && (
               <button
                 onClick={onToggleMute}
@@ -77,22 +130,56 @@ export default function PersonalizedBadge({
             >
               <Share2 className="w-3.5 h-3.5 text-[#d4af37]" />
               <span className="hidden sm:inline">
-                {lang === "en" ? "Create Guest Link" : "নতুন লিংক তৈরি"}
+                {lang === "en" ? "Create Link" : "লিংক বানান"}
               </span>
-              <span className="sm:hidden">Share</span>
             </button>
 
             {/* Language Switcher */}
             <button
               onClick={onToggleLang}
-              className="flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold bg-[#d4af37]/15 hover:bg-[#d4af37]/25 text-[#d4af37] border border-[#d4af37]/40 transition"
+              className="flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-semibold bg-[#d4af37]/15 hover:bg-[#d4af37]/25 text-[#d4af37] border border-[#d4af37]/40 transition"
               title="Toggle Bengali / English"
             >
               <Globe className="w-3.5 h-3.5" />
-              <span>{lang === "en" ? "বাংলা" : "English"}</span>
+              <span>{lang === "en" ? "বাংলা" : "EN"}</span>
+            </button>
+
+            {/* Mobile Menu Hamburger */}
+            <button
+              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+              className="lg:hidden p-1.5 rounded-full bg-[#13241f] text-stone-300 border border-[#d4af37]/30 hover:text-white"
+              aria-label="Toggle Navigation Menu"
+            >
+              {isMobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </button>
           </div>
         </div>
+
+        {/* Mobile Dropdown Menu */}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden mt-3 pt-3 border-t border-white/10 flex flex-col gap-1 pb-2 animate-in fade-in slide-in-from-top-2 duration-200">
+            {navLinks.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium transition ${
+                  item.highlight
+                    ? "bg-[#d4af37]/20 text-[#fce09b] border border-[#d4af37]/40"
+                    : "text-stone-300 hover:bg-white/5 hover:text-white"
+                }`}
+              >
+                {item.icon}
+                <span>{lang === "en" ? item.labelEn : item.labelBn}</span>
+                {item.highlight && (
+                  <span className="ml-auto text-[10px] px-2 py-0.5 rounded-full bg-[#d4af37] text-black font-bold">
+                    Special
+                  </span>
+                )}
+              </a>
+            ))}
+          </div>
+        )}
       </header>
 
       <LinkGeneratorModal
