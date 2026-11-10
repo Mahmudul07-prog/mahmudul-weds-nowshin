@@ -23,6 +23,7 @@ function WeddingContent() {
   const [isOpened, setIsOpened] = useState(false);
   const [lang, setLang] = useState<"en" | "bn">("bn"); // default to warm Bengali, toggleable to English
   const [autoPlayMusic, setAutoPlayMusic] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
 
   const handleOpenEnvelope = () => {
     setIsOpened(true);
@@ -31,6 +32,10 @@ function WeddingContent() {
     setTimeout(() => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }, 100);
+  };
+
+  const handleToggleMute = () => {
+    setIsMuted((prev) => !prev);
   };
 
   const toggleLanguage = () => {
@@ -43,7 +48,11 @@ function WeddingContent() {
       <PetalsEffect />
 
       {/* Floating Wedding Symphony & Music Player */}
-      <MusicPlayer autoPlayTrigger={autoPlayMusic} />
+      <MusicPlayer
+        autoPlayTrigger={autoPlayMusic}
+        isMuted={isMuted}
+        onToggleMute={handleToggleMute}
+      />
 
       {!isOpened ? (
         /* Envelope Landing Experience */
@@ -63,6 +72,8 @@ function WeddingContent() {
             lang={lang}
             onToggleLang={toggleLanguage}
             groomName={weddingData.couple.groom.name}
+            isMuted={isMuted}
+            onToggleMute={handleToggleMute}
           />
 
           {/* Hero Section with Countdown & Announcement */}
