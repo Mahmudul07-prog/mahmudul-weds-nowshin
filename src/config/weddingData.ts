@@ -185,8 +185,8 @@ export const weddingData: WeddingConfig = {
   },
 
   music: {
-    title: "Kudmayi / Instrumental Wedding Symphony",
-    artist: "Acoustic Flute & Strings Melodic Serenade",
+    title: "বারাকাল্লাহু লাকুমা (Baraka Allahu Lakuma)",
+    artist: "ইসলামিক বিয়ের মধুর গজল / Nasheed",
     audioUrl: "/audio/wedding-melody.mp3",
   },
 };

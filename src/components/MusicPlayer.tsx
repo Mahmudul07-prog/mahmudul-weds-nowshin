@@ -9,150 +9,85 @@ interface MusicPlayerProps {
 
 export default function MusicPlayer({ autoPlayTrigger }: MusicPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [audioSupported, setAudioSupported] = useState(true);
-  const audioContextRef = useRef<AudioContext | null>(null);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const audioElemRef = useRef<HTMLAudioElement | null>(null);
 
-  // Soft gentle ambient synth chords for romantic backdrop
-  const chords = [
-    [261.63, 329.63, 392.0, 493.88], // Cmaj7
-    [220.0, 261.63, 329.63, 392.0],  // Am7
-    [174.61, 220.0, 261.63, 329.63], // Fmaj7
-    [196.0, 246.94, 293.66, 392.0],  // G
-  ];
-
-  const playSynthesizedAmbient = () => {
-    try {
-      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-      if (!audioContextRef.current) {
-        audioContextRef.current = new AudioCtx();
-      }
-      const ctx = audioContextRef.current;
-      if (ctx.state === "suspended") {
-        ctx.resume();
-      }
-
-      let chordIndex = 0;
-      const playNextChord = () => {
-        if (!audioContextRef.current || audioContextRef.current.state === "closed") return;
-        const currentChord = chords[chordIndex % chords.length];
-        chordIndex++;
-
-        currentChord.forEach((freq, i) => {
-          const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
-
-          osc.type = "sine";
-          osc.frequency.setValueAtTime(freq, ctx.currentTime);
-
-          // Gentle envelope
-          const startTime = ctx.currentTime + i * 0.15;
-          gain.gain.setValueAtTime(0, startTime);
-          gain.gain.linearRampToValueAtTime(0.025, startTime + 0.8);
-          gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 4.5);
-
-          osc.connect(gain);
-          gain.connect(ctx.destination);
-
-          osc.start(startTime);
-          osc.stop(startTime + 4.8);
-        });
-      };
-
-      playNextChord();
-      intervalRef.current = setInterval(playNextChord, 4600);
-    } catch (e) {
-      console.warn("Web audio not supported", e);
-      setAudioSupported(false);
-    }
-  };
-
-  const stopSynthesizedAmbient = () => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
-    if (audioContextRef.current && audioContextRef.current.state === "running") {
-      audioContextRef.current.suspend();
-    }
-  };
-
   const toggleMusic = () => {
+    if (!audioElemRef.current) return;
+
     if (isPlaying) {
-      if (audioElemRef.current) {
-        audioElemRef.current.pause();
-      }
-      stopSynthesizedAmbient();
+      audioElemRef.current.pause();
       setIsPlaying(false);
     } else {
-      if (audioElemRef.current && audioElemRef.current.src) {
-        audioElemRef.current
-          .play()
-          .then(() => setIsPlaying(true))
-          .catch(() => {
-            playSynthesizedAmbient();
-            setIsPlaying(true);
-          });
-      } else {
-        playSynthesizedAmbient();
-        setIsPlaying(true);
-      }
+      audioElemRef.current.volume = 0.45; // gentle, comforting volume
+      audioElemRef.current
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch((err) => {
+          console.warn("Audio autoplay blocked or failed:", err);
+          setIsPlaying(false);
+        });
     }
   };
 
   useEffect(() => {
-    if (autoPlayTrigger && !isPlaying) {
-      toggleMusic();
+    if (autoPlayTrigger && !isPlaying && audioElemRef.current) {
+      audioElemRef.current.volume = 0.45;
+      audioElemRef.current
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch((err) => console.log("User interaction required for autoplay:", err));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [autoPlayTrigger]);
-
-  useEffect(() => {
-    return () => {
-      stopSynthesizedAmbient();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  if (!audioSupported) return null;
+  }, [autoPlayTrigger, isPlaying]);
 
   return (
     <div className="fixed bottom-5 right-5 z-40">
-      <audio ref={audioElemRef} src="/audio/wedding-melody.mp3" loop preload="none" />
-      
+      <audio
+        ref={audioElemRef}
+        src="/audio/wedding-melody.mp3"
+        loop
+        preload="auto"
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+      />
+
       <button
         onClick={toggleMusic}
-        aria-label="Toggle background music"
-        className={`group relative flex items-center gap-3 px-4 py-2.5 rounded-full border transition-all duration-300 backdrop-blur-md shadow-2xl ${
+        aria-label="Toggle Islamic Wedding Nasheed"
+        className={`group relative flex items-center gap-3 px-4 py-2.5 rounded-full border transition-all duration-300 backdrop-blur-md shadow-2xl cursor-pointer ${
           isPlaying
-            ? "bg-[#142921]/90 border-[#d4af37] text-[#fce09b] shadow-[0_0_20px_rgba(212,175,55,0.4)]"
-            : "bg-[#0b1411]/80 border-[#d4af37]/30 text-stone-300 hover:border-[#d4af37]/60"
+            ? "bg-[#142921]/95 border-[#d4af37] text-[#fce09b] shadow-[0_0_20px_rgba(212,175,55,0.45)] scale-105"
+            : "bg-[#0b1411]/85 border-[#d4af37]/35 text-stone-300 hover:border-[#d4af37]/70"
         }`}
       >
         {/* Animated Disc / Vinyl */}
         <div
-          className={`relative w-7 h-7 rounded-full bg-[#1e3a30] border border-[#d4af37]/60 flex items-center justify-center transition-transform ${
+          className={`relative w-8 h-8 rounded-full bg-[#1b352c] border border-[#d4af37]/70 flex items-center justify-center transition-transform ${
             isPlaying ? "animate-spin" : ""
           }`}
-          style={{ animationDuration: "3s" }}
+          style={{ animationDuration: "4s" }}
         >
           <div className="w-2.5 h-2.5 rounded-full bg-[#d4af37]" />
         </div>
 
+        {/* Text Details */}
         <div className="flex flex-col text-left">
-          <span className="text-[11px] font-semibold tracking-wider uppercase text-[#d4af37] flex items-center gap-1.5">
-            <Music className="w-3 h-3 inline" />
-            {isPlaying ? "Music Playing" : "Wedding Symphony"}
+          <span className="text-[11px] font-semibold tracking-wider text-[#d4af37] flex items-center gap-1.5">
+            <Music className="w-3 h-3 inline text-[#d4af37]" />
+            {isPlaying ? "বারাকাল্লাহু লাকুমা" : "বিয়ের মধুর গজল"}
           </span>
-          <span className="text-[10px] text-stone-400 max-w-[110px] truncate">
-            {isPlaying ? "Instrumental Melody" : "Tap to Play"}
+          <span className="text-[10px] text-stone-300 max-w-[130px] truncate">
+            {isPlaying ? "প্লে হচ্ছে... (Wedding Nasheed)" : "শুনতে ক্লিক করুন 🎵"}
           </span>
         </div>
 
-        <div className="pl-1">
+        {/* Equalizer animation / volume icon */}
+        <div className="pl-1 flex items-center gap-1">
           {isPlaying ? (
-            <Volume2 className="w-4 h-4 text-[#d4af37] animate-pulse" />
+            <div className="flex items-end gap-0.5 h-4">
+              <span className="w-1 bg-[#d4af37] rounded-full animate-[bounce_0.8s_infinite]" style={{ height: "60%" }} />
+              <span className="w-1 bg-[#fce09b] rounded-full animate-[bounce_0.6s_infinite_0.2s]" style={{ height: "100%" }} />
+              <span className="w-1 bg-[#d4af37] rounded-full animate-[bounce_0.7s_infinite_0.4s]" style={{ height: "40%" }} />
+            </div>
           ) : (
             <VolumeX className="w-4 h-4 text-stone-400" />
           )}
