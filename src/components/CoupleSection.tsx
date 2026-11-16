@@ -113,16 +113,24 @@ export default function CoupleSection({ config, lang }: CoupleSectionProps) {
             </h3>
 
             {/* Parents & Residence Info */}
-            <div className="my-3 py-2 px-4 rounded-xl bg-white/5 border border-white/5 text-xs text-stone-300 max-w-xs space-y-1">
+            <div className="my-3 py-2 px-4 rounded-xl bg-white/5 border border-white/5 text-xs text-stone-300 max-w-sm space-y-1">
               <p>
                 <strong className="text-stone-400">{lang === "en" ? "Daughter of:" : "পিতা-মাতা:"}</strong>{" "}
                 {lang === "en"
                   ? `${bride.fatherName} & ${bride.motherName}`
                   : `${bride.fatherNameBn || bride.fatherName} ও ${bride.motherNameBn || bride.motherName}`}
               </p>
-              <p className="text-[11px] text-stone-400">
-                <strong className="text-stone-400">{lang === "en" ? "Residence:" : "বাসস্থান:"}</strong>{" "}
-                {lang === "en" ? "Maniksar Khan Bari, Laksam" : "মানিকসার খান বাড়ি, লাকসাম"}
+              {bride.fatherOccupation && (
+                <p className="text-[11px] text-stone-400">
+                  <strong className="text-stone-400">{lang === "en" ? "Father's Profession:" : "পিতার পেশা:"}</strong>{" "}
+                  {lang === "en" ? bride.fatherOccupation : bride.fatherOccupationBn}
+                </p>
+              )}
+              <p className="text-[11px] text-stone-300">
+                <strong className="text-stone-400">{lang === "en" ? "Residence:" : "স্থায়ী ঠিকানা:"}</strong>{" "}
+                {lang === "en"
+                  ? "Maniksar (Khan Bari), PO: Mudaforgonj, PS: Barura, Cumilla"
+                  : "মানিকসার (খান বাড়ি), ডাকঘর: মুদাফরগঞ্জ, থানা: বরুড়া, জেলা: কুমিল্লা"}
               </p>
             </div>
 
@@ -134,8 +142,8 @@ export default function CoupleSection({ config, lang }: CoupleSectionProps) {
             {bride.isRevealed ? (
               <div className="mt-4 p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-[11px] text-emerald-300 max-w-xs text-center shadow-sm">
                 🌸 {lang === "en" 
-                  ? "Alhamdulillah, first meet accomplished on 13 Nov 2026 at Maniksar Khan Bari!" 
-                  : "আলহামদুলিল্লাহ, ১৩ নভেম্বর ২০২৬ তারিখে মানিকসার খান বাড়িতে আমাদের প্রথম দেখা সম্পন্ন হয়েছে!"}
+                  ? "Alhamdulillah, first meet accomplished on 13 Nov 2026 at Maniksar Khan Bari, Barura, Cumilla!" 
+                  : "আলহামদুলিল্লাহ, ১৩ নভেম্বর ২০২৬ তারিখে মানিকসার খান বাড়ি (মুদাফরগঞ্জ, বরুড়া, কুমিল্লা)-তে আমাদের প্রথম দেখা সম্পন্ন হয়েছে!"}
               </div>
             ) : (
               <div className="mt-4 p-3 rounded-xl bg-[#d4af37]/10 border border-[#d4af37]/20 text-[11px] text-[#fce09b] max-w-xs">

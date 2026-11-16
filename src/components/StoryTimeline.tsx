@@ -110,8 +110,8 @@ export default function StoryTimeline({ milestones, lang }: StoryTimelineProps) 
                         <Sparkles className="w-4 h-4 text-emerald-400 flex-shrink-0" />
                         <span>
                           {lang === "en"
-                            ? "Alhamdulillah, first meet accomplished on 13 Nov 2026 at Maniksar Khan Bari (Bride's Residence)!"
-                            : "আলহামদুলিল্লাহ, ১৩ নভেম্বর ২০২৬ তারিখে মানিকসার খান বাড়ি (কনের নিজ বাড়ি)-তে প্রথম দেখা সফলভাবে সম্পন্ন হয়েছে!"}
+                            ? "Alhamdulillah, first meet accomplished on 13 Nov 2026 at Maniksar Khan Bari, Mudaforgonj, Barura, Cumilla (Bride's Residence)!"
+                            : "আলহামদুলিল্লাহ, ১৩ নভেম্বর ২০২৬ তারিখে মানিকসার খান বাড়ি (মুদাফরগঞ্জ, বরুড়া, কুমিল্লা)-তে প্রথম দেখা সফলভাবে সম্পন্ন হয়েছে!"}
                         </span>
                       </div>
                     ) : (
