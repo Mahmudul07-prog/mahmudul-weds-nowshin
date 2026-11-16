@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Calendar, Clock, MapPin, Heart, Send, CheckCircle2 } from "lucide-react";
+import { Calendar, Clock, MapPin, Heart, Send, CheckCircle2, Download, Sparkles } from "lucide-react";
 import { WeddingConfig } from "@/types";
 
 interface HeroSectionProps {
@@ -134,15 +134,22 @@ export default function HeroSection({ config, lang, guestName }: HeroSectionProp
         {/* Quick Nav Anchors */}
         <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
           <a
-            href="#rsvp"
-            className="px-6 py-3 rounded-full bg-gradient-to-r from-[#d4af37] to-[#aa8214] text-[#0b1411] font-semibold text-xs sm:text-sm hover:scale-105 transition shadow-lg shadow-[#d4af37]/25 flex items-center gap-2"
+            href="#card"
+            className="px-6 py-3 rounded-full bg-gradient-to-r from-[#d4af37] via-[#f3c25b] to-[#aa8214] text-[#061a14] font-bold text-xs sm:text-sm hover:scale-105 transition shadow-lg shadow-[#d4af37]/35 flex items-center gap-2"
           >
-            <CheckCircle2 className="w-4 h-4" />
+            <Download className="w-4 h-4 text-[#061a14]" />
+            {lang === "en" ? "Download Invitation Card" : "নিমন্ত্রণপত্র ডাউনলোড করুন"}
+          </a>
+          <a
+            href="#rsvp"
+            className="px-6 py-3 rounded-full royal-glass hover:bg-[#1a352c] text-[#fce09b] border border-[#d4af37]/40 font-semibold text-xs sm:text-sm transition flex items-center gap-2"
+          >
+            <CheckCircle2 className="w-4 h-4 text-[#d4af37]" />
             {lang === "en" ? "Confirm Attendance (RSVP)" : "উপস্থিতি নিশ্চিত করুন (RSVP)"}
           </a>
           <a
             href="#events"
-            className="px-6 py-3 rounded-full royal-glass hover:bg-[#1a352c] text-[#fce09b] border border-[#d4af37]/40 text-xs sm:text-sm font-medium transition flex items-center gap-2"
+            className="px-6 py-3 rounded-full royal-glass hover:bg-[#1a352c] text-stone-200 border border-white/10 text-xs sm:text-sm font-medium transition flex items-center gap-2"
           >
             <Calendar className="w-4 h-4 text-[#d4af37]" />
             {lang === "en" ? "View Ceremony Schedule" : "অনুষ্ঠান সূচি"}

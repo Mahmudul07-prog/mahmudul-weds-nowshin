@@ -7,6 +7,7 @@ import EnvelopeHero from "@/components/EnvelopeHero";
 import PersonalizedBadge from "@/components/PersonalizedBadge";
 import HeroSection from "@/components/HeroSection";
 import CoupleSection from "@/components/CoupleSection";
+import InvitationCardSection from "@/components/InvitationCardSection";
 import StoryTimeline from "@/components/StoryTimeline";
 import EventsSection from "@/components/EventsSection";
 import RsvpSection from "@/components/RsvpSection";
@@ -86,6 +87,13 @@ function WeddingContent() {
           {/* Couple Cards */}
           <CoupleSection
             config={weddingData}
+            lang={lang}
+          />
+
+          {/* Personalized Royal Invitation Card with High-Res JPEG Download */}
+          <InvitationCardSection
+            config={weddingData}
+            initialGuestName={guestName}
             lang={lang}
           />
 
