@@ -63,7 +63,10 @@ export default function CoupleSection({ config, lang }: CoupleSectionProps) {
             {/* Parents Info */}
             <div className="my-3 py-2 px-4 rounded-xl bg-white/5 border border-white/5 text-xs text-stone-300 max-w-xs">
               <p>
-                <strong className="text-stone-400">Son of:</strong> {groom.fatherName} & {groom.motherName}
+                <strong className="text-stone-400">{lang === "en" ? "Son of:" : "পিতা-মাতা:"}</strong>{" "}
+                {lang === "en"
+                  ? `${groom.fatherName} & ${groom.motherName}`
+                  : `${groom.fatherNameBn || groom.fatherName} ও ${groom.motherNameBn || groom.motherName}`}
               </p>
             </div>
 
@@ -109,10 +112,17 @@ export default function CoupleSection({ config, lang }: CoupleSectionProps) {
               {lang === "en" ? bride.name : bride.nameBn}
             </h3>
 
-            {/* Residence & Family Info */}
-            <div className="my-3 py-2 px-4 rounded-xl bg-white/5 border border-white/5 text-xs text-stone-300 max-w-xs">
+            {/* Parents & Residence Info */}
+            <div className="my-3 py-2 px-4 rounded-xl bg-white/5 border border-white/5 text-xs text-stone-300 max-w-xs space-y-1">
               <p>
-                <strong className="text-stone-400">{lang === "en" ? "Residence:" : "পরিবার ও বাসস্থান:"}</strong> {lang === "en" ? "Maniksar Khan Bari" : "মানিকসার খান বাড়ি"}
+                <strong className="text-stone-400">{lang === "en" ? "Daughter of:" : "পিতা-মাতা:"}</strong>{" "}
+                {lang === "en"
+                  ? `${bride.fatherName} & ${bride.motherName}`
+                  : `${bride.fatherNameBn || bride.fatherName} ও ${bride.motherNameBn || bride.motherName}`}
+              </p>
+              <p className="text-[11px] text-stone-400">
+                <strong className="text-stone-400">{lang === "en" ? "Residence:" : "বাসস্থান:"}</strong>{" "}
+                {lang === "en" ? "Maniksar Khan Bari, Laksam" : "মানিকসার খান বাড়ি, লাকসাম"}
               </p>
             </div>
 

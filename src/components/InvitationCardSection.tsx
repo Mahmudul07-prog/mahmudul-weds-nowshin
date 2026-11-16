@@ -458,7 +458,7 @@ export default function InvitationCardSection({
                 <p className={`text-[10px] sm:text-xs ${themeClasses.mutedText}`}>
                   {cardLang === "en"
                     ? `Son of ${config.couple.groom.fatherName} & ${config.couple.groom.motherName}`
-                    : `সুযোগ্য জ্যেষ্ঠ পুত্র: ${config.couple.groom.fatherName} ও ${config.couple.groom.motherName}`}
+                    : `সুযোগ্য জ্যেষ্ঠ পুত্র: ${config.couple.groom.fatherNameBn || config.couple.groom.fatherName} ও ${config.couple.groom.motherNameBn || config.couple.groom.motherName}`}
                 </p>
                 <p className="text-[9px] sm:text-[10px] text-stone-400 italic">
                   {cardLang === "en"
@@ -490,8 +490,8 @@ export default function InvitationCardSection({
                 </h4>
                 <p className={`text-[10px] sm:text-xs ${themeClasses.mutedText}`}>
                   {cardLang === "en"
-                    ? "Daughter of Khan Family, Maniksar"
-                    : "সুযোগ্য কন্যা: খান পরিবার, মানিকসার"}
+                    ? `Daughter of ${config.couple.bride.fatherName} & ${config.couple.bride.motherName}`
+                    : `সুযোগ্য কন্যা: ${config.couple.bride.fatherNameBn || config.couple.bride.fatherName} ও ${config.couple.bride.motherNameBn || config.couple.bride.motherName}`}
                 </p>
                 <p className="text-[9px] sm:text-[10px] text-stone-400 italic">
                   {cardLang === "en" ? "Maniksar Khan Bari, Laksam" : "মানিকসার খান বাড়ি, লাকসাম"}

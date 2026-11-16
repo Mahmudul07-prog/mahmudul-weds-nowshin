@@ -41,7 +41,9 @@ export interface WeddingConfig {
       role: string;
       bio: string;
       fatherName: string;
+      fatherNameBn?: string;
       motherName: string;
+      motherNameBn?: string;
       image?: string;
     };
     bride: {
@@ -51,7 +53,9 @@ export interface WeddingConfig {
       role: string;
       bio: string;
       fatherName: string;
+      fatherNameBn?: string;
       motherName: string;
+      motherNameBn?: string;
       image?: string;
       isRevealed: boolean;
     };
