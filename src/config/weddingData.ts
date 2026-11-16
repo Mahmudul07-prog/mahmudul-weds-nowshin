@@ -48,7 +48,7 @@ export const weddingData: WeddingConfig = {
         shortAddress: "Maniksar (Khan Bari), Mudaforgonj, Barura, Cumilla",
         shortAddressBn: "মানিকসার (খান বাড়ি), মুদাফরগঞ্জ, বরুড়া, কুমিল্লা",
       },
-      image: "/images/bride-placeholder.svg",
+      image: "/images/nowshin-mili-bride.jpg",
       isRevealed: true,
     },
     hashtag: "#MahmudulWedsMili",

@@ -94,10 +94,12 @@ export default function CoupleSection({ config, lang }: CoupleSectionProps) {
             <div className="relative w-44 h-44 sm:w-48 sm:h-48 rounded-full p-2 border-2 border-[#f472b6]/50 shadow-[0_0_30px_rgba(244,114,182,0.25)] mb-6">
               <div className="w-full h-full rounded-full overflow-hidden bg-[#160912] relative">
                 <Image
-                  src={bride.image || "/images/bride-placeholder.svg"}
+                  src={bride.image || "/images/nowshin-mili-bride.jpg"}
                   alt={bride.name}
                   fill
-                  className="object-cover"
+                  sizes="(max-width: 768px) 192px, 192px"
+                  className="object-cover object-[50%_20%]"
+                  priority
                 />
               </div>
               <span className="absolute bottom-2 right-2 p-2 rounded-full bg-[#1e0e18] border border-[#f472b6] text-[#fbc2eb] shadow">
