@@ -543,10 +543,14 @@ export default function InvitationCardSection({
                       {cardLang === "en" ? "Wedding Venue:" : "অনুষ্ঠানস্থল:"}
                     </span>
                     <span className={`font-semibold ${themeClasses.goldText} text-xs`}>
-                      {cardLang === "en" ? "Pir Bari Residence (পীর বাড়ি)" : "পীর বাড়ি (Pir Bari Residence)"}
+                      {cardLang === "en"
+                        ? "Nikah: Maniksar Khan Bari | Walima: Pir Bari"
+                        : "আকদ: মানিকসার খান বাড়ি | ওয়ালিমা: পীর বাড়ি"}
                     </span>
                     <span className="block text-[10px] text-stone-400">
-                      {cardLang === "en" ? "Aushpara, Laksam, Cumilla - 3570" : "আউশপাড়া, লাকসাম, কুমিল্লা - ৩৫৭০"}
+                      {cardLang === "en"
+                        ? "Barura & Laksam, Cumilla"
+                        : "মুদাফরগঞ্জ, বরুড়া ও আউশপাড়া, লাকসাম"}
                     </span>
                   </div>
                 </div>

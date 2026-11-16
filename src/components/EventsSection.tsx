@@ -72,11 +72,11 @@ END:VCALENDAR`;
         {/* Notice Banner */}
         <div className="max-w-3xl mx-auto mb-10 p-4 rounded-2xl bg-[#13241f]/70 border border-[#d4af37]/30 text-center">
           <p className="text-xs text-[#fce09b] flex items-center justify-center gap-2">
-            <Sparkles className="w-4 h-4 text-[#d4af37]" />
+            <Sparkles className="w-4 h-4 text-[#d4af37] shrink-0" />
             <span>
               {lang === "en"
-                ? "All auspicious ceremonies will be hosted at our ancestral residence: Pir Bari, Aushpara, Laksam, Cumilla."
-                : "বিবাহের সকল শুভ অনুষ্ঠান বরের নিজস্ব বাসভবন—পীর বাড়ি, আউশপাড়া, লাকসাম, কুমিল্লাতে অনুষ্ঠিত হবে ইনশাআল্লাহ।"}
+                ? "The Sacred Nikah & Wedding ceremony will be hosted at the Bride's residence (Maniksar Khan Bari, Barura), followed by the Grand Walima at the Groom's residence (Pir Bari, Laksam)."
+                : "পবিত্র আকদ ও মূল বিবাহ অনুষ্ঠান কনের নিজ বাড়ি—মানিকসার খান বাড়ি (মুদাফরগঞ্জ, বরুড়া, কুমিল্লা) এবং বিবাহোত্তর ওয়ালিমা বরের বাড়ি—পীর বাড়ি (আউশপাড়া, লাকসাম)-তে অনুষ্ঠিত হবে।"}
             </span>
           </p>
         </div>
