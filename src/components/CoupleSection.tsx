@@ -60,13 +60,19 @@ export default function CoupleSection({ config, lang }: CoupleSectionProps) {
               {lang === "en" ? groom.fullName : groom.nameBn}
             </h3>
 
-            {/* Parents Info */}
-            <div className="my-3 py-2 px-4 rounded-xl bg-white/5 border border-white/5 text-xs text-stone-300 max-w-xs">
+            {/* Parents & Residence Info */}
+            <div className="my-3 py-2 px-4 rounded-xl bg-white/5 border border-white/5 text-xs text-stone-300 max-w-sm space-y-1">
               <p>
                 <strong className="text-stone-400">{lang === "en" ? "Son of:" : "পিতা-মাতা:"}</strong>{" "}
                 {lang === "en"
                   ? `${groom.fatherName} & ${groom.motherName}`
                   : `${groom.fatherNameBn || groom.fatherName} ও ${groom.motherNameBn || groom.motherName}`}
+              </p>
+              <p className="text-[11px] text-stone-300">
+                <strong className="text-stone-400">{lang === "en" ? "Residence:" : "স্থায়ী ঠিকানা:"}</strong>{" "}
+                {lang === "en"
+                  ? (groom.address?.shortAddress || "Pir Bari, Aushpara, PO: Laksam (3570), PS: Laksam, Cumilla")
+                  : (groom.address?.shortAddressBn || "পীর বাড়ি, আউশপাড়া, ডাকঘর: লাকসাম (৩৫৭০), থানা: লাকসাম, জেলা: কুমিল্লা")}
               </p>
             </div>
 

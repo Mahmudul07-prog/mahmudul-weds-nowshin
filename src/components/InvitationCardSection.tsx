@@ -462,8 +462,8 @@ export default function InvitationCardSection({
                 </p>
                 <p className="text-[9px] sm:text-[10px] text-stone-400 italic">
                   {cardLang === "en"
-                    ? "Pir Bari Residence, Aushpara, Laksam, Cumilla"
-                    : "পীর বাড়ি, আউশপাড়া, লাকসাম, কুমিল্লা"}
+                    ? "Pir Bari, Aushpara, PO: Laksam, PS: Laksam, Cumilla"
+                    : "পীর বাড়ি, আউশপাড়া, ডাকঘর: লাকসাম, থানা: লাকসাম, জেলা: কুমিল্লা"}
                 </p>
               </div>
 

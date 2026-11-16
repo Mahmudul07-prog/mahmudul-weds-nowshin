@@ -24,6 +24,18 @@ export const weddingData: WeddingConfig = {
       fatherNameBn: "খাজা মোঃ আমিনুল আহসান",
       motherName: "Kohinur Begum",
       motherNameBn: "কহিনুর বেগম",
+      address: {
+        village: "Pir Bari, Aushpara",
+        villageBn: "পীর বাড়ি, আউশপাড়া",
+        postOffice: "Laksam - 3570",
+        postOfficeBn: "লাকসাম - ৩৫৭০",
+        policeStation: "Laksam",
+        policeStationBn: "লাকসাম",
+        district: "Cumilla",
+        districtBn: "কুমিল্লা",
+        shortAddress: "Pir Bari, Aushpara, PO: Laksam (3570), PS: Laksam, Cumilla",
+        shortAddressBn: "পীর বাড়ি, আউশপাড়া, ডাকঘর: লাকসাম (৩৫৭০), থানা: লাকসাম, জেলা: কুমিল্লা",
+      },
       image: "/images/mahmudul-groom.jpg",
     },
     bride: {

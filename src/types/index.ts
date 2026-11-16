@@ -44,6 +44,18 @@ export interface WeddingConfig {
       fatherNameBn?: string;
       motherName: string;
       motherNameBn?: string;
+      address?: {
+        village: string;
+        villageBn: string;
+        postOffice: string;
+        postOfficeBn: string;
+        policeStation: string;
+        policeStationBn: string;
+        district: string;
+        districtBn: string;
+        shortAddress?: string;
+        shortAddressBn?: string;
+      };
       image?: string;
     };
     bride: {
