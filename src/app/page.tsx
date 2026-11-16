@@ -11,7 +11,6 @@ import StoryTimeline from "@/components/StoryTimeline";
 import EventsSection from "@/components/EventsSection";
 import RsvpSection from "@/components/RsvpSection";
 import WishesSection from "@/components/WishesSection";
-import LaksamGuideSection from "@/components/LaksamGuideSection";
 import Footer from "@/components/Footer";
 import PetalsEffect from "@/components/PetalsEffect";
 import MusicPlayer from "@/components/MusicPlayer";
@@ -101,9 +100,6 @@ function WeddingContent() {
             events={weddingData.events}
             lang={lang}
           />
-
-          {/* Explore Laksam Sightseeing & Attractions */}
-          <LaksamGuideSection lang={lang} />
 
           {/* RSVP Attendance Form */}
           <RsvpSection

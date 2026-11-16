@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { UserCheck, Share2, Globe, Volume2, VolumeX, Menu, X, Compass, Calendar, Heart, Send, CheckCircle2 } from "lucide-react";
+import { UserCheck, Share2, Globe, Volume2, VolumeX, Menu, X, Calendar, Heart, Send, CheckCircle2 } from "lucide-react";
 import LinkGeneratorModal from "./LinkGeneratorModal";
 
 interface PersonalizedBadgeProps {
@@ -26,16 +26,10 @@ export default function PersonalizedBadge({
 
   const navLinks = [
     {
-      href: "#laksam",
-      labelEn: "Explore Laksam",
-      labelBn: "লাকসাম দর্শন",
-      highlight: true,
-      icon: <Compass className="w-3.5 h-3.5 text-[#d4af37]" />,
-    },
-    {
       href: "#events",
       labelEn: "Schedule",
       labelBn: "অনুষ্ঠান সূচি",
+      highlight: true,
       icon: <Calendar className="w-3.5 h-3.5" />,
     },
     {
