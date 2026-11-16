@@ -74,8 +74,13 @@ export default function CoupleSection({ config, lang }: CoupleSectionProps) {
 
           {/* Bride Card */}
           <div className="rounded-3xl p-6 sm:p-8 royal-glass royal-glass-hover transition-all duration-300 flex flex-col items-center text-center relative">
-            {/* Status Ribbon if still awaiting meet */}
-            {!bride.isRevealed && (
+            {/* Status Ribbon */}
+            {bride.isRevealed ? (
+              <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-emerald-950/70 border border-emerald-500/40 text-emerald-300 text-[10px] font-semibold tracking-wider uppercase flex items-center gap-1 shadow">
+                <Sparkles className="w-3 h-3 text-emerald-400" />
+                {lang === "en" ? "First Meet Accomplished" : "প্রথম দেখা সম্পন্ন ✨"}
+              </div>
+            ) : (
               <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-[#f472b6]/20 border border-[#f472b6]/40 text-[#fbc2eb] text-[10px] font-medium tracking-wider uppercase flex items-center gap-1">
                 <Sparkles className="w-3 h-3 text-[#f472b6]" />
                 {lang === "en" ? "First Meet Awaited" : "দেখা হওয়ার অপেক্ষায়"}
@@ -104,10 +109,10 @@ export default function CoupleSection({ config, lang }: CoupleSectionProps) {
               {lang === "en" ? bride.name : bride.nameBn}
             </h3>
 
-            {/* Parents Info */}
+            {/* Residence & Family Info */}
             <div className="my-3 py-2 px-4 rounded-xl bg-white/5 border border-white/5 text-xs text-stone-300 max-w-xs">
               <p>
-                <strong className="text-stone-400">Daughter of:</strong> {bride.fatherName} & {bride.motherName}
+                <strong className="text-stone-400">{lang === "en" ? "Residence:" : "পরিবার ও বাসস্থান:"}</strong> {lang === "en" ? "Maniksar Khan Bari" : "মানিকসার খান বাড়ি"}
               </p>
             </div>
 
@@ -115,12 +120,20 @@ export default function CoupleSection({ config, lang }: CoupleSectionProps) {
               {bride.bio}
             </p>
 
-            {/* Modular note for user */}
-            <div className="mt-4 p-3 rounded-xl bg-[#d4af37]/10 border border-[#d4af37]/20 text-[11px] text-[#fce09b] max-w-xs">
-              💍 {lang === "en" 
-                ? "Bride details & photo will be unveiled right after our first official meeting!" 
-                : "কনের সাথে প্রথম দেখার পর সুন্দর ছবি ও বিস্তারিত তথ্য এই কার্ডে যুক্ত করা হবে ইনশাআল্লাহ!"}
-            </div>
+            {/* Milestone note */}
+            {bride.isRevealed ? (
+              <div className="mt-4 p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-[11px] text-emerald-300 max-w-xs text-center shadow-sm">
+                🌸 {lang === "en" 
+                  ? "Alhamdulillah, first meet accomplished on 13 Nov 2026 at Maniksar Khan Bari!" 
+                  : "আলহামদুলিল্লাহ, ১৩ নভেম্বর ২০২৬ তারিখে মানিকসার খান বাড়িতে আমাদের প্রথম দেখা সম্পন্ন হয়েছে!"}
+              </div>
+            ) : (
+              <div className="mt-4 p-3 rounded-xl bg-[#d4af37]/10 border border-[#d4af37]/20 text-[11px] text-[#fce09b] max-w-xs">
+                💍 {lang === "en" 
+                  ? "Bride details & photo will be unveiled right after our first official meeting!" 
+                  : "কনের সাথে প্রথম দেখার পর সুন্দর ছবি ও বিস্তারিত তথ্য এই কার্ডে যুক্ত করা হবে ইনশাআল্লাহ!"}
+              </div>
+            )}
           </div>
         </div>
       </div>

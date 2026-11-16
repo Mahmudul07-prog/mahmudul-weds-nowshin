@@ -103,16 +103,27 @@ export default function StoryTimeline({ milestones, lang }: StoryTimelineProps) 
                     {lang === "en" ? item.description : item.descriptionBn || item.description}
                   </p>
 
-                  {/* Special highlight for Chapter 2 (Awaiting First Meet) */}
+                  {/* Special highlight for Chapter 2 */}
                   {item.id === "step-2" && (
-                    <div className="mt-4 p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-200/90 flex items-center gap-2">
-                      <Sparkles className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                      <span>
-                        {lang === "en"
-                          ? "This special milestone will be updated with date & notes as soon as our first meet happens!"
-                          : "দেখা হওয়ার পর এই অধ্যায়ে স্মরণীয় তারিখ ও বিশেষ অনুভূতি স্বয়ংক্রিয়ভাবে যুক্ত হবে।"}
-                      </span>
-                    </div>
+                    item.isUnlocked ? (
+                      <div className="mt-4 p-3 rounded-xl bg-emerald-950/50 border border-emerald-500/40 text-xs text-emerald-300 flex items-center gap-2 shadow-sm">
+                        <Sparkles className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                        <span>
+                          {lang === "en"
+                            ? "Alhamdulillah, first meet accomplished on 13 Nov 2026 at Maniksar Khan Bari (Bride's Residence)!"
+                            : "আলহামদুলিল্লাহ, ১৩ নভেম্বর ২০২৬ তারিখে মানিকসার খান বাড়ি (কনের নিজ বাড়ি)-তে প্রথম দেখা সফলভাবে সম্পন্ন হয়েছে!"}
+                        </span>
+                      </div>
+                    ) : (
+                      <div className="mt-4 p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-200/90 flex items-center gap-2">
+                        <Sparkles className="w-4 h-4 text-amber-400 flex-shrink-0" />
+                        <span>
+                          {lang === "en"
+                            ? "This special milestone will be updated with date & notes as soon as our first meet happens!"
+                            : "দেখা হওয়ার পর এই অধ্যায়ে স্মরণীয় তারিখ ও বিশেষ অনুভূতি স্বয়ংক্রিয়ভাবে যুক্ত হবে।"}
+                        </span>
+                      </div>
+                    )
                   )}
                 </div>
               </div>
