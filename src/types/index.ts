@@ -54,12 +54,8 @@ export interface WeddingConfig {
       bio: string;
       fatherName: string;
       fatherNameBn?: string;
-      fatherOccupation?: string;
-      fatherOccupationBn?: string;
       motherName: string;
       motherNameBn?: string;
-      motherOccupation?: string;
-      motherOccupationBn?: string;
       address?: {
         village: string;
         villageBn: string;

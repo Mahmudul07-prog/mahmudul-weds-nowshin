@@ -120,12 +120,6 @@ export default function CoupleSection({ config, lang }: CoupleSectionProps) {
                   ? `${bride.fatherName} & ${bride.motherName}`
                   : `${bride.fatherNameBn || bride.fatherName} ও ${bride.motherNameBn || bride.motherName}`}
               </p>
-              {bride.fatherOccupation && (
-                <p className="text-[11px] text-stone-400">
-                  <strong className="text-stone-400">{lang === "en" ? "Father's Profession:" : "পিতার পেশা:"}</strong>{" "}
-                  {lang === "en" ? bride.fatherOccupation : bride.fatherOccupationBn}
-                </p>
-              )}
               <p className="text-[11px] text-stone-300">
                 <strong className="text-stone-400">{lang === "en" ? "Residence:" : "স্থায়ী ঠিকানা:"}</strong>{" "}
                 {lang === "en"
