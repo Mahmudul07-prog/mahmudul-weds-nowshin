@@ -32,7 +32,7 @@ export default function GallerySection({
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Fetch photos
-  const fetchPhotos = async () => {
+  const refreshPhotos = async () => {
     try {
       const res = await fetch("/api/photos");
       const data = await res.json();
@@ -41,13 +41,26 @@ export default function GallerySection({
       }
     } catch (e) {
       console.warn("Could not load photos:", e);
-    } finally {
-      setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchPhotos();
+    let isMounted = true;
+    fetch("/api/photos")
+      .then((res) => res.json())
+      .then((data) => {
+        if (isMounted && data.success && Array.isArray(data.photos)) {
+          setPhotos(data.photos);
+        }
+      })
+      .catch((e) => console.warn("Could not load photos:", e))
+      .finally(() => {
+        if (isMounted) setIsLoading(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   // Handle Image File Selection & Client-Side Canvas Compression
@@ -134,7 +147,7 @@ export default function GallerySection({
           setPreviewUrl(null);
           setCaption("");
           setUploadSuccess(false);
-          fetchPhotos();
+          refreshPhotos();
         }, 1500);
       } else {
         alert(data.error || "Upload failed");

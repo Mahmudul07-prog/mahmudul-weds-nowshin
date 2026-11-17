@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Heart, Sparkles, Lock, CheckCircle2, Calendar, Milestone } from "lucide-react";
+import { Sparkles, Lock, CheckCircle2, Calendar, Milestone } from "lucide-react";
 import { StoryMilestone } from "@/types";
 
 interface StoryTimelineProps {

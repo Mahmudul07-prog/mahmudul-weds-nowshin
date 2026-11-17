@@ -3,8 +3,6 @@ import fs from "fs";
 import path from "path";
 import { WeddingPhoto } from "@/types";
 
-const defaultPhotos: WeddingPhoto[] = [];
-
 let inMemoryPhotos: WeddingPhoto[] = [];
 
 function getFilePath() {
@@ -103,7 +101,7 @@ export async function DELETE(request: Request) {
     writePhotos(updated);
 
     return NextResponse.json({ success: true, photos: updated });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ success: false, error: "Delete failed" }, { status: 500 });
   }
 }

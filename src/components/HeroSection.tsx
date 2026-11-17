@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Calendar, Clock, MapPin, Heart, Send, CheckCircle2, Download, Sparkles } from "lucide-react";
+import { Calendar, Clock, MapPin, Send, CheckCircle2, Download } from "lucide-react";
 import { WeddingConfig } from "@/types";
 
 interface HeroSectionProps {

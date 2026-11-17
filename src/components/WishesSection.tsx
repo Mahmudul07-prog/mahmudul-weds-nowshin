@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import confetti from "canvas-confetti";
-import { MessageSquareHeart, Send, Sparkles, HeartHandshake, User, Check } from "lucide-react";
+import { MessageSquareHeart, Send, Sparkles, HeartHandshake, Check } from "lucide-react";
 import { Wish } from "@/types";
 
 interface WishesSectionProps {
@@ -12,7 +12,11 @@ interface WishesSectionProps {
 
 export default function WishesSection({ initialGuestName, lang }: WishesSectionProps) {
   const [wishes, setWishes] = useState<Wish[]>([]);
-  const [name, setName] = useState("");
+  const [name, setName] = useState(
+    initialGuestName && initialGuestName !== "Guest" && initialGuestName !== "Honored Guest"
+      ? initialGuestName
+      : ""
+  );
   const [relation, setRelation] = useState("Friend");
   const [message, setMessage] = useState("");
   const [emoji, setEmoji] = useState("🤲");
@@ -22,10 +26,6 @@ export default function WishesSection({ initialGuestName, lang }: WishesSectionP
   const emojis = ["🤲", "💐", "💍", "❤️", "🌟", "🎉", "🕊️"];
 
   useEffect(() => {
-    if (initialGuestName && initialGuestName !== "Guest" && initialGuestName !== "Honored Guest") {
-      setName(initialGuestName);
-    }
-
     // Fetch initial wishes
     fetch("/api/wishes")
       .then((res) => res.json())

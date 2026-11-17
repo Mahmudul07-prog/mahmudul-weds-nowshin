@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import {
   Users,
@@ -14,8 +14,6 @@ import {
   Search,
   MessageCircle,
   ArrowLeft,
-  Sparkles,
-  Phone,
   RefreshCw,
   HeartHandshake
 } from "lucide-react";
@@ -339,7 +337,7 @@ export default function AdminDashboard() {
                 ].map((tab) => (
                   <button
                     key={tab.key}
-                    onClick={() => setStatusFilter(tab.key as any)}
+                    onClick={() => setStatusFilter(tab.key as "all" | "yes" | "no" | "tentative")}
                     className={`px-3 py-1.5 rounded-lg text-xs font-medium transition ${
                       statusFilter === tab.key
                         ? "bg-[#13241f] border border-[#d4af37] text-[#fce09b]"

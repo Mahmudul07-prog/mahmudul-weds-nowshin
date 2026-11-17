@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { UserCheck, Share2, Globe, Volume2, VolumeX, Menu, X, Calendar, Heart, Send, CheckCircle2, Sparkles, Award, Camera } from "lucide-react";
+import { UserCheck, Share2, Globe, Volume2, VolumeX, Menu, X, Calendar, Send, CheckCircle2, Sparkles, Award, Camera } from "lucide-react";
 import LinkGeneratorModal from "./LinkGeneratorModal";
 
 interface PersonalizedBadgeProps {

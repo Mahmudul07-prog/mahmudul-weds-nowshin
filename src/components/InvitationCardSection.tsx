@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { Download, Share2, Sparkles, User, RefreshCw, Check, Heart, MapPin, Calendar, Phone, Award, QrCode } from "lucide-react";
+import { Download, Share2, Sparkles, User, RefreshCw, Check, MapPin, Calendar, Award } from "lucide-react";
 import { toJpeg } from "html-to-image";
 import confetti from "canvas-confetti";
 import QRCode from "qrcode";

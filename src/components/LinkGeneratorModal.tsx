@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { Copy, Check, Share2, X, Sparkles, MessageCircle } from "lucide-react";
+import React, { useState } from "react";
+import { Copy, Check, X, Sparkles, MessageCircle } from "lucide-react";
 
 interface LinkGeneratorModalProps {
   isOpen: boolean;
@@ -15,17 +15,11 @@ export default function LinkGeneratorModal({
   groomName,
 }: LinkGeneratorModalProps) {
   const [guestName, setGuestName] = useState("");
-  const [baseUrl, setBaseUrl] = useState("");
   const [copied, setCopied] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setBaseUrl(window.location.origin);
-    }
-  }, []);
 
   if (!isOpen) return null;
 
+  const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
   const trimmedName = guestName.trim();
   const generatedUrl = trimmedName
     ? `${baseUrl}/?to=${encodeURIComponent(trimmedName)}`

@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { Heart, Sparkles, User } from "lucide-react";
+import { Heart, Sparkles } from "lucide-react";
 import { WeddingConfig } from "@/types";
 
 interface CoupleSectionProps {

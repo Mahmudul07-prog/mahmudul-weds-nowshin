@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import confetti from "canvas-confetti";
 import { CheckCircle2, Send, Users, Phone, User, Utensils, Sparkles } from "lucide-react";
 
@@ -10,21 +10,18 @@ interface RsvpSectionProps {
 }
 
 export default function RsvpSection({ initialGuestName, lang }: RsvpSectionProps) {
-  const [name, setName] = useState("");
+  const [name, setName] = useState(
+    initialGuestName && initialGuestName !== "Guest" && initialGuestName !== "Honored Guest"
+      ? initialGuestName
+      : ""
+  );
   const [phone, setPhone] = useState("");
   const [attendance, setAttendance] = useState<"yes" | "no" | "tentative">("yes");
   const [guestCount, setGuestCount] = useState<number>(1);
-  const [dietary, setDietary] = useState("");
   const [notes, setNotes] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-
-  useEffect(() => {
-    if (initialGuestName && initialGuestName !== "Guest" && initialGuestName !== "Honored Guest") {
-      setName(initialGuestName);
-    }
-  }, [initialGuestName]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,12 +39,12 @@ export default function RsvpSection({ initialGuestName, lang }: RsvpSectionProps
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name,
-          phone,
+          name: name.trim(),
+          phone: phone.trim(),
           attendance,
           guestCount,
-          dietary,
-          notes,
+          dietary: "",
+          notes: notes.trim(),
         }),
       });
 

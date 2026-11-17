@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { weddingData } from "@/config/weddingData";
 import EnvelopeHero from "@/components/EnvelopeHero";

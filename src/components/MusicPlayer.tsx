@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { Volume2, VolumeX, Music, ListMusic, Sparkles, ChevronUp, ChevronDown } from "lucide-react";
+import { Volume2, VolumeX, Music, ListMusic, Sparkles, ChevronDown } from "lucide-react";
 
 interface MusicPlayerProps {
   autoPlayTrigger?: boolean;

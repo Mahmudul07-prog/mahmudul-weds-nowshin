@@ -17,7 +17,7 @@ export default function PetalsEffect() {
   const [isEnabled, setIsEnabled] = useState(true);
 
   useEffect(() => {
-    // Generate 20 floating petals
+    // Generate 22 floating petals
     const colors = [
       "rgba(212, 175, 55, 0.45)", // gold
       "rgba(251, 194, 235, 0.5)", // soft rose
@@ -35,7 +35,11 @@ export default function PetalsEffect() {
       color: colors[Math.floor(Math.random() * colors.length)],
     }));
 
-    setPetals(generated);
+    const timer = setTimeout(() => {
+      setPetals(generated);
+    }, 0);
+
+    return () => clearTimeout(timer);
   }, []);
 
   if (!isEnabled) return null;

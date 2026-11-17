@@ -56,9 +56,8 @@ export default function DuaBlessingsSection({
   const [recentBlessings, setRecentBlessings] = useState<DuaEntry[]>([]);
   const [sendingId, setSendingId] = useState<string | null>(null);
   const [sentMap, setSentMap] = useState<Record<string, boolean>>({});
-  const [guestName, setGuestName] = useState(
-    initialGuestName && initialGuestName !== "Honored Guest" ? initialGuestName : ""
-  );
+  const guestName =
+    initialGuestName && initialGuestName !== "Honored Guest" ? initialGuestName : "";
 
   useEffect(() => {
     fetch("/api/duas")
