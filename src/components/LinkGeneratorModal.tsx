@@ -39,7 +39,7 @@ export default function LinkGeneratorModal({
 
   const shareText = `السلام عليكم,\nDear ${
     trimmedName || "Honored Guest"
-  },\nYou are warmly invited to celebrate the royal wedding of ${groomName} & Nowshin Jahan Mili. Open the link to view ceremony details and download your personalized Royal Invitation Card (JPEG):\n\n${generatedUrl}\n\nWe eagerly look forward to your presence and prayers! 💍✨`;
+  },\nYou are warmly invited to celebrate the royal wedding of ${groomName} & Nowshin. Open the link to view ceremony details and download your personalized Royal Invitation Card (JPEG):\n\n${generatedUrl}\n\nWe eagerly look forward to your presence and prayers! 💍✨`;
 
   const handleWhatsApp = () => {
     const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;

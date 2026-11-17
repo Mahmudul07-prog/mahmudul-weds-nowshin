@@ -29,7 +29,7 @@ const greatVibes = Great_Vibes({
 
 export const metadata: Metadata = {
   title: `${weddingData.couple.groom.name} & ${weddingData.couple.bride.name} | Royal Wedding Invitation`,
-  description: `You are cordially invited to celebrate the auspicious union of ${weddingData.couple.groom.fullName} & ${weddingData.couple.bride.name}.`,
+  description: `You are cordially invited to celebrate the auspicious union of ${weddingData.couple.groom.fullName} & ${weddingData.couple.bride.fullName}.`,
   openGraph: {
     title: `${weddingData.couple.groom.name} & ${weddingData.couple.bride.name} - Royal Wedding Invitation`,
     description: "Personalized Digital Wedding Invitation with events, RSVP, and wishes.",

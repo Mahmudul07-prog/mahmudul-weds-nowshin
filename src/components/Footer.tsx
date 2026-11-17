@@ -16,7 +16,7 @@ export default function Footer({ config, lang }: FooterProps) {
       <div className="max-w-4xl mx-auto relative z-10">
         {/* Monogram */}
         <div className="w-14 h-14 rounded-full border-2 border-[#d4af37] mx-auto flex items-center justify-center mb-4 bg-[#0e1d17] shadow-[0_0_20px_rgba(212,175,55,0.3)]">
-          <span className="font-serif font-bold text-lg text-[#fce09b]">M &amp; S</span>
+          <span className="font-serif font-bold text-lg text-[#fce09b]">M &amp; N</span>
         </div>
 
         <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white mb-2">

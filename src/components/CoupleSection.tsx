@@ -57,7 +57,7 @@ export default function CoupleSection({ config, lang }: CoupleSectionProps) {
               {lang === "en" ? groom.role : "বর"}
             </span>
             <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white tracking-wide">
-              {lang === "en" ? groom.fullName : groom.nameBn}
+              {lang === "en" ? groom.fullName : groom.fullNameBn || "মুহাম্মাদ মাহমুদুল হাসান"}
             </h3>
 
             {/* Parents & Residence Info */}
@@ -117,7 +117,7 @@ export default function CoupleSection({ config, lang }: CoupleSectionProps) {
               {lang === "en" ? bride.role : "কনে"}
             </span>
             <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white tracking-wide">
-              {lang === "en" ? bride.name : bride.nameBn}
+              {lang === "en" ? bride.fullName : bride.fullNameBn || "নওশীন জাহান মিলি"}
             </h3>
 
             {/* Parents & Residence Info */}

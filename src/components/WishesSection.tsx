@@ -95,7 +95,7 @@ export default function WishesSection({ initialGuestName, lang }: WishesSectionP
           </div>
           <p className="text-xs sm:text-sm text-stone-400 max-w-lg mx-auto">
             {lang === "en"
-              ? "Share your prayers, heartfelt advice, and warm congratulations for Mahmudul & the couple."
+              ? "Share your prayers, heartfelt advice, and warm congratulations for Mahmudul & Nowshin."
               : "নতুন দম্পতির জন্য আপনার মনের শুভকামনা, দোয়া বা উপদেশ রেখে যান।"}
           </p>
         </div>

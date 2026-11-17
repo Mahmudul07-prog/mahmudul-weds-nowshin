@@ -38,6 +38,7 @@ export interface WeddingConfig {
       name: string;
       nameBn: string;
       fullName: string;
+      fullNameBn?: string;
       role: string;
       bio: string;
       fatherName: string;
@@ -62,6 +63,7 @@ export interface WeddingConfig {
       name: string;
       nameBn: string;
       fullName: string;
+      fullNameBn?: string;
       role: string;
       bio: string;
       fatherName: string;

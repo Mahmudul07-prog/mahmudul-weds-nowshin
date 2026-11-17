@@ -421,7 +421,7 @@ export default function InvitationCardSection({
                   } flex flex-col items-center justify-center text-center`}
                 >
                   <span className="font-serif text-xs tracking-tighter text-[#d4af37] font-bold">
-                    M <span className="text-[10px] text-rose-400">♥</span> M
+                    M <span className="text-[10px] text-rose-400">♥</span> N
                   </span>
                   <span className="text-[7px] uppercase tracking-widest text-stone-400">
                     ROYAL
@@ -473,7 +473,7 @@ export default function InvitationCardSection({
                     theme === "ivory" ? "text-emerald-950" : "text-white"
                   }`}
                 >
-                  {cardLang === "en" ? config.couple.groom.fullName : config.couple.groom.nameBn}
+                  {cardLang === "en" ? config.couple.groom.fullName : config.couple.groom.fullNameBn || "মুহাম্মাদ মাহমুদুল হাসান"}
                 </h4>
                 <p className={`text-[10px] sm:text-xs ${themeClasses.mutedText}`}>
                   {cardLang === "en"
@@ -506,7 +506,7 @@ export default function InvitationCardSection({
                     theme === "ivory" ? "text-emerald-950" : "text-white"
                   }`}
                 >
-                  {cardLang === "en" ? config.couple.bride.fullName : config.couple.bride.nameBn}
+                  {cardLang === "en" ? config.couple.bride.fullName : config.couple.bride.fullNameBn || "নওশীন জাহান মিলি"}
                 </h4>
                 <p className={`text-[10px] sm:text-xs ${themeClasses.mutedText}`}>
                   {cardLang === "en"

@@ -16,8 +16,9 @@ export const weddingData: WeddingConfig = {
   couple: {
     groom: {
       name: "Mahmudul",
-      nameBn: "মাহমুদুল হাসান",
+      nameBn: "মাহমুদুল",
       fullName: "Md. Mahmudul Hasan",
+      fullNameBn: "মুহাম্মাদ মাহমুদুল হাসান",
       role: "The Groom",
       bio: "A passionate soul from Pir Bari, Aushpara, Laksam, ready to embark on life's most sacred and beautiful chapter with love and family blessings.",
       fatherName: "Khaza Md Aminul Ahsan",
@@ -39,9 +40,10 @@ export const weddingData: WeddingConfig = {
       image: "/images/mahmudul-groom.jpg",
     },
     bride: {
-      name: "Nowshin Jahan Mili",
-      nameBn: "নওশীন জাহান মিলি",
+      name: "Nowshin",
+      nameBn: "নওশীন",
       fullName: "Nowshin Jahan Mili",
+      fullNameBn: "নওশীন জাহান মিলি",
       role: "The Bride",
       bio: "A gracious and gentle soul from Maniksar (Khan Bari), Mudaforgonj, Barura, Cumilla, stepping hand-in-hand with Mahmudul into this sacred journey of eternal companionship, love, and piety.",
       fatherName: "Md. Abdul Malek Khan",

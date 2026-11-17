@@ -180,8 +180,8 @@ export default function GallerySection({
           </h2>
           <p className="text-stone-300 text-xs sm:text-sm max-w-xl mx-auto mt-2 leading-relaxed">
             {lang === "en"
-              ? "Share your joyful photographs with Mahmudul & Mili! Upload your selfies and warm memories to our royal wedding wall."
-              : "মাহমুদুল ও মিলির শুভ পরিণয়ে আপনার তোলা সুন্দর মুহূর্তের ছবি সরাসরি সাইটে আপলোড করুন এবং অন্যদের সাথে আনন্দ ভাগ করে নিন।"}
+              ? "Share your joyful photographs with Mahmudul & Nowshin! Upload your selfies and warm memories to our royal wedding wall."
+              : "মাহমুদুল ও নওশীনের শুভ পরিণয়ে আপনার তোলা সুন্দর মুহূর্তের ছবি সরাসরি সাইটে আপলোড করুন এবং অন্যদের সাথে আনন্দ ভাগ করে নিন।"}
           </p>
 
           {/* Upload Photo Button */}
