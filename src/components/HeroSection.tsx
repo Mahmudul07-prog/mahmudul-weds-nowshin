@@ -72,11 +72,11 @@ export default function HeroSection({ config, lang, guestName }: HeroSectionProp
 
         {/* Couple Names */}
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif font-bold text-white tracking-wide my-4 leading-tight">
-          <span className="gold-gradient-text">{config.couple.groom.name}</span>
+          <span className="gold-gradient-shimmer">{config.couple.groom.name}</span>
           <span className="block sm:inline sm:mx-4 font-serif text-3xl sm:text-5xl text-[#d4af37] font-light">
             &
           </span>
-          <span className="gold-gradient-text">{config.couple.bride.name}</span>
+          <span className="gold-gradient-shimmer">{config.couple.bride.name}</span>
         </h1>
 
         {/* Islamic Quote */}

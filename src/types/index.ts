@@ -128,3 +128,21 @@ export interface RsvpEntry {
   notes?: string;
   createdAt: string;
 }
+
+export interface WeddingPhoto {
+  id: string;
+  guestName: string;
+  caption: string;
+  imageUrl: string;
+  createdAt: string;
+  likes?: number;
+}
+
+export interface DuaEntry {
+  id: string;
+  guestName: string;
+  duaId: string;
+  duaTitle: string;
+  duaArabic: string;
+  createdAt: string;
+}

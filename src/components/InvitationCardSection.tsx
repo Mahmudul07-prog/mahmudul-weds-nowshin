@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, useRef } from "react";
-import { Download, Share2, Sparkles, User, RefreshCw, Check, Heart, MapPin, Calendar, Phone, Award } from "lucide-react";
+import React, { useState, useRef, useEffect } from "react";
+import { Download, Share2, Sparkles, User, RefreshCw, Check, Heart, MapPin, Calendar, Phone, Award, QrCode } from "lucide-react";
 import { toJpeg } from "html-to-image";
 import confetti from "canvas-confetti";
+import QRCode from "qrcode";
 import { WeddingConfig } from "@/types";
 
 interface InvitationCardSectionProps {
@@ -28,8 +29,27 @@ export default function InvitationCardSection({
   const [isGenerating, setIsGenerating] = useState(false);
   const [downloadSuccess, setDownloadSuccess] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
+  const [qrCodeUrl, setQrCodeUrl] = useState<string>("");
 
   const displayName = guestName.trim() || (cardLang === "en" ? "Honored Guest" : "সম্মানিত সুধী");
+
+  useEffect(() => {
+    const origin = typeof window !== "undefined" ? window.location.origin : "https://wedding.example.com";
+    const inviteUrl = guestName.trim()
+      ? `${origin}/?to=${encodeURIComponent(guestName.trim())}#card`
+      : `${origin}/#card`;
+
+    QRCode.toDataURL(inviteUrl, {
+      margin: 1,
+      width: 140,
+      color: {
+        dark: theme === "ivory" ? "#8c671b" : "#fce09b",
+        light: theme === "ivory" ? "#fcfbf7" : "#071711",
+      },
+    })
+      .then((url) => setQrCodeUrl(url))
+      .catch((err) => console.warn("QR generation error:", err));
+  }, [guestName, theme]);
 
   // Handle Download as JPEG
   const handleDownloadJpeg = async () => {
@@ -557,19 +577,34 @@ export default function InvitationCardSection({
               </div>
             </div>
 
-            {/* Footer Sign-off & Helpline */}
-            <div className="mt-4 pt-3 border-t border-[#d4af37]/25 text-center">
-              <p className="text-[10px] uppercase tracking-widest text-[#d4af37] font-semibold">
-                {cardLang === "en" ? "With Best Compliments:" : "বিনীত আমন্ত্রণে:"}
-              </p>
-              <p className={`text-xs font-serif font-bold ${themeClasses.goldText} mt-0.5`}>
-                {cardLang === "en" ? "Ahsan & Khan Families" : "আহসান ও খান পরিবার"}
-              </p>
-              <p className="text-[9px] text-stone-400 mt-1 flex items-center justify-center gap-2">
-                <span>📞 +880 1863-846300</span>
-                <span>•</span>
-                <span>#MahmudulWedsMili</span>
-              </p>
+            {/* Footer Sign-off, Helpline & Smart Golden QR Code */}
+            <div className="mt-4 pt-3 border-t border-[#d4af37]/25 flex items-center justify-between text-left">
+              <div>
+                <p className="text-[9px] uppercase tracking-widest text-[#d4af37] font-semibold">
+                  {cardLang === "en" ? "With Best Compliments:" : "বিনীত আমন্ত্রণে:"}
+                </p>
+                <p className={`text-xs font-serif font-bold ${themeClasses.goldText} mt-0.5`}>
+                  {cardLang === "en" ? "Ahsan & Khan Families" : "আহসান ও খান পরিবার"}
+                </p>
+                <p className="text-[9px] text-stone-400 mt-1 flex items-center gap-1.5">
+                  <span>📞 +880 1863-846300</span>
+                  <span>•</span>
+                  <span>#MahmudulWedsMili</span>
+                </p>
+              </div>
+
+              {/* Golden Smart QR Code */}
+              {qrCodeUrl && (
+                <div className="flex flex-col items-center shrink-0 pl-3">
+                  <div className="p-1 rounded-xl bg-black/40 border border-[#d4af37]/40 shadow">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={qrCodeUrl} alt="Invitation QR" className="w-12 h-12 rounded-lg" />
+                  </div>
+                  <span className="text-[8px] text-stone-400 tracking-tighter mt-0.5 font-light">
+                    {cardLang === "en" ? "Scan QR" : "স্ক্যান করুন"}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         </div>

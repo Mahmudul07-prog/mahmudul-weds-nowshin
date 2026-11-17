@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { UserCheck, Share2, Globe, Volume2, VolumeX, Menu, X, Calendar, Heart, Send, CheckCircle2, Sparkles } from "lucide-react";
+import { UserCheck, Share2, Globe, Volume2, VolumeX, Menu, X, Calendar, Heart, Send, CheckCircle2, Sparkles, Award, Camera } from "lucide-react";
 import LinkGeneratorModal from "./LinkGeneratorModal";
 
 interface PersonalizedBadgeProps {
@@ -26,6 +26,12 @@ export default function PersonalizedBadge({
 
   const navLinks = [
     {
+      href: "#duas",
+      labelEn: "Duas",
+      labelBn: "দোয়ার তোহফা",
+      icon: <Award className="w-3.5 h-3.5 text-[#d4af37]" />,
+    },
+    {
       href: "#card",
       labelEn: "Card",
       labelBn: "নিমন্ত্রণপত্র",
@@ -40,10 +46,10 @@ export default function PersonalizedBadge({
       icon: <Calendar className="w-3.5 h-3.5" />,
     },
     {
-      href: "#journey",
-      labelEn: "Our Story",
-      labelBn: "আমাদের গল্প",
-      icon: <Heart className="w-3.5 h-3.5" />,
+      href: "#gallery",
+      labelEn: "Gallery",
+      labelBn: "স্মৃতি গ্যালারি",
+      icon: <Camera className="w-3.5 h-3.5" />,
     },
     {
       href: "#rsvp",

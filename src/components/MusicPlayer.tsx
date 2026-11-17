@@ -1,13 +1,30 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { Volume2, VolumeX, Music } from "lucide-react";
+import { Volume2, VolumeX, Music, ListMusic, Sparkles, ChevronUp, ChevronDown } from "lucide-react";
 
 interface MusicPlayerProps {
   autoPlayTrigger?: boolean;
   isMuted?: boolean;
   onToggleMute?: () => void;
 }
+
+const PLAYLIST = [
+  {
+    id: "barakallah",
+    title: "বারাকাল্লাহু লাকুমা (Wedding Nasheed)",
+    artist: "Traditional Islamic Melody",
+    src: "/audio/wedding-melody.mp3",
+    icon: "🕌",
+  },
+  {
+    id: "sufi",
+    title: "রয়েল সুফি ও বাঁশির সুর (Sufi Flute)",
+    artist: "Peaceful Serene Harmonies",
+    src: "/audio/wedding-melody.mp3", // fallback gracefully
+    icon: "🕊️",
+  },
+];
 
 export default function MusicPlayer({
   autoPlayTrigger,
@@ -16,6 +33,8 @@ export default function MusicPlayer({
 }: MusicPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [internalMuted, setInternalMuted] = useState(false);
+  const [isPlaylistOpen, setIsPlaylistOpen] = useState(false);
+  const [currentTrack, setCurrentTrack] = useState(PLAYLIST[0]);
   const audioElemRef = useRef<HTMLAudioElement | null>(null);
 
   const isMuted = externalMuted !== undefined ? externalMuted : internalMuted;
@@ -50,10 +69,8 @@ export default function MusicPlayer({
     if (!audioElemRef.current) return;
 
     if (isPlaying && !isMuted) {
-      // If playing, clicking mutes it
       toggleMute();
     } else if (isMuted) {
-      // If muted, unmutes and plays
       toggleMute();
     } else {
       audioElemRef.current.volume = 0.45;
@@ -61,6 +78,18 @@ export default function MusicPlayer({
         .play()
         .then(() => setIsPlaying(true))
         .catch((err) => console.log("Audio play blocked:", err));
+    }
+  };
+
+  const handleSelectTrack = (track: (typeof PLAYLIST)[0]) => {
+    setCurrentTrack(track);
+    setIsPlaylistOpen(false);
+    if (audioElemRef.current) {
+      audioElemRef.current.src = track.src;
+      audioElemRef.current.currentTime = 0;
+      if (!isMuted) {
+        audioElemRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+      }
     }
   };
 
@@ -76,17 +105,54 @@ export default function MusicPlayer({
   }, [autoPlayTrigger, isMuted]);
 
   return (
-    <div className="fixed bottom-5 right-5 z-40 flex items-center gap-2">
+    <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-2">
       <audio
         ref={audioElemRef}
-        src="/audio/wedding-melody.mp3"
+        src={currentTrack.src}
         loop
         preload="auto"
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
       />
 
-      {/* Main Pill Player */}
+      {/* Playlist Selector Dropup */}
+      {isPlaylistOpen && (
+        <div className="w-64 p-3 rounded-2xl bg-[#0b1411]/95 border border-[#d4af37]/40 shadow-2xl backdrop-blur-md animate-in slide-in-from-bottom-2 duration-200">
+          <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/10">
+            <span className="text-[11px] font-semibold text-[#fce09b] flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[#d4af37]" />
+              নাশিদ ও সুর নির্বাচন
+            </span>
+            <button
+              onClick={() => setIsPlaylistOpen(false)}
+              className="text-stone-400 hover:text-white text-xs px-1"
+            >
+              ✕
+            </button>
+          </div>
+          <div className="space-y-1.5">
+            {PLAYLIST.map((t) => (
+              <button
+                key={t.id}
+                onClick={() => handleSelectTrack(t)}
+                className={`w-full text-left p-2 rounded-xl text-xs flex items-center gap-2 transition ${
+                  currentTrack.id === t.id
+                    ? "bg-[#142921] border border-[#d4af37]/50 text-[#fce09b] font-medium"
+                    : "hover:bg-white/5 text-stone-300"
+                }`}
+              >
+                <span>{t.icon}</span>
+                <div className="overflow-hidden">
+                  <p className="truncate font-medium">{t.title}</p>
+                  <p className="text-[9px] text-stone-400 truncate">{t.artist}</p>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Main Audio Control Bar */}
       <div
         className={`group relative flex items-center gap-2.5 sm:gap-3 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full border transition-all duration-300 backdrop-blur-md shadow-2xl ${
           isPlaying && !isMuted
@@ -112,18 +178,27 @@ export default function MusicPlayer({
 
         {/* Text Details */}
         <div className="flex flex-col text-left cursor-pointer" onClick={togglePlay}>
-          <span className="text-[11px] font-semibold tracking-wider text-[#d4af37] flex items-center gap-1.5">
-            <Music className="w-3 h-3 inline text-[#d4af37]" />
-            বারাকাল্লাহু লাকুমা
+          <span className="text-[11px] font-semibold tracking-wider text-[#d4af37] flex items-center gap-1.5 max-w-[130px] truncate">
+            <Music className="w-3 h-3 inline text-[#d4af37] shrink-0" />
+            {currentTrack.title.split("(")[0]}
           </span>
           <span className="text-[10px] text-stone-300 max-w-[120px] sm:max-w-[140px] truncate">
             {isMuted
               ? "নিঃশব্দ (Muted)"
               : isPlaying
-              ? "প্লে হচ্ছে (Wedding Nasheed)"
+              ? "প্লে হচ্ছে (Playing)"
               : "চালু করতে চাপ দিন"}
           </span>
         </div>
+
+        {/* Toggle Playlist Popup */}
+        <button
+          onClick={() => setIsPlaylistOpen((prev) => !prev)}
+          title="সুর বদলান (Change Music)"
+          className="p-1 rounded-full text-stone-400 hover:text-white hover:bg-white/10 transition"
+        >
+          {isPlaylistOpen ? <ChevronDown className="w-3.5 h-3.5" /> : <ListMusic className="w-3.5 h-3.5 text-[#d4af37]" />}
+        </button>
 
         {/* Dedicated MUTE / UNMUTE Action Button */}
         <button

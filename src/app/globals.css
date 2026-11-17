@@ -35,6 +35,30 @@
   -webkit-text-fill-color: transparent;
 }
 
+@keyframes goldShimmerSweep {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.gold-gradient-shimmer {
+  background: linear-gradient(
+    90deg,
+    #fce09b 0%,
+    #ffffff 25%,
+    #d4af37 50%,
+    #ffffff 75%,
+    #fce09b 100%
+  );
+  background-size: 200% auto;
+  animation: goldShimmerSweep 5s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .gold-gradient-border {
   border-image: linear-gradient(135deg, #d4af37, #8c6d1f, #fce09b) 1;
 }

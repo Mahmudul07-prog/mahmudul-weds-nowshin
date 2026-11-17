@@ -7,9 +7,11 @@ import EnvelopeHero from "@/components/EnvelopeHero";
 import PersonalizedBadge from "@/components/PersonalizedBadge";
 import HeroSection from "@/components/HeroSection";
 import CoupleSection from "@/components/CoupleSection";
+import DuaBlessingsSection from "@/components/DuaBlessingsSection";
 import InvitationCardSection from "@/components/InvitationCardSection";
 import StoryTimeline from "@/components/StoryTimeline";
 import EventsSection from "@/components/EventsSection";
+import GallerySection from "@/components/GallerySection";
 import RsvpSection from "@/components/RsvpSection";
 import WishesSection from "@/components/WishesSection";
 import Footer from "@/components/Footer";
@@ -90,6 +92,12 @@ function WeddingContent() {
             lang={lang}
           />
 
+          {/* Interactive Sunnah Dua Blessings Counter & Gifts */}
+          <DuaBlessingsSection
+            initialGuestName={guestName}
+            lang={lang}
+          />
+
           {/* Personalized Royal Invitation Card with High-Res JPEG Download */}
           <InvitationCardSection
             config={weddingData}
@@ -106,6 +114,12 @@ function WeddingContent() {
           {/* Ceremony Schedule & Venue Locations */}
           <EventsSection
             events={weddingData.events}
+            lang={lang}
+          />
+
+          {/* Wedding Photo Memories & Guest Selfie Gallery Wall */}
+          <GallerySection
+            initialGuestName={guestName}
             lang={lang}
           />
 
