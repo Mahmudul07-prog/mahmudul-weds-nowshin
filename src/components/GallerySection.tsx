@@ -204,10 +204,25 @@ export default function GallerySection({
             <p className="text-xs">স্মৃতি গ্যালারি লোড হচ্ছে...</p>
           </div>
         ) : photos.length === 0 ? (
-          <div className="py-16 text-center text-stone-400 royal-glass rounded-3xl p-8 max-w-md mx-auto">
-            <Camera className="w-10 h-10 text-[#d4af37] mx-auto mb-3 opacity-60" />
-            <p className="text-sm font-serif text-white">এখনও কোনো ছবি আপলোড হয়নি</p>
-            <p className="text-xs text-stone-400 mt-1">প্রথম ছবি আপলোড করে গ্যালারির শুভসূচনা করুন!</p>
+          <div className="py-12 px-6 text-center text-stone-400 royal-glass rounded-3xl border border-[#d4af37]/30 max-w-md mx-auto shadow-xl">
+            <div className="w-16 h-16 rounded-full bg-[#13241f] border border-[#d4af37]/40 flex items-center justify-center mx-auto mb-4 shadow">
+              <Camera className="w-8 h-8 text-[#d4af37]" />
+            </div>
+            <p className="text-base font-serif font-semibold text-white">
+              {lang === "en" ? "No Moments Shared Yet" : "এখনও কোনো ছবি আপলোড করা হয়নি"}
+            </p>
+            <p className="text-xs text-stone-400 mt-1.5 leading-relaxed">
+              {lang === "en"
+                ? "Be the first to share a joyful photo or selfie with Mahmudul & Nowshin!"
+                : "অনুষ্ঠানের যেকোনো সুন্দর ছবি বা সেলফি আপলোড করে স্মৃতি গ্যালারির শুভসূচনা করুন!"}
+            </p>
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="mt-5 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#d4af37] to-[#aa8214] text-[#061a14] font-bold text-xs hover:scale-105 active:scale-95 transition shadow cursor-pointer inline-flex items-center gap-1.5"
+            >
+              <Plus className="w-4 h-4 stroke-[3]" />
+              <span>{lang === "en" ? "Upload First Photo" : "প্রথম ছবি আপলোড করুন 📸"}</span>
+            </button>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

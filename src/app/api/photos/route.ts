@@ -3,26 +3,9 @@ import fs from "fs";
 import path from "path";
 import { WeddingPhoto } from "@/types";
 
-const defaultPhotos: WeddingPhoto[] = [
-  {
-    "id": "photo-1",
-    "guestName": "Mahmudul & Nowshin",
-    "caption": "দুই পরিবারের ভালোবাসায় চিরস্থায়ী ভালোবাসার পবিত্র সূচনা 💍✨",
-    "imageUrl": "/images/mahmudul-groom.jpg",
-    "createdAt": "2026-11-13T10:00:00.000Z",
-    "likes": 48
-  },
-  {
-    "id": "photo-2",
-    "guestName": "Family Moments",
-    "caption": "পীর বাড়ির পারিবারিক প্রাঙ্গণ ও ঐতিহাসিক স্নিগ্ধ সকাল 🌿🕊️",
-    "imageUrl": "/images/nowshin-mili-bride.jpg",
-    "createdAt": "2026-11-13T11:30:00.000Z",
-    "likes": 35
-  }
-];
+const defaultPhotos: WeddingPhoto[] = [];
 
-let inMemoryPhotos: WeddingPhoto[] = [...defaultPhotos];
+let inMemoryPhotos: WeddingPhoto[] = [];
 
 function getFilePath() {
   return path.join(process.cwd(), "data", "photos.json");
@@ -34,7 +17,7 @@ function readPhotos(): WeddingPhoto[] {
     if (fs.existsSync(filePath)) {
       const data = fs.readFileSync(filePath, "utf-8");
       const parsed = JSON.parse(data);
-      if (Array.isArray(parsed) && parsed.length > 0) {
+      if (Array.isArray(parsed)) {
         inMemoryPhotos = parsed;
         return parsed;
       }

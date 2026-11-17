@@ -1,11 +1,27 @@
 {
-  "totalDuas": 234,
+  "totalDuas": 236,
   "duaCounts": {
-    "barakallah": 142,
+    "barakallah": 144,
     "rabbana": 58,
     "rizq": 34
   },
   "recentBlessings": [
+    {
+      "id": "dua-1794908785310-nmwo",
+      "guestName": "তানভীর আহমেদ",
+      "duaId": "barakallah",
+      "duaTitle": "রাসূল (সাঃ)-এর সুন্নতি দোয়া",
+      "duaArabic": "بَارَكَ اللَّهُ لَكَ وَبَارَكَ عَلَيْكَ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ",
+      "createdAt": "2026-11-17T09:46:25.311Z"
+    },
+    {
+      "id": "dua-1794908520773-sv0w",
+      "guestName": "সম্মানিত শুভাকাঙ্ক্ষী",
+      "duaId": "barakallah",
+      "duaTitle": "রাসূল (সাঃ)-এর সুন্নতি দোয়া",
+      "duaArabic": "بَارَكَ اللَّهُ لَكَ وَبَارَكَ عَلَيْكَ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ",
+      "createdAt": "2026-11-17T09:42:00.773Z"
+    },
     {
       "id": "dua-1",
       "guestName": "মাওলানা রফিকুল ইসলাম",
