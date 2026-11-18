@@ -33,6 +33,11 @@ export interface WeddingEvent {
   landmark?: string;
   landmarkBn?: string;
   directionsQuery?: string;
+  coordinates?: {
+    lat: number;
+    lng: number;
+  };
+  plusCode?: string;
 }
 
 export interface WeddingConfig {

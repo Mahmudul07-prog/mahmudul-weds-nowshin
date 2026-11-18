@@ -69,7 +69,7 @@ DTSTART:${startStr}
 DTEND:${endStr}
 SUMMARY:${ev.title} - Mahmudul & Nowshin
 DESCRIPTION:${ev.tagline}. Venue: ${ev.venueName}, ${ev.venueAddress}. Helpline: +880 1863-846300
-LOCATION:${ev.venueName}, ${ev.venueAddress}
+LOCATION:${ev.venueName}, ${ev.venueAddress}${ev.coordinates ? `\nGEO:${ev.coordinates.lat};${ev.coordinates.lng}` : ""}
 STATUS:CONFIRMED
 BEGIN:VALARM
 ACTION:DISPLAY
@@ -111,7 +111,7 @@ DTSTART:${startStr}
 DTEND:${endStr}
 SUMMARY:${ev.title} - Mahmudul & Nowshin
 DESCRIPTION:${ev.tagline}. Venue: ${ev.venueName}, ${ev.venueAddress}. Helpline: +880 1863-846300
-LOCATION:${ev.venueName}, ${ev.venueAddress}
+LOCATION:${ev.venueName}, ${ev.venueAddress}${ev.coordinates ? `\nGEO:${ev.coordinates.lat};${ev.coordinates.lng}` : ""}
 STATUS:CONFIRMED
 BEGIN:VALARM
 ACTION:DISPLAY

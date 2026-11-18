@@ -98,6 +98,19 @@ export default function VenueNavigationModal({
               </div>
             </div>
           )}
+
+          {/* Exact GPS Coordinates & Plus Code */}
+          {event.coordinates && (
+            <div className="pt-2 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-[11px] text-[#fce09b]">
+              <span className="font-mono bg-black/30 px-2.5 py-1 rounded-lg border border-[#d4af37]/20">
+                📍 GPS: {event.coordinates.lat.toFixed(6)}, {event.coordinates.lng.toFixed(6)}
+                {event.plusCode && ` • ${event.plusCode}`}
+              </span>
+              <span className="text-[10px] font-semibold text-emerald-300 bg-emerald-500/15 px-2 py-0.5 rounded-full border border-emerald-500/30">
+                {lang === "en" ? "Exact House Pinpoint ✓" : "সঠিক বাড়ির লোকেশন পিন ✓"}
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Primary Action: Turn-by-Turn GPS Navigation */}
