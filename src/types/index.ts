@@ -38,6 +38,8 @@ export interface WeddingEvent {
     lng: number;
   };
   plusCode?: string;
+  audience?: string;
+  audienceBn?: string;
 }
 
 export interface WeddingConfig {

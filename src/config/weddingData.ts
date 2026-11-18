@@ -170,6 +170,8 @@ export const weddingData: WeddingConfig = {
       isConfirmed: true,
       dressCode: "Traditional Mustard Yellow & Floral",
       dressCodeBn: "বাসন্তী হলুদ অথবা রঙিন ঐতিহ্যবাহী পোশাক",
+      audience: "Family Celebration",
+      audienceBn: "পারিবারিক আনন্দ আয়োজন",
       iconName: "sun",
     },
     {
@@ -198,6 +200,8 @@ export const weddingData: WeddingConfig = {
       isConfirmed: true,
       dressCode: "Royal Traditional Panjabi / Sherwani & Saree",
       dressCodeBn: "রাজকীয় শেরওয়ানি / পাঞ্জাবি ও শাড়ি",
+      audience: "Intimate Ceremony • Family & Close Relatives",
+      audienceBn: "ঘরোয়া আকদ • পারিবারিক ও আমন্ত্রিত নিকটাত্মীয়",
       iconName: "rings",
     },
     {
@@ -225,6 +229,8 @@ export const weddingData: WeddingConfig = {
       isConfirmed: true,
       dressCode: "Formal Suits & Elegant Evening Wear",
       dressCodeBn: "ফর্মাল বা মার্জিত অভিজাত পোশাক",
+      audience: "Grand Reception • All Honored Guests Welcome",
+      audienceBn: "শুভ সংবর্ধনা • সকল সম্মানিত মেহমান ও সুধীজন",
       iconName: "utensils",
     },
   ],

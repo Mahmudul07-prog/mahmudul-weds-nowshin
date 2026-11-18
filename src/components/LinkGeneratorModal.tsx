@@ -17,14 +17,16 @@ export default function LinkGeneratorModal({
   const [guestName, setGuestName] = useState("");
   const [copied, setCopied] = useState(false);
   const [lang, setLang] = useState<"bn" | "en">("bn");
+  const [scope, setScope] = useState<"walima" | "all">("walima");
 
   if (!isOpen) return null;
 
   const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
   const trimmedName = guestName.trim();
+  const scopeParam = scope === "all" ? "&scope=all" : "&scope=walima";
   const generatedUrl = trimmedName
-    ? `${baseUrl}/?to=${encodeURIComponent(trimmedName)}`
-    : `${baseUrl}/?to=Guest`;
+    ? `${baseUrl}/?to=${encodeURIComponent(trimmedName)}${scopeParam}`
+    : `${baseUrl}/?to=Guest${scopeParam}`;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(generatedUrl);
@@ -32,14 +34,24 @@ export default function LinkGeneratorModal({
     setTimeout(() => setCopied(false), 2500);
   };
 
+  const ceremonyBn =
+    scope === "all"
+      ? "পবিত্র আকদ ও শুভ বিবাহোত্তর সংবর্ধনায়"
+      : "শুভ বিবাহোত্তর ওয়ালিমা ও প্রীতিভোজে";
+
+  const ceremonyEn =
+    scope === "all"
+      ? "the sacred Nikah ceremony & grand Walima reception"
+      : "the auspicious Walima reception & feast";
+
   const shareText =
     lang === "en"
       ? `السلام عليكم,\nDear ${
           trimmedName || "Honored Guest"
-        },\nYou are warmly invited to celebrate the royal wedding of ${groomName} & Nowshin. Open the link to view ceremony details and download your personalized Royal Invitation Card (JPEG):\n\n${generatedUrl}\n\nWe eagerly look forward to your presence and prayers! 💍✨`
+        },\nYou are warmly invited to ${ceremonyEn} of ${groomName} & Nowshin. Open the link to view ceremony details and download your personalized Royal Invitation Card (JPEG):\n\n${generatedUrl}\n\nWe eagerly look forward to your presence and prayers! 💍✨`
       : `আসসালামু আলাইকুম,\nশ্রদ্ধেয় ${
           trimmedName || "সম্মানিত সুধী"
-        },\nমাহমুদুল হাসান ও নওশীন জাহান মিলির শুভ বিবাহে আপনি ও আপনার পরিবার সাদরে আমন্ত্রিত। আপনার জন্য বিশেষভাবে প্রস্তুতকৃত রাজকীয় ডিজিটাল নিমন্ত্রণপত্রটি দেখতে নিচের লিংকে প্রবেশ করুন:\n\n${generatedUrl}\n\nআপনার আন্তরিক দোয়া ও উপস্থিতি আমাদের একান্ত কাম্য! 💍✨`;
+        },\nমাহমুদুল হাসান ও নওশীন জাহান মিলির ${ceremonyBn} আপনি ও আপনার পরিবার সাদরে আমন্ত্রিত। আপনার জন্য বিশেষভাবে প্রস্তুতকৃত রাজকীয় ডিজিটাল নিমন্ত্রণপত্রটি দেখতে নিচের লিংকে প্রবেশ করুন:\n\n${generatedUrl}\n\nআপনার আন্তরিক দোয়া ও উপস্থিতি আমাদের একান্ত কাম্য! 💍✨`;
 
   const handleWhatsApp = () => {
     const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
@@ -100,6 +112,42 @@ export default function LinkGeneratorModal({
 
         {/* Input Form */}
         <div className="space-y-4">
+          {/* Scope Selection: Walima vs All */}
+          <div>
+            <label className="block text-xs uppercase tracking-wider text-stone-300 mb-1.5 font-medium">
+              {lang === "en" ? "Invitation Scope:" : "দাওয়াতের ধরন:"}
+            </label>
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={() => setScope("walima")}
+                className={`py-2.5 px-3 rounded-xl text-xs font-semibold border transition cursor-pointer ${
+                  scope === "walima"
+                    ? "bg-[#d4af37] text-[#0b1411] border-[#d4af37] shadow"
+                    : "bg-white/5 text-stone-300 border-white/10 hover:bg-white/10"
+                }`}
+              >
+                {lang === "en" ? "🍽️ Walima (Feast Only)" : "🍽️ শুধুমাত্র ওয়ালিমা ও দোয়া"}
+              </button>
+              <button
+                type="button"
+                onClick={() => setScope("all")}
+                className={`py-2.5 px-3 rounded-xl text-xs font-semibold border transition cursor-pointer ${
+                  scope === "all"
+                    ? "bg-[#d4af37] text-[#0b1411] border-[#d4af37] shadow"
+                    : "bg-white/5 text-stone-300 border-white/10 hover:bg-white/10"
+                }`}
+              >
+                {lang === "en" ? "💍 All (Nikah + Walima)" : "💍 আকদ ও ওয়ালিমা (উভয়টি)"}
+              </button>
+            </div>
+            <p className="text-[10px] text-stone-400 mt-1">
+              {scope === "walima"
+                ? (lang === "en" ? "General invite for friends and colleagues to the Walima feast." : "সাধারণ মেহমান ও বন্ধুদের জন্য শুধু ওয়ালিমা ও দোয়ার দাওয়াত।")
+                : (lang === "en" ? "Full invite for close family to both Nikah and Walima ceremonies." : "ঘনিষ্ঠ আত্মীয়স্বজন ও পারিবারিক মেহমানদের উভয় অনুষ্ঠানের দাওয়াত।")}
+            </p>
+          </div>
+
           <div>
             <label className="block text-xs uppercase tracking-wider text-[#d4af37] mb-2 font-medium">
               Guest Name / মেহমানের নাম

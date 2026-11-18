@@ -22,6 +22,8 @@ function WeddingContent() {
   const searchParams = useSearchParams();
   const rawTo = searchParams.get("to") || searchParams.get("name") || searchParams.get("guest");
   const guestName = rawTo ? decodeURIComponent(rawTo).trim() : "Honored Guest";
+  const rawScope = searchParams.get("scope") || searchParams.get("event");
+  const initialScope: "walima" | "all" = rawScope === "all" ? "all" : "walima";
 
   const [isOpened, setIsOpened] = useState(false);
   const [lang, setLang] = useState<"en" | "bn">("bn"); // default to warm Bengali, toggleable to English
@@ -103,6 +105,7 @@ function WeddingContent() {
             config={weddingData}
             initialGuestName={guestName}
             lang={lang}
+            initialScope={initialScope}
           />
 
           {/* Story & Journey Milestones (Modular with upcoming locks) */}

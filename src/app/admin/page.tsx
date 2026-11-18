@@ -30,6 +30,7 @@ interface GeneratedLinkItem {
   id: string;
   name: string;
   category: string;
+  scope: "walima" | "all";
   url: string;
   isSent: boolean;
   createdAt: string;
@@ -50,6 +51,7 @@ export default function AdminDashboard() {
   // Link Generator Hub State
   const [linkName, setLinkName] = useState("");
   const [linkCategory, setLinkCategory] = useState("family");
+  const [linkScope, setLinkScope] = useState<"walima" | "all">("walima");
   const [generatedList, setGeneratedList] = useState<GeneratedLinkItem[]>([]);
   const [copiedLinkId, setCopiedLinkId] = useState<string | null>(null);
   const [currentCopied, setCurrentCopied] = useState(false);
@@ -146,9 +148,10 @@ export default function AdminDashboard() {
   // Link Generator Helpers
   const origin = typeof window !== "undefined" ? window.location.origin : "";
   const trimmedLinkName = linkName.trim();
+  const scopeParam = linkScope === "all" ? "&scope=all" : "&scope=walima";
   const activeGeneratedUrl = trimmedLinkName
-    ? `${origin}/?to=${encodeURIComponent(trimmedLinkName)}`
-    : `${origin}/?to=Honored+Guest`;
+    ? `${origin}/?to=${encodeURIComponent(trimmedLinkName)}${scopeParam}`
+    : `${origin}/?to=Honored+Guest${scopeParam}`;
 
   const getCategoryLabel = (cat: string) => {
     switch (cat) {
@@ -165,9 +168,14 @@ export default function AdminDashboard() {
     }
   };
 
-  const getShareMessage = (name: string, url: string, cat: string) => {
+  const getShareMessage = (name: string, url: string, cat: string, scope: "walima" | "all" = "walima") => {
     const greeting = cat === "friend" ? `প্রিয় ${name},` : `শ্রদ্ধেয় ${name},`;
-    return `আসসালামু আলাইকুম,\n${greeting}\n\nমহান আল্লাহর অশেষ রহমতে মাহমুদুল হাসান ও নওশীন জাহান মিলির শুভ বিবাহ অনুষ্ঠিত হতে যাচ্ছে।\n\nএই আনন্দঘন শুভলগ্নে আপনার ও আপনার পরিবারের উপস্থিতি এবং আন্তরিক দোয়া আমাদের জন্য অত্যন্ত সম্মানের ও আনন্দের।\n\nআপনার জন্য বিশেষভাবে প্রস্তুতকৃত রাজকীয় ডিজিটাল নিমন্ত্রণপত্রটি দেখতে নিচের লিংকে প্রবেশ করুন:\n\n${url}\n\nবিনীত আমন্ত্রণে,\nআহসান ও খান পরিবার\n📞 +880 1863-846300`;
+    const ceremonyText =
+      scope === "all"
+        ? "পবিত্র আকদ ও শুভ বিবাহোত্তর সংবর্ধনা"
+        : "শুভ বিবাহোত্তর ওয়ালিমা ও প্রীতিভোজ";
+
+    return `আসসালামু আলাইকুম,\n${greeting}\n\nমহান আল্লাহর অশেষ রহমতে মাহমুদুল হাসান ও নওশীন জাহান মিলির ${ceremonyText} অনুষ্ঠিত হতে যাচ্ছে।\n\nএই আনন্দঘন শুভলগ্নে আপনার ও আপনার পরিবারের উপস্থিতি এবং আন্তরিক দোয়া আমাদের জন্য অত্যন্ত সম্মানের ও আনন্দের।\n\nআপনার জন্য বিশেষভাবে প্রস্তুতকৃত রাজকীয় ডিজিটাল নিমন্ত্রণপত্রটি দেখতে নিচের লিংকে প্রবেশ করুন:\n\n${url}\n\nবিনীত আমন্ত্রণে,\nআহসান ও খান পরিবার\n📞 +880 1863-846300`;
   };
 
   const handleCopyCurrentLink = () => {
@@ -183,6 +191,7 @@ export default function AdminDashboard() {
       id: `link-${Date.now()}`,
       name: trimmedLinkName,
       category: linkCategory,
+      scope: linkScope,
       url: activeGeneratedUrl,
       isSent: false,
       createdAt: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
@@ -192,7 +201,7 @@ export default function AdminDashboard() {
   };
 
   const handleSendWhatsApp = (item: GeneratedLinkItem) => {
-    const msg = getShareMessage(item.name, item.url, item.category);
+    const msg = getShareMessage(item.name, item.url, item.category, item.scope);
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, "_blank");
     setGeneratedList((prev) =>
       prev.map((l) => (l.id === item.id ? { ...l, isSent: true } : l))
@@ -642,6 +651,46 @@ export default function AdminDashboard() {
                   </div>
                 </div>
 
+                {/* Scope Selection: Walima vs All */}
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-[#d4af37] font-semibold mb-1.5">
+                    দাওয়াতের পরিধি (অনুষ্ঠান)
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <button
+                      type="button"
+                      onClick={() => setLinkScope("walima")}
+                      className={`p-3 rounded-xl border text-xs font-semibold flex items-center gap-2.5 transition cursor-pointer text-left ${
+                        linkScope === "walima"
+                          ? "bg-[#d4af37] text-[#0b1411] border-[#d4af37] shadow"
+                          : "bg-[#091511] text-stone-300 border-white/10 hover:border-white/20"
+                      }`}
+                    >
+                      <span className="text-xl">🍽️</span>
+                      <div>
+                        <span className="block font-bold">শুধুমাত্র ওয়ালিমা ও প্রীতিভোজ</span>
+                        <span className="text-[10px] opacity-80 font-normal">সাধারণ মেহমান, বন্ধু-বান্ধব ও শুভাকাঙ্ক্ষীদের জন্য</span>
+                      </div>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setLinkScope("all")}
+                      className={`p-3 rounded-xl border text-xs font-semibold flex items-center gap-2.5 transition cursor-pointer text-left ${
+                        linkScope === "all"
+                          ? "bg-[#d4af37] text-[#0b1411] border-[#d4af37] shadow"
+                          : "bg-[#091511] text-stone-300 border-white/10 hover:border-white/20"
+                      }`}
+                    >
+                      <span className="text-xl">💍</span>
+                      <div>
+                        <span className="block font-bold">আকদ ও ওয়ালিমা (সকল অনুষ্ঠান)</span>
+                        <span className="text-[10px] opacity-80 font-normal">ঘনিষ্ঠ আত্মীয়স্বজন ও পারিবারিক মেহমানদের জন্য</span>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+
                 {/* Generated Link Display */}
                 <div>
                   <label className="block text-xs uppercase tracking-wider text-stone-400 font-medium mb-1.5">
@@ -687,7 +736,7 @@ export default function AdminDashboard() {
                     disabled={!trimmedLinkName}
                     onClick={() => {
                       if (!trimmedLinkName) return;
-                      const msg = getShareMessage(trimmedLinkName, activeGeneratedUrl, linkCategory);
+                      const msg = getShareMessage(trimmedLinkName, activeGeneratedUrl, linkCategory, linkScope);
                       window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, "_blank");
                     }}
                     className="py-2.5 px-5 rounded-xl bg-[#25D366] hover:bg-[#20b858] text-[#0b1411] font-bold text-xs flex items-center gap-1.5 transition shadow-md shadow-[#25D366]/20 disabled:opacity-50 cursor-pointer"
@@ -758,6 +807,15 @@ export default function AdminDashboard() {
                             <span className="font-semibold text-sm text-white">{item.name}</span>
                             <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-stone-300">
                               {getCategoryLabel(item.category)}
+                            </span>
+                            <span
+                              className={`text-[10px] px-2 py-0.5 rounded-full font-semibold border ${
+                                item.scope === "all"
+                                  ? "bg-amber-500/15 border-amber-500/30 text-amber-300"
+                                  : "bg-emerald-500/15 border-emerald-500/30 text-emerald-300"
+                              }`}
+                            >
+                              {item.scope === "all" ? "আকদ + ওয়ালিমা" : "শুধুমাত্র ওয়ালিমা"}
                             </span>
                             {item.isSent && (
                               <span className="text-[10px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/30">

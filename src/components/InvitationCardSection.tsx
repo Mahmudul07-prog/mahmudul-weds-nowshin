@@ -12,6 +12,7 @@ interface InvitationCardSectionProps {
   config: WeddingConfig;
   initialGuestName: string;
   lang: "en" | "bn";
+  initialScope?: "walima" | "all";
 }
 
 type CardTheme = "emerald" | "ivory" | "navy";
@@ -20,6 +21,7 @@ export default function InvitationCardSection({
   config,
   initialGuestName,
   lang: initialLang,
+  initialScope = "walima",
 }: InvitationCardSectionProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [guestName, setGuestName] = useState(
@@ -27,6 +29,7 @@ export default function InvitationCardSection({
   );
   const [cardLang, setCardLang] = useState<"bn" | "en">(initialLang || "bn");
   const [theme, setTheme] = useState<CardTheme>("emerald");
+  const [inviteScope, setInviteScope] = useState<"walima" | "all">(initialScope);
   const [isGenerating, setIsGenerating] = useState(false);
   const [downloadSuccess, setDownloadSuccess] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
@@ -39,9 +42,10 @@ export default function InvitationCardSection({
 
   useEffect(() => {
     const origin = typeof window !== "undefined" ? window.location.origin : "https://wedding.example.com";
+    const scopeParam = inviteScope === "all" ? "&scope=all" : "&scope=walima";
     const inviteUrl = guestName.trim()
-      ? `${origin}/?to=${encodeURIComponent(guestName.trim())}#card`
-      : `${origin}/#card`;
+      ? `${origin}/?to=${encodeURIComponent(guestName.trim())}${scopeParam}#card`
+      : `${origin}/?scope=${inviteScope}#card`;
 
     QRCode.toDataURL(inviteUrl, {
       margin: 1,
@@ -53,7 +57,7 @@ export default function InvitationCardSection({
     })
       .then((url) => setQrCodeUrl(url))
       .catch((err) => console.warn("QR generation error:", err));
-  }, [guestName, theme]);
+  }, [guestName, theme, inviteScope]);
 
   // Handle Download as JPEG
   const handleDownloadJpeg = async () => {
@@ -113,9 +117,10 @@ export default function InvitationCardSection({
   const handleCopyLink = () => {
     if (typeof window === "undefined") return;
     const origin = window.location.origin;
+    const scopeParam = inviteScope === "all" ? "&scope=all" : "&scope=walima";
     const url = guestName.trim()
-      ? `${origin}/?to=${encodeURIComponent(guestName.trim())}#card`
-      : `${origin}/#card`;
+      ? `${origin}/?to=${encodeURIComponent(guestName.trim())}${scopeParam}#card`
+      : `${origin}/?scope=${inviteScope}#card`;
 
     navigator.clipboard.writeText(url);
     setCopiedLink(true);
@@ -129,14 +134,25 @@ export default function InvitationCardSection({
     setShareFeedback(null);
 
     const origin = window.location.origin;
+    const scopeParam = inviteScope === "all" ? "&scope=all" : "&scope=walima";
     const shareUrl = guestName.trim()
-      ? `${origin}/?to=${encodeURIComponent(guestName.trim())}#card`
-      : `${origin}/#card`;
+      ? `${origin}/?to=${encodeURIComponent(guestName.trim())}${scopeParam}#card`
+      : `${origin}/?scope=${inviteScope}#card`;
+
+    const ceremonyBn =
+      inviteScope === "all"
+        ? "পবিত্র আকদ ও শুভ বিবাহোত্তর সংবর্ধনায়"
+        : "শুভ বিবাহোত্তর ওয়ালিমা ও প্রীতিভোজে";
+
+    const ceremonyEn =
+      inviteScope === "all"
+        ? "the sacred Nikah ceremony & grand Walima reception"
+        : "the auspicious Walima reception & feast";
 
     const message =
       cardLang === "en"
-        ? `السلام عليكم,\nDear ${displayName},\nYou are warmly invited to the royal wedding of Mahmudul Hasan & Nowshin Jahan Mili. Download your personalized invitation card here:\n\n${shareUrl}\n\nWe look forward to your presence and prayers! 💍✨`
-        : `আসসালামু আলাইকুম,\nশ্রদ্ধেয় ${displayName},\nমাহমুদুল হাসান ও নওশীন জাহান মিলির শুভ বিবাহে আপনার জন্য প্রস্তুতকৃত ডিজিটাল নিমন্ত্রণপত্রটি এই লিংক থেকে দেখে ও ডাউনলোড করে নিন:\n\n${shareUrl}\n\nআপনার দোয়া ও উপস্থিতি একান্ত কাম্য! 💍✨`;
+        ? `السلام عليكم,\nDear ${displayName},\nYou are warmly invited to ${ceremonyEn} of Mahmudul Hasan & Nowshin Jahan Mili. Download your personalized invitation card here:\n\n${shareUrl}\n\nWe look forward to your presence and prayers! 💍✨`
+        : `আসসালামু আলাইকুম,\nশ্রদ্ধেয় ${displayName},\nমাহমুদুল হাসান ও নওশীন জাহান মিলির ${ceremonyBn} আপনার জন্য প্রস্তুতকৃত ডিজিটাল নিমন্ত্রণপত্রটি এই লিংক থেকে দেখে ও ডাউনলোড করে নিন:\n\n${shareUrl}\n\nআপনার দোয়া ও উপস্থিতি একান্ত কাম্য! 💍✨`;
 
     try {
       // 1. Try mobile Web Share API with actual generated JPEG image file
@@ -365,6 +381,37 @@ export default function InvitationCardSection({
                   >
                     <span className="w-2.5 h-2.5 rounded-full bg-[#3b82f6]" />
                     <span className="hidden sm:inline">Navy</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Scope Switch: Walima Only vs All Ceremonies */}
+              <div>
+                <span className="block text-xs font-medium text-stone-300 mb-1.5">
+                  {cardLang === "en" ? "Invitation Scope:" : "দাওয়াতের পরিধি:"}
+                </span>
+                <div className="inline-flex rounded-xl bg-[#0b1411] p-1 border border-[#d4af37]/30 gap-1">
+                  <button
+                    onClick={() => setInviteScope("walima")}
+                    title="Walima Feast Only"
+                    className={`px-2.5 py-1.5 rounded-lg text-xs font-medium transition ${
+                      inviteScope === "walima"
+                        ? "bg-[#d4af37] text-[#0b1411] shadow-md font-semibold"
+                        : "text-stone-300 hover:text-white"
+                    }`}
+                  >
+                    {cardLang === "en" ? "Walima (Feast)" : "ওয়ালিমা ও প্রীতিভোজ"}
+                  </button>
+                  <button
+                    onClick={() => setInviteScope("all")}
+                    title="All Ceremonies (Nikah & Walima)"
+                    className={`px-2.5 py-1.5 rounded-lg text-xs font-medium transition ${
+                      inviteScope === "all"
+                        ? "bg-[#d4af37] text-[#0b1411] shadow-md font-semibold"
+                        : "text-stone-300 hover:text-white"
+                    }`}
+                  >
+                    {cardLang === "en" ? "Akd + Walima" : "আকদ ও ওয়ালিমা"}
                   </button>
                 </div>
               </div>
@@ -633,15 +680,17 @@ export default function InvitationCardSection({
                   <Calendar className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
                   <div>
                     <span className="block text-[10px] uppercase tracking-wider text-stone-400 font-semibold">
-                      {cardLang === "en" ? "Date & Time:" : "তারিখ ও সময়:"}
+                      {cardLang === "en" ? "Date & Ceremony:" : "তারিখ ও অনুষ্ঠান:"}
                     </span>
                     <span className={`font-semibold ${themeClasses.goldText} text-xs`}>
                       {cardLang === "en"
                         ? "Date to be announced InshaAllah"
                         : "শুভলগ্নে শীঘ্রই ঘোষিত হবে (ইনশাআল্লাহ)"}
                     </span>
-                    <span className="block text-[10px] text-stone-400">
-                      {cardLang === "en" ? "Nikah & Grand Walima Feast" : "পবিত্র আকদ ও প্রীতিভোজ"}
+                    <span className="block text-[10px] text-stone-300 font-medium mt-0.5">
+                      {inviteScope === "all"
+                        ? (cardLang === "en" ? "Sacred Nikah & Grand Walima Feast" : "পবিত্র আকদ ও শুভ ওয়ালিমা প্রীতিভোজ")
+                        : (cardLang === "en" ? "Grand Walima Feast & Reception" : "শুভ বিবাহোত্তর ওয়ালিমা ও প্রীতিভোজ")}
                     </span>
                   </div>
                 </div>
@@ -654,14 +703,22 @@ export default function InvitationCardSection({
                       {cardLang === "en" ? "Wedding Venue:" : "অনুষ্ঠানস্থল:"}
                     </span>
                     <span className={`font-semibold ${themeClasses.goldText} text-xs`}>
-                      {cardLang === "en"
-                        ? "Nikah: Maniksar Khan Bari | Walima: Pir Bari"
-                        : "আকদ: মানিকসার খান বাড়ি | ওয়ালিমা: পীর বাড়ি"}
+                      {inviteScope === "all"
+                        ? (cardLang === "en"
+                            ? "Nikah: Maniksar Khan Bari | Walima: Pir Bari"
+                            : "আকদ: মানিকসার খান বাড়ি | ওয়ালিমা: পীর বাড়ি")
+                        : (cardLang === "en"
+                            ? "পীর বাড়ি (Pir Bari Residence)"
+                            : "পীর বাড়ি (বরের নিজ বাড়ি)")}
                     </span>
                     <span className="block text-[10px] text-stone-400">
-                      {cardLang === "en"
-                        ? "Barura & Laksam, Cumilla"
-                        : "মুদাফরগঞ্জ, বরুড়া ও আউশপাড়া, লাকসাম"}
+                      {inviteScope === "all"
+                        ? (cardLang === "en"
+                            ? "Barura & Laksam, Cumilla"
+                            : "মুদাফরগঞ্জ, বরুড়া ও আউশপাড়া, লাকসাম")
+                        : (cardLang === "en"
+                            ? "Aushpara, Pir Bari, Laksam, Cumilla"
+                            : "আউশপাড়া, পীর বাড়ি, লাকসাম, কুমিল্লা")}
                     </span>
                   </div>
                 </div>
