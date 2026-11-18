@@ -12,16 +12,23 @@ interface MusicPlayerProps {
 const PLAYLIST = [
   {
     id: "barakallah",
-    title: "বারাকাল্লাহু লাকুমা (Wedding Nasheed)",
-    artist: "Traditional Islamic Melody",
+    title: "বারাকাল্লাহু লাকুমা (Baraka Allahu Lakuma)",
+    artist: "Maher Zain • বিয়ের আনন্দ নাশিদ",
     src: "/audio/wedding-melody.mp3",
     icon: "🕌",
   },
   {
-    id: "sufi",
-    title: "রয়েল সুফি ও বাঁশির সুর (Sufi Flute)",
-    artist: "Peaceful Serene Harmonies",
-    src: "/audio/wedding-melody.mp3", // fallback gracefully
+    id: "rest-of-my-life",
+    title: "ফর দ্য রেস্ট অফ মাই লাইফ (For The Rest of My Life)",
+    artist: "Maher Zain • ইসলামিক রোমান্টিক নাশিদ",
+    src: "/audio/for-the-rest-of-my-life.mp3",
+    icon: "💍",
+  },
+  {
+    id: "thank-you-allah",
+    title: "থ্যাংক ইউ আল্লাহ (Thank You Allah Acoustic)",
+    artist: "Maher Zain • স্নিগ্ধ অ্যাকোস্টিক সুর",
+    src: "/audio/thank-you-allah-acoustic.mp3",
     icon: "🕊️",
   },
 ];
