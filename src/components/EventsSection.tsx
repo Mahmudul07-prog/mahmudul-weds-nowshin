@@ -1,8 +1,10 @@
 "use client";
 
-import React from "react";
-import { Calendar, Clock, MapPin, Sparkles, Navigation, CalendarPlus } from "lucide-react";
+import React, { useState } from "react";
+import { Calendar, Clock, MapPin, Sparkles, Navigation, CalendarPlus, Bell, Car } from "lucide-react";
 import { WeddingEvent } from "@/types";
+import CalendarModal from "./CalendarModal";
+import VenueNavigationModal from "./VenueNavigationModal";
 
 interface EventsSectionProps {
   events: WeddingEvent[];
@@ -10,41 +12,8 @@ interface EventsSectionProps {
 }
 
 export default function EventsSection({ events, lang }: EventsSectionProps) {
-  const getGoogleCalendarUrl = (event: WeddingEvent) => {
-    const title = encodeURIComponent(`${event.title} - Mahmudul's Wedding`);
-    const details = encodeURIComponent(
-      `${event.tagline}. Venue: ${event.venueName}, ${event.venueAddress}`
-    );
-    const location = encodeURIComponent(`${event.venueName}, ${event.venueAddress}`);
-    // Example dates: 20261225T133000Z / 20261225T173000Z
-    const dates = event.calendarDate
-      ? `${event.calendarDate}Z/${event.calendarDate}Z`
-      : "20261225T130000Z/20261225T170000Z";
-
-    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}&dates=${dates}`;
-  };
-
-  const downloadIcs = (event: WeddingEvent) => {
-    const icsContent = `BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//Mahmudul Wedding//EN
-BEGIN:VEVENT
-SUMMARY:${event.title} - Mahmudul's Wedding
-DESCRIPTION:${event.tagline}
-LOCATION:${event.venueName}, ${event.venueAddress}
-STATUS:CONFIRMED
-END:VEVENT
-END:VCALENDAR`;
-
-    const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.setAttribute("download", `${event.id}.ics`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+  const [selectedCalendarEvent, setSelectedCalendarEvent] = useState<WeddingEvent | null>(null);
+  const [selectedNavigationEvent, setSelectedNavigationEvent] = useState<WeddingEvent | null>(null);
 
   return (
     <section id="events" className="py-20 px-4 relative overflow-hidden">
@@ -64,21 +33,35 @@ END:VCALENDAR`;
           </div>
           <p className="text-xs sm:text-sm text-stone-400 max-w-xl mx-auto">
             {lang === "en"
-              ? "Join us in our celebrations across every sacred milestone. Exact venues & timestamps will be communicated with reverence."
-              : "আমাদের জীবনের স্মরণীয় প্রতিটি অনুষ্ঠানে আপনার উপস্থিতি একান্তভাবে কাম্য।"}
+              ? "Join us in our celebrations across every sacred milestone. Add events to your calendar for automated reminders and navigate directly via Google Maps GPS."
+              : "আমাদের জীবনের স্মরণীয় প্রতিটি অনুষ্ঠানে আপনার উপস্থিতি একান্তভাবে কাম্য। স্বয়ংক্রিয় রিমাইন্ডারের জন্য ক্যালেন্ডারে যোগ করুন এবং সহজে পৌঁছাতে গুগল ম্যাপস নেভিগেশন ব্যবহার করুন।"}
           </p>
         </div>
 
-        {/* Notice Banner */}
-        <div className="max-w-3xl mx-auto mb-10 p-4 rounded-2xl bg-[#13241f]/70 border border-[#d4af37]/30 text-center">
-          <p className="text-xs text-[#fce09b] flex items-center justify-center gap-2">
-            <Sparkles className="w-4 h-4 text-[#d4af37] shrink-0" />
-            <span>
-              {lang === "en"
-                ? "The Sacred Nikah & Wedding ceremony will be hosted at the Bride's residence (Maniksar Khan Bari, Barura), followed by the Grand Walima at the Groom's residence (Pir Bari, Laksam)."
-                : "পবিত্র আকদ ও মূল বিবাহ অনুষ্ঠান কনের নিজ বাড়ি—মানিকসার খান বাড়ি (মুদাফরগঞ্জ, বরুড়া, কুমিল্লা) এবং বিবাহোত্তর ওয়ালিমা বরের বাড়ি—পীর বাড়ি (আউশপাড়া, লাকসাম)-তে অনুষ্ঠিত হবে।"}
-            </span>
-          </p>
+        {/* Notice & Quick Sync Banner */}
+        <div className="max-w-3xl mx-auto mb-10 p-4 sm:p-5 rounded-2xl bg-[#13241f]/80 border border-[#d4af37]/35 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="text-left flex items-start gap-3">
+            <Sparkles className="w-5 h-5 text-[#d4af37] shrink-0 mt-0.5" />
+            <div className="text-xs">
+              <strong className="text-[#fce09b] block">
+                {lang === "en" ? "Sacred Venues & Locations" : "পবিত্র আকদ ও সংবর্ধনার স্থান"}
+              </strong>
+              <span className="text-stone-300">
+                {lang === "en"
+                  ? "Nikah at Bride's residence (Maniksar Khan Bari, Barura) & Walima at Groom's residence (Pir Bari, Laksam)."
+                  : "আকদ কনের নিজ বাড়ি—মানিকসার খান বাড়ি (মুদাফরগঞ্জ, বরুড়া) এবং ওয়ালিমা বরের বাড়ি—পীর বাড়ি (আউশপাড়া, লাকসাম)।"}
+              </span>
+            </div>
+          </div>
+
+          {/* Quick All-Events Calendar Sync */}
+          <button
+            onClick={() => setSelectedCalendarEvent(events[0] || null)}
+            className="shrink-0 px-4 py-2 rounded-xl bg-gradient-to-r from-[#d4af37] to-[#aa8214] text-[#061a14] font-bold text-xs hover:brightness-110 transition shadow-md shadow-[#d4af37]/20 flex items-center gap-1.5 cursor-pointer"
+          >
+            <Bell className="w-3.5 h-3.5" />
+            <span>{lang === "en" ? "Sync Wedding Calendar" : "ক্যালেন্ডার রিমাইন্ডার"}</span>
+          </button>
         </div>
 
         {/* Events Grid */}
@@ -128,9 +111,19 @@ END:VCALENDAR`;
                   </div>
                 </div>
 
+                {/* Landmark Notice */}
+                {(event.landmark || event.landmarkBn) && (
+                  <div className="mt-3 p-2.5 rounded-xl bg-emerald-950/30 border border-emerald-500/20 text-[11px] text-emerald-200">
+                    <span className="font-semibold block text-emerald-300 mb-0.5">
+                      {lang === "en" ? "Landmark Guide:" : "ল্যান্ডমার্ক নির্দেশিকা:"}
+                    </span>
+                    {lang === "en" ? event.landmark : event.landmarkBn || event.landmark}
+                  </div>
+                )}
+
                 {/* Dress code */}
                 {event.dressCode && (
-                  <div className="mt-4 p-3 rounded-xl bg-white/5 text-[11px] text-stone-300">
+                  <div className="mt-3 p-2.5 rounded-xl bg-white/5 text-[11px] text-stone-300">
                     <span className="text-[#d4af37] font-semibold block mb-0.5">
                       {lang === "en" ? "Suggested Attire:" : "পোশাকের ধারণা:"}
                     </span>
@@ -139,39 +132,52 @@ END:VCALENDAR`;
                 )}
               </div>
 
-              {/* Action Buttons */}
-              <div className="mt-6 pt-4 border-t border-white/10 flex flex-col gap-2">
-                <a
-                  href={getGoogleCalendarUrl(event)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-2.5 px-3 rounded-xl bg-[#13241f] hover:bg-[#1c3830] text-[#fce09b] border border-[#d4af37]/30 text-xs font-medium flex items-center justify-center gap-2 transition"
+              {/* Action Buttons: Add to Calendar & Live GPS Navigation */}
+              <div className="mt-6 pt-4 border-t border-white/10 flex flex-col gap-2.5">
+                {/* 1. Add to Calendar (Google, Apple, Outlook with Alarms) */}
+                <button
+                  onClick={() => setSelectedCalendarEvent(event)}
+                  className="w-full py-2.5 px-3 rounded-xl bg-[#13241f] hover:bg-[#1c3830] text-[#fce09b] border border-[#d4af37]/35 text-xs font-semibold flex items-center justify-center gap-2 transition cursor-pointer"
                 >
-                  <CalendarPlus className="w-3.5 h-3.5 text-[#d4af37]" />
-                  {lang === "en" ? "Add to Google Calendar" : "গুগল ক্যালেন্ডারে যোগ করুন"}
-                </a>
-                <div className="grid grid-cols-2 gap-2">
-                  <button
-                    onClick={() => downloadIcs(event)}
-                    className="py-2 px-3 rounded-xl bg-white/5 hover:bg-white/10 text-stone-300 text-xs flex items-center justify-center gap-1.5 transition"
-                  >
-                    .iCal Invite
-                  </button>
-                  <a
-                    href={event.mapUrl || "https://maps.google.com"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="py-2 px-3 rounded-xl bg-white/5 hover:bg-white/10 text-stone-300 text-xs flex items-center justify-center gap-1.5 transition"
-                  >
-                    <Navigation className="w-3 h-3 text-[#d4af37]" />
-                    {lang === "en" ? "Map View" : "ম্যাপ"}
-                  </a>
-                </div>
+                  <CalendarPlus className="w-4 h-4 text-[#d4af37]" />
+                  <span>
+                    {lang === "en" ? "Add to Calendar (Alarms & Reminders)" : "ক্যালেন্ডার ও নোটিফিকেশন রিমাইন্ডার"}
+                  </span>
+                </button>
+
+                {/* 2. Direct Live GPS Navigation (Google Maps Turn-by-Turn) */}
+                <button
+                  onClick={() => setSelectedNavigationEvent(event)}
+                  className="w-full py-2 px-3 rounded-xl bg-white/5 hover:bg-white/10 text-stone-200 border border-white/10 text-xs font-medium flex items-center justify-center gap-2 transition cursor-pointer"
+                >
+                  <Navigation className="w-3.5 h-3.5 text-emerald-400" />
+                  <Car className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>
+                    {lang === "en" ? "Google Maps GPS Navigation" : "গুগল ম্যাপস লাইভ নেভিগেশন"}
+                  </span>
+                </button>
               </div>
             </div>
           ))}
         </div>
       </div>
+
+      {/* Calendar Modal */}
+      <CalendarModal
+        isOpen={!!selectedCalendarEvent}
+        onClose={() => setSelectedCalendarEvent(null)}
+        event={selectedCalendarEvent}
+        allEvents={events}
+        lang={lang}
+      />
+
+      {/* Venue GPS Navigation Modal */}
+      <VenueNavigationModal
+        isOpen={!!selectedNavigationEvent}
+        onClose={() => setSelectedNavigationEvent(null)}
+        event={selectedNavigationEvent}
+        lang={lang}
+      />
     </section>
   );
 }

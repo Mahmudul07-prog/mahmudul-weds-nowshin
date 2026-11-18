@@ -30,6 +30,9 @@ export interface WeddingEvent {
   dressCode?: string;
   dressCodeBn?: string;
   iconName?: string;
+  landmark?: string;
+  landmarkBn?: string;
+  directionsQuery?: string;
 }
 
 export interface WeddingConfig {

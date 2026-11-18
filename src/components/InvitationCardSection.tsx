@@ -1,11 +1,12 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { Download, Share2, Sparkles, User, RefreshCw, Check, MapPin, Calendar, Award } from "lucide-react";
+import { Download, Share2, Sparkles, User, RefreshCw, Check, MapPin, Calendar, Award, MessageCircle, Link as LinkIcon } from "lucide-react";
 import { toJpeg } from "html-to-image";
 import confetti from "canvas-confetti";
 import QRCode from "qrcode";
 import { WeddingConfig } from "@/types";
+import LinkGeneratorModal from "./LinkGeneratorModal";
 
 interface InvitationCardSectionProps {
   config: WeddingConfig;
@@ -30,6 +31,9 @@ export default function InvitationCardSection({
   const [downloadSuccess, setDownloadSuccess] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
   const [qrCodeUrl, setQrCodeUrl] = useState<string>("");
+  const [isSharing, setIsSharing] = useState(false);
+  const [isLinkModalOpen, setIsLinkModalOpen] = useState(false);
+  const [shareFeedback, setShareFeedback] = useState<string | null>(null);
 
   const displayName = guestName.trim() || (cardLang === "en" ? "Honored Guest" : "সম্মানিত সুধী");
 
@@ -118,9 +122,12 @@ export default function InvitationCardSection({
     setTimeout(() => setCopiedLink(false), 2500);
   };
 
-  // Share via WhatsApp
-  const handleShareWhatsApp = () => {
+  // Smart WhatsApp & Direct Web Share
+  const handleShareWhatsApp = async () => {
     if (typeof window === "undefined") return;
+    setIsSharing(true);
+    setShareFeedback(null);
+
     const origin = window.location.origin;
     const shareUrl = guestName.trim()
       ? `${origin}/?to=${encodeURIComponent(guestName.trim())}#card`
@@ -131,7 +138,65 @@ export default function InvitationCardSection({
         ? `السلام عليكم,\nDear ${displayName},\nYou are warmly invited to the royal wedding of Mahmudul Hasan & Nowshin Jahan Mili. Download your personalized invitation card here:\n\n${shareUrl}\n\nWe look forward to your presence and prayers! 💍✨`
         : `আসসালামু আলাইকুম,\nশ্রদ্ধেয় ${displayName},\nমাহমুদুল হাসান ও নওশীন জাহান মিলির শুভ বিবাহে আপনার জন্য প্রস্তুতকৃত ডিজিটাল নিমন্ত্রণপত্রটি এই লিংক থেকে দেখে ও ডাউনলোড করে নিন:\n\n${shareUrl}\n\nআপনার দোয়া ও উপস্থিতি একান্ত কাম্য! 💍✨`;
 
+    try {
+      // 1. Try mobile Web Share API with actual generated JPEG image file
+      if (cardRef.current && typeof navigator !== "undefined" && navigator.share) {
+        const bgColor =
+          theme === "ivory"
+            ? "#fcfbf7"
+            : theme === "navy"
+            ? "#070e1e"
+            : "#061a14";
+
+        const dataUrl = await toJpeg(cardRef.current, {
+          quality: 0.92,
+          pixelRatio: 2.0,
+          backgroundColor: bgColor,
+        });
+
+        const res = await fetch(dataUrl);
+        const blob = await res.blob();
+        const safeName = displayName.replace(/[^a-zA-Z0-9\u0980-\u09FF_-]/g, "_");
+        const file = new File([blob], `Mahmudul_Nowshin_Invitation_${safeName || "Guest"}.jpg`, {
+          type: "image/jpeg",
+        });
+
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({
+            title: "Royal Wedding Invitation - Mahmudul & Nowshin",
+            text: message,
+            files: [file],
+          });
+          setShareFeedback(cardLang === "en" ? "Card shared successfully!" : "কার্ড সফলভাবে শেয়ার হয়েছে!");
+          setTimeout(() => setShareFeedback(null), 3500);
+          setIsSharing(false);
+          return;
+        } else if (navigator.canShare && navigator.canShare({ url: shareUrl })) {
+          await navigator.share({
+            title: "Royal Wedding Invitation - Mahmudul & Nowshin",
+            text: message,
+            url: shareUrl,
+          });
+          setShareFeedback(cardLang === "en" ? "Invitation link shared!" : "আমন্ত্রণ লিংক শেয়ার হয়েছে!");
+          setTimeout(() => setShareFeedback(null), 3500);
+          setIsSharing(false);
+          return;
+        }
+      }
+    } catch {
+      // If user cancelled native share or not supported, continue to WhatsApp web/app link
+    } finally {
+      setIsSharing(false);
+    }
+
+    // 2. Direct WhatsApp Open Fallback
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`, "_blank");
+    setShareFeedback(
+      cardLang === "en"
+        ? "Opening WhatsApp with personalized invitation..."
+        : "হোয়াটসঅ্যাপে আমন্ত্রণপত্র শেয়ার হচ্ছে..."
+    );
+    setTimeout(() => setShareFeedback(null), 3500);
   };
 
   // Theme styling helpers
@@ -306,24 +371,42 @@ export default function InvitationCardSection({
             </div>
           </div>
 
-          {/* Action Buttons */}
+          {/* Action Buttons & Feedback */}
           <div className="mt-5 pt-4 border-t border-[#d4af37]/20 flex flex-wrap items-center justify-center sm:justify-end gap-3">
-            {/* Share WhatsApp */}
+            {/* Share WhatsApp (Smart 1-Tap Share) */}
             <button
               onClick={handleShareWhatsApp}
-              className="px-4 py-2.5 rounded-xl bg-[#25D366]/20 hover:bg-[#25D366]/30 text-[#25D366] border border-[#25D366]/40 text-xs font-semibold flex items-center gap-2 transition"
+              disabled={isSharing}
+              className="px-4 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#20b858] text-[#0b1411] font-bold text-xs flex items-center gap-2 transition shadow-md shadow-[#25D366]/20 cursor-pointer disabled:opacity-60"
             >
-              <Share2 className="w-4 h-4" />
-              <span>{cardLang === "en" ? "Share on WhatsApp" : "হোয়াটসঅ্যাপে পাঠান"}</span>
+              {isSharing ? (
+                <RefreshCw className="w-4 h-4 animate-spin text-[#0b1411]" />
+              ) : (
+                <MessageCircle className="w-4 h-4 text-[#0b1411]" />
+              )}
+              <span>
+                {isSharing
+                  ? (cardLang === "en" ? "Preparing Card..." : "কার্ড প্রস্তুত হচ্ছে...")
+                  : (cardLang === "en" ? "Share on WhatsApp" : "হোয়াটসঅ্যাপে পাঠান")}
+              </span>
+            </button>
+
+            {/* Custom Link Generator Modal Opener */}
+            <button
+              onClick={() => setIsLinkModalOpen(true)}
+              className="px-3.5 py-2.5 rounded-xl bg-[#13241f] hover:bg-[#1a352c] text-[#fce09b] border border-[#d4af37]/35 text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer"
+            >
+              <LinkIcon className="w-3.5 h-3.5 text-[#d4af37]" />
+              <span>{cardLang === "en" ? "Create Custom Link" : "কাস্টম লিংক তৈরি"}</span>
             </button>
 
             {/* Copy Card Link */}
             <button
               onClick={handleCopyLink}
-              className="px-4 py-2.5 rounded-xl bg-[#13241f] hover:bg-[#1a352c] text-stone-200 border border-[#d4af37]/35 text-xs font-semibold flex items-center gap-2 transition"
+              className="px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-stone-200 border border-white/10 text-xs font-medium flex items-center gap-1.5 transition cursor-pointer"
             >
-              {copiedLink ? <Check className="w-4 h-4 text-emerald-400" /> : <Sparkles className="w-4 h-4 text-[#d4af37]" />}
-              <span>{copiedLink ? (cardLang === "en" ? "Link Copied!" : "লিংক কপি হয়েছে!") : (cardLang === "en" ? "Copy Invite Link" : "কার্ড লিংক কপি")}</span>
+              {copiedLink ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Share2 className="w-3.5 h-3.5 text-[#d4af37]" />}
+              <span>{copiedLink ? (cardLang === "en" ? "Link Copied!" : "লিংক কপি হয়েছে!") : (cardLang === "en" ? "Copy Link" : "লিংক কপি")}</span>
             </button>
 
             {/* DOWNLOAD JPEG BUTTON */}
@@ -335,7 +418,7 @@ export default function InvitationCardSection({
               {isGenerating ? (
                 <>
                   <RefreshCw className="w-4 h-4 animate-spin" />
-                  <span>{cardLang === "en" ? "Generating High-Res JPEG..." : "JPEG ছবি তৈরি হচ্ছে..."}</span>
+                  <span>{cardLang === "en" ? "Generating High-Res JPEG..." : "JPEG তৈরি হচ্ছে..."}</span>
                 </>
               ) : downloadSuccess ? (
                 <>
@@ -350,6 +433,14 @@ export default function InvitationCardSection({
               )}
             </button>
           </div>
+
+          {/* Share Feedback Toast */}
+          {shareFeedback && (
+            <div className="mt-3 p-2.5 rounded-xl bg-emerald-950/70 border border-emerald-500/40 text-emerald-300 text-xs text-center animate-in fade-in flex items-center justify-center gap-2">
+              <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+              <span>{shareFeedback}</span>
+            </div>
+          )}
         </div>
 
         {/* =========================================================================
@@ -625,6 +716,13 @@ export default function InvitationCardSection({
           </span>
         </div>
       </div>
+
+      {/* Link Generator Modal */}
+      <LinkGeneratorModal
+        isOpen={isLinkModalOpen}
+        onClose={() => setIsLinkModalOpen(false)}
+        groomName={config.couple.groom.name}
+      />
     </section>
   );
 }

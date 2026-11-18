@@ -16,6 +16,7 @@ export default function LinkGeneratorModal({
 }: LinkGeneratorModalProps) {
   const [guestName, setGuestName] = useState("");
   const [copied, setCopied] = useState(false);
+  const [lang, setLang] = useState<"bn" | "en">("bn");
 
   if (!isOpen) return null;
 
@@ -31,9 +32,14 @@ export default function LinkGeneratorModal({
     setTimeout(() => setCopied(false), 2500);
   };
 
-  const shareText = `السلام عليكم,\nDear ${
-    trimmedName || "Honored Guest"
-  },\nYou are warmly invited to celebrate the royal wedding of ${groomName} & Nowshin. Open the link to view ceremony details and download your personalized Royal Invitation Card (JPEG):\n\n${generatedUrl}\n\nWe eagerly look forward to your presence and prayers! 💍✨`;
+  const shareText =
+    lang === "en"
+      ? `السلام عليكم,\nDear ${
+          trimmedName || "Honored Guest"
+        },\nYou are warmly invited to celebrate the royal wedding of ${groomName} & Nowshin. Open the link to view ceremony details and download your personalized Royal Invitation Card (JPEG):\n\n${generatedUrl}\n\nWe eagerly look forward to your presence and prayers! 💍✨`
+      : `আসসালামু আলাইকুম,\nশ্রদ্ধেয় ${
+          trimmedName || "সম্মানিত সুধী"
+        },\nমাহমুদুল হাসান ও নওশীন জাহান মিলির শুভ বিবাহে আপনি ও আপনার পরিবার সাদরে আমন্ত্রিত। আপনার জন্য বিশেষভাবে প্রস্তুতকৃত রাজকীয় ডিজিটাল নিমন্ত্রণপত্রটি দেখতে নিচের লিংকে প্রবেশ করুন:\n\n${generatedUrl}\n\nআপনার আন্তরিক দোয়া ও উপস্থিতি আমাদের একান্ত কাম্য! 💍✨`;
 
   const handleWhatsApp = () => {
     const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
@@ -52,16 +58,44 @@ export default function LinkGeneratorModal({
         </button>
 
         {/* Header */}
-        <div className="text-center mb-6">
+        <div className="text-center mb-5">
           <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#d4af37]/15 border border-[#d4af37]/40 mb-3 text-[#d4af37]">
             <Sparkles className="w-6 h-6" />
           </div>
           <h3 className="text-2xl font-serif text-[#fce09b] tracking-wide">
-            Create Personalized Invite Link
+            {lang === "en" ? "Create Personalized Invite Link" : "পার্সোনালাইজড ইনভাইটেশন লিংক"}
           </h3>
           <p className="text-xs sm:text-sm text-stone-300 mt-1">
-            মেহমানের নাম লিখলেই সাথে সাথে তাদের নামের পার্সোনালাইজড লিংক তৈরি হয়ে যাবে!
+            {lang === "en"
+              ? "Type the guest name to generate an exclusive wedding invite link!"
+              : "মেহমানের নাম লিখলেই সাথে সাথে তাদের নামের পার্সোনালাইজড লিংক তৈরি হয়ে যাবে!"}
           </p>
+
+          {/* Language Toggle */}
+          <div className="flex items-center justify-center gap-2 mt-3">
+            <button
+              type="button"
+              onClick={() => setLang("bn")}
+              className={`px-3 py-1 rounded-full text-xs font-semibold transition ${
+                lang === "bn"
+                  ? "bg-[#d4af37] text-[#0b1411] shadow"
+                  : "bg-white/5 text-stone-300 hover:bg-white/10"
+              }`}
+            >
+              বাংলা বার্তা
+            </button>
+            <button
+              type="button"
+              onClick={() => setLang("en")}
+              className={`px-3 py-1 rounded-full text-xs font-semibold transition ${
+                lang === "en"
+                  ? "bg-[#d4af37] text-[#0b1411] shadow"
+                  : "bg-white/5 text-stone-300 hover:bg-white/10"
+              }`}
+            >
+              English Message
+            </button>
+          </div>
         </div>
 
         {/* Input Form */}
