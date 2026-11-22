@@ -67,20 +67,46 @@ export default function PersonalizedBadge({
 
   return (
     <>
-      <header className="fixed top-0 inset-x-0 z-40 bg-[#08110e]/95 backdrop-blur-md border-b border-[#d4af37]/25 py-2.5 px-4 shadow-lg">
+      <header className="fixed top-0 inset-x-0 z-40 bg-[#08110e]/95 backdrop-blur-md border-b border-[#d4af37]/25 py-2 px-4 shadow-lg">
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-3">
-          {/* Guest Greeting Pill */}
-          <div className="flex items-center gap-2 overflow-hidden flex-shrink-0">
-            <span className="flex-shrink-0 flex items-center justify-center w-7 h-7 rounded-full bg-[#d4af37]/20 border border-[#d4af37]/50 text-[#d4af37]">
-              <UserCheck className="w-3.5 h-3.5" />
-            </span>
-            <div className="flex flex-col truncate">
-              <span className="text-[9px] uppercase tracking-wider text-stone-400 font-medium">
-                {lang === "en" ? "Invited Guest" : "আমন্ত্রিত মেহমান"}
+          {/* Brand Royal Monogram Logo (M & N) & Guest Greeting */}
+          <div className="flex items-center gap-3 overflow-hidden flex-shrink-0">
+            <a
+              href="#home"
+              className="flex items-center gap-2 group flex-shrink-0 hover:opacity-90 transition"
+              title="Mahmudul & Nowshin"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/mn-logo.svg"
+                alt="M & N Royal Monogram"
+                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-[#d4af37]/60 shadow-[0_0_12px_rgba(212,175,55,0.35)] group-hover:scale-105 transition-transform"
+              />
+              <div className="hidden sm:flex flex-col text-left">
+                <span className="font-serif font-bold text-xs tracking-wider text-[#fce09b] leading-tight">
+                  M &amp; N
+                </span>
+                <span className="text-[8px] uppercase tracking-widest text-[#d4af37]/80">
+                  Royal Union
+                </span>
+              </div>
+            </a>
+
+            <span className="hidden sm:inline-block h-6 w-[1px] bg-white/10" />
+
+            {/* Guest Greeting Pill */}
+            <div className="flex items-center gap-2 overflow-hidden flex-shrink-0">
+              <span className="flex-shrink-0 flex items-center justify-center w-7 h-7 rounded-full bg-[#d4af37]/20 border border-[#d4af37]/50 text-[#d4af37]">
+                <UserCheck className="w-3.5 h-3.5" />
               </span>
-              <span className="text-xs sm:text-sm font-semibold text-[#fce09b] truncate max-w-[120px] sm:max-w-[180px]">
-                {guestName}
-              </span>
+              <div className="flex flex-col truncate">
+                <span className="text-[9px] uppercase tracking-wider text-stone-400 font-medium">
+                  {lang === "en" ? "Invited Guest" : "আমন্ত্রিত মেহমান"}
+                </span>
+                <span className="text-xs sm:text-sm font-semibold text-[#fce09b] truncate max-w-[110px] sm:max-w-[160px]">
+                  {guestName}
+                </span>
+              </div>
             </div>
           </div>
 

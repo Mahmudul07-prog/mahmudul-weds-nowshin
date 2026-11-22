@@ -14,7 +14,6 @@ interface Petal {
 
 export default function PetalsEffect() {
   const [petals, setPetals] = useState<Petal[]>([]);
-  const [isEnabled, setIsEnabled] = useState(true);
 
   useEffect(() => {
     // Generate 22 floating petals
@@ -42,8 +41,6 @@ export default function PetalsEffect() {
     return () => clearTimeout(timer);
   }, []);
 
-  if (!isEnabled) return null;
-
   return (
     <div className="pointer-events-none fixed inset-0 overflow-hidden z-10">
       {petals.map((petal) => (
@@ -65,13 +62,6 @@ export default function PetalsEffect() {
           }}
         />
       ))}
-      <button
-        onClick={() => setIsEnabled(false)}
-        title="Hide floating petals"
-        className="pointer-events-auto fixed bottom-5 left-5 z-40 p-2 text-xs text-[#d4af37]/60 hover:text-[#d4af37] bg-[#0b1411]/80 backdrop-blur-md rounded-full border border-[#d4af37]/20 transition-all"
-      >
-        🌸 Petals
-      </button>
     </div>
   );
 }

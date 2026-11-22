@@ -47,6 +47,19 @@ export default function HeroSection({ config, lang, guestName }: HeroSectionProp
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full border border-[#d4af37]/5 pointer-events-none" />
 
       <div className="max-w-4xl mx-auto relative z-10">
+        {/* Royal M & N Monogram Emblem */}
+        <div className="flex justify-center mb-5">
+          <div className="relative group">
+            <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-[#d4af37]/30 to-[#f3c25b]/30 blur-md opacity-75 group-hover:opacity-100 transition duration-500" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/mn-logo.svg"
+              alt="Mahmudul & Nowshin Royal Monogram"
+              className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-[#d4af37] shadow-[0_0_25px_rgba(212,175,55,0.4)] hover:scale-105 transition-transform duration-300"
+            />
+          </div>
+        </div>
+
         {/* Arabic Bismillah Calligraphy */}
         <div className="mb-4">
           <p className="font-serif text-2xl sm:text-3xl md:text-4xl text-[#d4af37] tracking-wider drop-shadow-md">
