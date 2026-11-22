@@ -58,7 +58,7 @@ const emojiSvg = `
 
 async function run() {
   const inputPath = 'C:/Users/faysa/.gemini/antigravity/brain/4d005f9d-f1b2-4276-8bad-ff0cc87647d7/.user_uploaded/media_1794826876524_3f8a9921.jpg';
-  const outputPath = path.join(__dirname, '../public/images/nowshin-mili-bride.jpg');
+  const outputPath = path.join(__dirname, '../public/images/nowshin-bride.jpg');
 
   const emojiBuffer = Buffer.from(emojiSvg);
 
@@ -73,7 +73,7 @@ async function run() {
     .jpeg({ quality: 96 })
     .toFile(outputPath);
 
-  console.log('Saved updated nowshin-mili-bride.jpg successfully!');
+  console.log('Saved updated nowshin-bride.jpg successfully!');
 }
 
 run().catch(console.error);

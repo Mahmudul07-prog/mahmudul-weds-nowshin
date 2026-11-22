@@ -14,7 +14,7 @@ const defaultWishes: Wish[] = [
   },
   {
     id: "wish-2",
-    name: "Sumaiya & Rafiq",
+    name: "Nusrat & Rafiq",
     relation: "Cousin",
     message: "Heartiest congratulations! May your journey together be blessed with endless happiness, love, and understanding.",
     emoji: "💐",

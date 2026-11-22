@@ -33,9 +33,9 @@ A luxury, modern, and interactive digital wedding invitation platform built with
 ### ১. কনের সাথে দেখা হওয়ার পর কনের নাম ও তথ্য যোগ:
 ```typescript
 bride: {
-  name: "কনের নাম (e.g. Sumaiya)",
-  nameBn: "সুমাইয়া",
-  fullName: "Sumaiya Akter",
+  name: "কনের নাম (e.g. Ayesha)",
+  nameBn: "আয়েশা",
+  fullName: "Ayesha Siddiqua",
   role: "The Bride",
   bio: "A heartfelt bio...",
   fatherName: "Father's Name",
