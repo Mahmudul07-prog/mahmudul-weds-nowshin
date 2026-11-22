@@ -21,8 +21,8 @@ export const weddingData: WeddingConfig = {
       fullNameBn: "মুহাম্মাদ মাহমুদুল হাসান",
       role: "The Groom",
       bio: "A passionate soul from Pir Bari, Aushpara, Laksam, ready to embark on life's most sacred and beautiful chapter with love and family blessings.",
-      fatherName: "Khaza Md Aminul Ahsan",
-      fatherNameBn: "খাজা মোঃ আমিনুল আহসান",
+      fatherName: "Khaza Md Aminul Ehsan",
+      fatherNameBn: "খাজা মোঃ আমিনুল এহছান",
       motherName: "Kohinur Begum",
       motherNameBn: "কহিনুর বেগম",
       address: {
