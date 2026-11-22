@@ -62,7 +62,7 @@ export default function CalendarModal({
     const location = encodeURIComponent(`${ev.venueName}, ${ev.venueAddress}`);
     const dates = ev.calendarDate
       ? `${ev.calendarDate}Z/${ev.calendarDate}Z`
-      : "20261225T133000Z/20261225T173000Z";
+      : "20261218T133000Z/20261218T173000Z";
 
     return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}&dates=${dates}`;
   };
@@ -76,7 +76,7 @@ export default function CalendarModal({
     const location = encodeURIComponent(`${ev.venueName}, ${ev.venueAddress}`);
     const startdt = ev.calendarDate
       ? `${ev.calendarDate.slice(0, 4)}-${ev.calendarDate.slice(4, 6)}-${ev.calendarDate.slice(6, 8)}T${ev.calendarDate.slice(9, 11)}:${ev.calendarDate.slice(11, 13)}:00`
-      : "2026-12-25T13:30:00";
+      : "2026-12-18T13:30:00";
 
     return `https://outlook.live.com/calendar/0/deeplink/compose?subject=${subject}&body=${body}&location=${location}&startdt=${startdt}&path=%2Fcalendar%2Faction%2Fcompose&rru=addevent`;
   };
@@ -87,8 +87,8 @@ export default function CalendarModal({
 
     const eventsBlocks = selectedEvents
       .map((ev) => {
-        const startStr = ev.calendarDate ? `${ev.calendarDate}Z` : "20261225T133000Z";
-        const endStr = ev.calendarDate ? `${ev.calendarDate.slice(0, 8)}T220000Z` : "20261225T180000Z";
+        const startStr = ev.calendarDate ? `${ev.calendarDate}Z` : "20261218T133000Z";
+        const endStr = ev.calendarDate ? `${ev.calendarDate.slice(0, 8)}T220000Z` : "20261218T180000Z";
 
         return `BEGIN:VEVENT
 UID:${ev.id}-${Date.now()}@mahmudul-wedding.com

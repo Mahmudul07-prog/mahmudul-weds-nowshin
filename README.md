@@ -63,7 +63,7 @@ bride: {
 ```typescript
 venueName: "Senakunja / সেনা কুঞ্জ",
 venueAddress: "Dhaka Cantonment, Dhaka",
-date: "Friday, 25 December 2026",
+date: "Friday, 18 December 2026",
 isConfirmed: true,
 ```
 

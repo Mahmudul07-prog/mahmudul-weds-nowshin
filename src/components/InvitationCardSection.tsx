@@ -683,9 +683,9 @@ export default function InvitationCardSection({
                       {cardLang === "en" ? "Date & Ceremony:" : "তারিখ ও অনুষ্ঠান:"}
                     </span>
                     <span className={`font-semibold ${themeClasses.goldText} text-xs`}>
-                      {cardLang === "en"
-                        ? "Date to be announced InshaAllah"
-                        : "শুভলগ্নে শীঘ্রই ঘোষিত হবে (ইনশাআল্লাহ)"}
+                      {inviteScope === "all"
+                        ? (cardLang === "en" ? "18 & 19 December 2026" : "১৮ ও ১৯ ডিসেম্বর ২০২৬")
+                        : (cardLang === "en" ? "Saturday, 19 December 2026" : "শনিবার, ১৯ ডিসেম্বর ২০২৬")}
                     </span>
                     <span className="block text-[10px] text-stone-300 font-medium mt-0.5">
                       {inviteScope === "all"
