@@ -15,7 +15,7 @@ A luxury, modern, and interactive digital wedding invitation platform built with
 - 📖 **Story & Journey Timeline**: Chapters configured step-by-step:
   - *Chapter 1*: Family Talks & Destiny (Accomplished)
   - *Chapter 2*: The First Meet / প্রথম দেখা (Awaiting date announcement)
-  - *Chapter 3*: The Formal Engagement / আংটি বদল
+  - *Chapter 3*: Family Pact: Mahr & Dates Finalized / শুভ পাকা কথা ও দেনমোহর নির্ধারণ
   - *Chapter 4*: Sacred Nikah & Wedding Day
 - 📅 **Events Schedule & Venues**: Gaye Holud, Sacred Nikah, Walima cards with Google Calendar integration, `.ics` iCal invite download, and Google Maps direction links.
 - 📝 **Interactive RSVP Attendance Form**: Guests confirm attendance, number of companions, phone number, and special dietary requests. Saves to server API.

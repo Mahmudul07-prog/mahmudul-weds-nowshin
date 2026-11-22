@@ -125,6 +125,18 @@ export default function StoryTimeline({ milestones, lang }: StoryTimelineProps) 
                       </div>
                     )
                   )}
+
+                  {/* Special highlight for Chapter 3 */}
+                  {item.id === "step-3" && item.isUnlocked && (
+                    <div className="mt-4 p-3 rounded-xl bg-emerald-950/50 border border-emerald-500/40 text-xs text-emerald-300 flex items-center gap-2 shadow-sm">
+                      <Sparkles className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                      <span>
+                        {lang === "en"
+                          ? "Alhamdulillah, mahr (kabin) & wedding dates formally finalized on 21 Nov 2026 with both families' full consent!"
+                          : "আলহামদুলিল্লাহ, ২১ নভেম্বর ২০২৬ তারিখে দুই পরিবারের সর্বসম্মত সন্তুষ্টিতে মোহরানা (কাবিন) ও শুভ বিবাহের দিনক্ষণ চূড়ান্ত হয়েছে!"}
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
             );

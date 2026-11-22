@@ -115,17 +115,17 @@ export const weddingData: WeddingConfig = {
     },
     {
       id: "step-3",
-      title: "The Formal Commitment & Ring",
-      titleBn: "আংটি বদল ও শুভ আংটি পরিধান",
-      date: "Upcoming InshaAllah",
-      dateBn: "শীঘ্রই আসছে",
+      title: "Family Pact: Mahr & Dates Finalized",
+      titleBn: "শুভ পাকা কথা (কাবিন ও দিনক্ষণ চূড়ান্ত)",
+      date: "21 November 2026",
+      dateBn: "২১ নভেম্বর ২০২৬",
       description:
-        "Exchanging promises under the blessings of both families, cementing our hearts for the sacred journey.",
+        "With the heartfelt consent and presence of both families' elders, the sacred mahr (kabin) and wedding dates were gracefully finalized under abundant blessings and prayers.",
       descriptionBn:
-        "দুপক্ষের পরিবারের সান্নিধ্যে শুভ প্রতিশ্রুতি এবং আংটি বিনিময়ের স্মৃতি।",
-      isUnlocked: false,
-      statusBadge: "Upcoming",
-      icon: "ring",
+        "উভয় পরিবারের মুরুব্বি ও অভিভাবকদের আন্তরিক উপস্থিতিতে শুভ পরিণয়ের পাকা কথা সম্পন্ন হলো। সুন্দর ও সৌহার্দ্যপূর্ণ পরিবেশে দেনমোহর (কাবিন) এবং শুভ বিবাহের চূড়ান্ত দিনক্ষণ নির্ধারণ করা হয়।",
+      isUnlocked: true,
+      statusBadge: "Accomplished",
+      icon: "check-circle",
     },
     {
       id: "step-4",
