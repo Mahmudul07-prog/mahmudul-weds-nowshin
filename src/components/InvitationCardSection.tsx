@@ -725,34 +725,22 @@ export default function InvitationCardSection({
               </div>
             </div>
 
-            {/* Footer Sign-off, Helpline & Smart Golden QR Code */}
-            <div className="mt-4 pt-3 border-t border-[#d4af37]/25 flex items-center justify-between text-left">
-              <div>
-                <p className="text-[9px] uppercase tracking-widest text-[#d4af37] font-semibold">
-                  {cardLang === "en" ? "With Best Compliments:" : "বিনীত আমন্ত্রণে:"}
-                </p>
-                <p className={`text-xs font-serif font-bold ${themeClasses.goldText} mt-0.5`}>
-                  {cardLang === "en" ? "Ahsan & Khan Families" : "আহসান ও খান পরিবার"}
-                </p>
-                <p className="text-[9px] text-stone-400 mt-1 flex items-center gap-1.5">
-                  <span>📞 +880 1863-846300</span>
-                  <span>•</span>
-                  <span>#MahmudulWedsMili</span>
-                </p>
-              </div>
-
-              {/* Golden Smart QR Code */}
+            {/* Footer: Centered Smart Golden QR Code & Contact Helpline */}
+            <div className="mt-4 pt-3 border-t border-[#d4af37]/25 flex flex-col items-center justify-center text-center">
               {qrCodeUrl && (
-                <div className="flex flex-col items-center shrink-0 pl-3">
-                  <div className="p-1 rounded-xl bg-black/40 border border-[#d4af37]/40 shadow">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={qrCodeUrl} alt="Invitation QR" className="w-12 h-12 rounded-lg" />
-                  </div>
-                  <span className="text-[8px] text-stone-400 tracking-tighter mt-0.5 font-light">
-                    {cardLang === "en" ? "Scan QR" : "স্ক্যান করুন"}
-                  </span>
+                <div className="p-1 rounded-xl bg-black/40 border border-[#d4af37]/40 shadow">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={qrCodeUrl} alt="Invitation QR" className="w-12 h-12 rounded-lg" />
                 </div>
               )}
+              <span className={`text-[9px] ${themeClasses.mutedText} tracking-tight mt-1 font-light`}>
+                {cardLang === "en" ? "Scan QR Code" : "স্ক্যান করুন"}
+              </span>
+              <p className={`text-[10px] ${themeClasses.bodyText} mt-0.5 flex items-center justify-center gap-1.5 font-medium`}>
+                <span>📞 +880 1863-846300</span>
+                <span>•</span>
+                <span className={themeClasses.goldText}>#MahmudulWedsMili</span>
+              </p>
             </div>
           </div>
         </div>
