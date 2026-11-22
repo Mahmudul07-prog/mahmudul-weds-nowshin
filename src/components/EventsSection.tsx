@@ -67,7 +67,7 @@ export default function EventsSection({ events, lang }: EventsSectionProps) {
         </div>
 
         {/* Events Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
           {events.map((event) => {
             const isWalima = event.id === "event-walima";
             const isNikah = event.id === "event-nikah";
@@ -75,14 +75,14 @@ export default function EventsSection({ events, lang }: EventsSectionProps) {
             return (
               <div
                 key={event.id}
-                className={`rounded-3xl p-6 sm:p-7 royal-glass royal-glass-hover transition-all duration-300 flex flex-col justify-between ${
+                className={`rounded-2xl p-5 sm:p-6 royal-glass royal-glass-hover transition-all duration-300 flex flex-col justify-between ${
                   isWalima ? "border-[#d4af37]/60 shadow-[0_0_25px_rgba(212,175,55,0.15)]" : ""
                 }`}
               >
                 <div>
                   {/* Event Badges */}
-                  <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
-                    <span className="text-[10px] uppercase tracking-wider font-semibold px-3 py-1 rounded-full bg-[#d4af37]/15 border border-[#d4af37]/30 text-[#fce09b]">
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span className="text-[10px] uppercase tracking-wider font-semibold px-2.5 py-0.5 rounded-full bg-[#d4af37]/15 border border-[#d4af37]/30 text-[#fce09b]">
                       {event.isConfirmed
                         ? (lang === "en" ? "Confirmed" : "নির্ধারিত")
                         : (lang === "en" ? "Tentative / প্রস্তাবিত" : "প্রস্তাবিত সময়")}
@@ -104,24 +104,24 @@ export default function EventsSection({ events, lang }: EventsSectionProps) {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl sm:text-2xl font-serif font-bold text-white mb-2">
+                  <h3 className="text-lg sm:text-xl font-serif font-bold text-white mb-1">
                     {lang === "en" ? event.title : event.titleBn || event.title}
                   </h3>
-                  <p className="text-xs text-stone-300 italic mb-6">
+                  <p className="text-xs text-stone-300 italic mb-3.5">
                     {lang === "en" ? event.tagline : event.taglineBn || event.tagline}
                   </p>
 
                   {/* Details List */}
-                  <div className="space-y-3 py-4 border-y border-white/10 text-xs text-stone-300">
-                    <div className="flex items-center gap-3">
+                  <div className="space-y-2.5 py-3 border-y border-white/10 text-xs text-stone-300">
+                    <div className="flex items-center gap-2.5">
                       <Calendar className="w-4 h-4 text-[#d4af37] flex-shrink-0" />
-                      <span>{lang === "en" ? event.date : event.dateBn || event.date}</span>
+                      <span className="font-medium text-stone-200">{lang === "en" ? event.date : event.dateBn || event.date}</span>
                     </div>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2.5">
                       <Clock className="w-4 h-4 text-[#d4af37] flex-shrink-0" />
                       <span>{lang === "en" ? event.time : event.timeBn || event.time}</span>
                     </div>
-                    <div className="flex items-start gap-3">
+                    <div className="flex items-start gap-2.5">
                       <MapPin className="w-4 h-4 text-[#d4af37] flex-shrink-0 mt-0.5" />
                       <div>
                         <strong className="text-[#fce09b] block font-normal">{event.venueName}</strong>
@@ -134,33 +134,23 @@ export default function EventsSection({ events, lang }: EventsSectionProps) {
 
                   {/* Landmark Notice */}
                   {(event.landmark || event.landmarkBn) && (
-                    <div className="mt-3 p-2.5 rounded-xl bg-emerald-950/30 border border-emerald-500/20 text-[11px] text-emerald-200">
+                    <div className="mt-2.5 p-2 rounded-xl bg-emerald-950/30 border border-emerald-500/20 text-[11px] text-emerald-200 leading-snug">
                       <span className="font-semibold block text-emerald-300 mb-0.5">
                         {lang === "en" ? "Landmark Guide:" : "ল্যান্ডমার্ক নির্দেশিকা:"}
                       </span>
                       {lang === "en" ? event.landmark : event.landmarkBn || event.landmark}
                     </div>
                   )}
-
-                  {/* Dress code */}
-                  {event.dressCode && (
-                    <div className="mt-3 p-2.5 rounded-xl bg-white/5 text-[11px] text-stone-300">
-                      <span className="text-[#d4af37] font-semibold block mb-0.5">
-                        {lang === "en" ? "Suggested Attire:" : "পোশাকের ধারণা:"}
-                      </span>
-                      {lang === "en" ? event.dressCode : event.dressCodeBn || event.dressCode}
-                    </div>
-                  )}
                 </div>
 
                 {/* Action Buttons: Add to Calendar & Live GPS Navigation */}
-                <div className="mt-6 pt-4 border-t border-white/10 flex flex-col gap-2.5">
+                <div className="mt-4 pt-3.5 border-t border-white/10 flex flex-col gap-2">
                   {/* 1. Add to Calendar (Google, Apple, Outlook with Alarms) */}
                   <button
                     onClick={() => setSelectedCalendarEvent(event)}
-                    className="w-full py-2.5 px-3 rounded-xl bg-[#13241f] hover:bg-[#1c3830] text-[#fce09b] border border-[#d4af37]/35 text-xs font-semibold flex items-center justify-center gap-2 transition cursor-pointer"
+                    className="w-full py-2 px-3 rounded-xl bg-[#13241f] hover:bg-[#1c3830] text-[#fce09b] border border-[#d4af37]/35 text-xs font-semibold flex items-center justify-center gap-2 transition cursor-pointer"
                   >
-                    <CalendarPlus className="w-4 h-4 text-[#d4af37]" />
+                    <CalendarPlus className="w-3.5 h-3.5 text-[#d4af37]" />
                     <span>
                       {lang === "en" ? "Add to Calendar (Alarms)" : "ক্যালেন্ডার ও রিমাইন্ডার"}
                     </span>
