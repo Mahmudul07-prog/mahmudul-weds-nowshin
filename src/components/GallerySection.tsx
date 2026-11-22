@@ -397,7 +397,7 @@ export default function GallerySection({
                 <textarea
                   value={caption}
                   onChange={(e) => setCaption(e.target.value)}
-                  placeholder={lang === "en" ? "e.g. Joyous moments with brother Mahmudul! 💍" : "যেমন: ভাই মাহমুদুল ও মিলির সাথে স্মরণীয় আনন্দঘন মুহূর্ত! 💍✨"}
+                  placeholder={lang === "en" ? "e.g. Joyous moments with brother Mahmudul & Nowshin! 💍" : "যেমন: ভাই মাহমুদুল ও নওশীনের সাথে স্মরণীয় আনন্দঘন মুহূর্ত! 💍✨"}
                   rows={2}
                   className="w-full px-3.5 py-2.5 rounded-xl bg-[#0b1411] border border-[#d4af37]/40 text-white placeholder-stone-500 text-xs sm:text-sm focus:outline-none focus:border-[#d4af37] resize-none"
                 />

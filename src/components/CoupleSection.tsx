@@ -57,7 +57,7 @@ export default function CoupleSection({ config, lang }: CoupleSectionProps) {
               {lang === "en" ? groom.role : "বর"}
             </span>
             <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white tracking-wide">
-              {lang === "en" ? groom.fullName : groom.fullNameBn || "মুহাম্মাদ মাহমুদুল হাসান"}
+              {lang === "en" ? groom.fullName : groom.fullNameBn || "মাহমুদুল হাসান"}
             </h3>
 
             {/* Parents & Residence Info */}
@@ -100,7 +100,7 @@ export default function CoupleSection({ config, lang }: CoupleSectionProps) {
             <div className="relative w-44 h-44 sm:w-48 sm:h-48 rounded-full p-2 border-2 border-[#f472b6]/50 shadow-[0_0_30px_rgba(244,114,182,0.25)] mb-6">
               <div className="w-full h-full rounded-full overflow-hidden bg-[#160912] relative">
                 <Image
-                  src={bride.image || "/images/nowshin-mili-bride.jpg"}
+                  src={bride.image || "/images/nowshin-bride.jpg"}
                   alt={bride.name}
                   fill
                   sizes="(max-width: 768px) 192px, 192px"
@@ -117,7 +117,7 @@ export default function CoupleSection({ config, lang }: CoupleSectionProps) {
               {lang === "en" ? bride.role : "কনে"}
             </span>
             <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white tracking-wide">
-              {lang === "en" ? bride.fullName : bride.fullNameBn || "নওশীন জাহান মিলি"}
+              {lang === "en" ? bride.fullName : bride.fullNameBn || "নওশীন জাহান"}
             </h3>
 
             {/* Parents & Residence Info */}

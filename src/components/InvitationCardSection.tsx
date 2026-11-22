@@ -84,7 +84,7 @@ export default function InvitationCardSection({
       });
 
       const safeName = displayName.replace(/[^a-zA-Z0-9\u0980-\u09FF_-]/g, "_");
-      const filename = `Mahmudul_Mili_Invitation_${safeName || "Guest"}.jpg`;
+      const filename = `Mahmudul_Nowshin_Invitation_${safeName || "Guest"}.jpg`;
 
       const link = document.createElement("a");
       link.download = filename;
@@ -151,8 +151,8 @@ export default function InvitationCardSection({
 
     const message =
       cardLang === "en"
-        ? `السلام عليكم,\nDear ${displayName},\nYou are warmly invited to ${ceremonyEn} of Mahmudul Hasan & Nowshin Jahan Mili. Download your personalized invitation card here:\n\n${shareUrl}\n\nWe look forward to your presence and prayers! 💍✨`
-        : `আসসালামু আলাইকুম,\nশ্রদ্ধেয় ${displayName},\nমাহমুদুল হাসান ও নওশীন জাহান মিলির ${ceremonyBn} আপনার জন্য প্রস্তুতকৃত ডিজিটাল নিমন্ত্রণপত্রটি এই লিংক থেকে দেখে ও ডাউনলোড করে নিন:\n\n${shareUrl}\n\nআপনার দোয়া ও উপস্থিতি একান্ত কাম্য! 💍✨`;
+        ? `السلام عليكم,\nDear ${displayName},\nYou are warmly invited to ${ceremonyEn} of Mahmudul Hasan & Nowshin Jahan. Download your personalized invitation card here:\n\n${shareUrl}\n\nWe look forward to your presence and prayers! 💍✨`
+        : `আসসালামু আলাইকুম,\nশ্রদ্ধেয় ${displayName},\nমাহমুদুল হাসান ও নওশীন জাহানের ${ceremonyBn} আপনার জন্য প্রস্তুতকৃত ডিজিটাল নিমন্ত্রণপত্রটি এই লিংক থেকে দেখে ও ডাউনলোড করে নিন:\n\n${shareUrl}\n\nআপনার দোয়া ও উপস্থিতি একান্ত কাম্য! 💍✨`;
 
     try {
       // 1. Try mobile Web Share API with actual generated JPEG image file
@@ -611,7 +611,7 @@ export default function InvitationCardSection({
                     theme === "ivory" ? "text-emerald-950" : "text-white"
                   }`}
                 >
-                  {cardLang === "en" ? config.couple.groom.fullName : config.couple.groom.fullNameBn || "মুহাম্মাদ মাহমুদুল হাসান"}
+                  {cardLang === "en" ? config.couple.groom.fullName : config.couple.groom.fullNameBn || "মাহমুদুল হাসান"}
                 </h4>
                 <p className={`text-[10px] sm:text-xs ${themeClasses.mutedText}`}>
                   {cardLang === "en"
@@ -644,7 +644,7 @@ export default function InvitationCardSection({
                     theme === "ivory" ? "text-emerald-950" : "text-white"
                   }`}
                 >
-                  {cardLang === "en" ? config.couple.bride.fullName : config.couple.bride.fullNameBn || "নওশীন জাহান মিলি"}
+                  {cardLang === "en" ? config.couple.bride.fullName : config.couple.bride.fullNameBn || "নওশীন জাহান"}
                 </h4>
                 <p className={`text-[10px] sm:text-xs ${themeClasses.mutedText}`}>
                   {cardLang === "en"
@@ -739,7 +739,7 @@ export default function InvitationCardSection({
               <p className={`text-[10px] ${themeClasses.bodyText} mt-0.5 flex items-center justify-center gap-1.5 font-medium`}>
                 <span>📞 +880 1863-846300</span>
                 <span>•</span>
-                <span className={themeClasses.goldText}>#MahmudulWedsMili</span>
+                <span className={themeClasses.goldText}>#MahmudulWedsNowshin</span>
               </p>
             </div>
           </div>

@@ -134,7 +134,7 @@ export default function DuaBlessingsSection({
           <p className="text-stone-300 text-xs sm:text-sm max-w-xl mx-auto mt-2 leading-relaxed">
             {lang === "en"
               ? "Touch any of the authentic Sunnah prayers below to send your heartfelt blessings. Your prayer will be cherished eternally."
-              : "রাসূলুল্লাহ (সাঃ)-এর শেখানো সুন্নতি দোয়াগুলোর যেকোনোটিতে স্পর্শ করে মাহমুদুল ও মিলির নতুন জীবনের জন্য আপনার বরকতময় শুভেচ্ছা পৌঁছে দিন।"}
+              : "রাসূলুল্লাহ (সাঃ)-এর শেখানো সুন্নতি দোয়াগুলোর যেকোনোটিতে স্পর্শ করে মাহমুদুল ও নওশীনের নতুন জীবনের জন্য আপনার বরকতময় শুভেচ্ছা পৌঁছে দিন।"}
           </p>
 
           {/* Live Dua Counter Badge */}

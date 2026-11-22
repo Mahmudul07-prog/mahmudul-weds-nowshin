@@ -51,7 +51,7 @@ export default function LinkGeneratorModal({
         },\nYou are warmly invited to ${ceremonyEn} of ${groomName} & Nowshin. Open the link to view ceremony details and download your personalized Royal Invitation Card (JPEG):\n\n${generatedUrl}\n\nWe eagerly look forward to your presence and prayers! 💍✨`
       : `আসসালামু আলাইকুম,\nশ্রদ্ধেয় ${
           trimmedName || "সম্মানিত সুধী"
-        },\nমাহমুদুল হাসান ও নওশীন জাহান মিলির ${ceremonyBn} আপনি ও আপনার পরিবার সাদরে আমন্ত্রিত। আপনার জন্য বিশেষভাবে প্রস্তুতকৃত রাজকীয় ডিজিটাল নিমন্ত্রণপত্রটি দেখতে নিচের লিংকে প্রবেশ করুন:\n\n${generatedUrl}\n\nআপনার আন্তরিক দোয়া ও উপস্থিতি আমাদের একান্ত কাম্য! 💍✨`;
+        },\nমাহমুদুল হাসান ও নওশীন জাহানের ${ceremonyBn} আপনি ও আপনার পরিবার সাদরে আমন্ত্রিত। আপনার জন্য বিশেষভাবে প্রস্তুতকৃত রাজকীয় ডিজিটাল নিমন্ত্রণপত্রটি দেখতে নিচের লিংকে প্রবেশ করুন:\n\n${generatedUrl}\n\nআপনার আন্তরিক দোয়া ও উপস্থিতি আমাদের একান্ত কাম্য! 💍✨`;
 
   const handleWhatsApp = () => {
     const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;

@@ -17,8 +17,8 @@ export const weddingData: WeddingConfig = {
     groom: {
       name: "Mahmudul",
       nameBn: "মাহমুদুল",
-      fullName: "Md. Mahmudul Hasan",
-      fullNameBn: "মুহাম্মাদ মাহমুদুল হাসান",
+      fullName: "Mahmudul Hasan",
+      fullNameBn: "মাহমুদুল হাসান",
       role: "The Groom",
       bio: "A passionate soul from Pir Bari, Aushpara, Laksam, ready to embark on life's most sacred and beautiful chapter with love and family blessings.",
       fatherName: "Khaza Md Aminul Ehsan",
@@ -42,8 +42,8 @@ export const weddingData: WeddingConfig = {
     bride: {
       name: "Nowshin",
       nameBn: "নওশীন",
-      fullName: "Nowshin Jahan Mili",
-      fullNameBn: "নওশীন জাহান মিলি",
+      fullName: "Nowshin Jahan",
+      fullNameBn: "নওশীন জাহান",
       role: "The Bride",
       bio: "A gracious and gentle soul from Maniksar (Khan Bari), Mudaforgonj, Barura, Cumilla, stepping hand-in-hand with Mahmudul into this sacred journey of eternal companionship, love, and piety.",
       fatherName: "Md. Abdul Malek Khan",
@@ -62,10 +62,10 @@ export const weddingData: WeddingConfig = {
         shortAddress: "Maniksar (Khan Bari), Mudaforgonj, Barura, Cumilla",
         shortAddressBn: "মানিকসার (খান বাড়ি), মুদাফরগঞ্জ, বরুড়া, কুমিল্লা",
       },
-      image: "/images/nowshin-mili-bride.jpg",
+      image: "/images/nowshin-bride.jpg",
       isRevealed: true,
     },
-    hashtag: "#MahmudulWedsMili",
+    hashtag: "#MahmudulWedsNowshin",
     bismillahArabic: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
     bismillahText: "In the name of Allah, the Most Gracious, the Most Merciful",
     quoteEnglish:
@@ -106,7 +106,7 @@ export const weddingData: WeddingConfig = {
       date: "13 November 2026",
       dateBn: "১৩ নভেম্বর ২০২৬",
       description:
-        "The momentous first meeting between Mahmudul and Nowshin Jahan Mili at Maniksar Khan Bari, Mudaforgonj, Barura, Cumilla (Bride's residence). Families united in joy and blessings for the beautiful journey ahead.",
+        "The momentous first meeting between Mahmudul and Nowshin Jahan at Maniksar Khan Bari, Mudaforgonj, Barura, Cumilla (Bride's residence). Families united in joy and blessings for the beautiful journey ahead.",
       descriptionBn:
         "১৩ নভেম্বর ২০২৬, কনের নিজ বাড়ি—মানিকসার খান বাড়ি (মুদাফরগঞ্জ, বরুড়া, কুমিল্লা)-তে অনুষ্ঠিত হলো প্রথম দেখার মাহেন্দ্রক্ষণ। দুই পরিবারের সান্নিধ্য ও আনন্দঘন পরিবেশে রচিত হলো এক আজন্ম ভালোবাসার পবিত্র শুভসূচনা।",
       isUnlocked: true,
