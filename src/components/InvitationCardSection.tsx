@@ -1,12 +1,11 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { Download, Share2, Sparkles, User, RefreshCw, Check, MapPin, Calendar, Award, MessageCircle, Link as LinkIcon } from "lucide-react";
+import { Download, Sparkles, UserCheck, Lock, RefreshCw, Check, MapPin, Calendar, Award, MessageCircle } from "lucide-react";
 import { toJpeg } from "html-to-image";
 import confetti from "canvas-confetti";
 import QRCode from "qrcode";
 import { WeddingConfig } from "@/types";
-import LinkGeneratorModal from "./LinkGeneratorModal";
 
 interface InvitationCardSectionProps {
   config: WeddingConfig;
@@ -24,21 +23,22 @@ export default function InvitationCardSection({
   initialScope = "walima",
 }: InvitationCardSectionProps) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [guestName, setGuestName] = useState(
-    initialGuestName && initialGuestName !== "Honored Guest" ? initialGuestName : ""
-  );
   const [cardLang, setCardLang] = useState<"bn" | "en">(initialLang || "bn");
   const [theme, setTheme] = useState<CardTheme>("emerald");
-  const [inviteScope, setInviteScope] = useState<"walima" | "all">(initialScope);
   const [isGenerating, setIsGenerating] = useState(false);
   const [downloadSuccess, setDownloadSuccess] = useState(false);
-  const [copiedLink, setCopiedLink] = useState(false);
   const [qrCodeUrl, setQrCodeUrl] = useState<string>("");
   const [isSharing, setIsSharing] = useState(false);
-  const [isLinkModalOpen, setIsLinkModalOpen] = useState(false);
   const [shareFeedback, setShareFeedback] = useState<string | null>(null);
 
-  const displayName = guestName.trim() || (cardLang === "en" ? "Honored Guest" : "সম্মানিত সুধী");
+  const inviteScope = initialScope;
+  const displayName =
+    initialGuestName && initialGuestName !== "Honored Guest"
+      ? initialGuestName.trim()
+      : cardLang === "en"
+      ? "Honored Guest"
+      : "শ্রদ্ধাভাজন অতিথি";
+  const guestName = displayName;
 
   useEffect(() => {
     const origin = typeof window !== "undefined" ? window.location.origin : "https://wedding.example.com";
@@ -111,20 +111,6 @@ export default function InvitationCardSection({
     } finally {
       setIsGenerating(false);
     }
-  };
-
-  // Copy shareable guest invitation URL
-  const handleCopyLink = () => {
-    if (typeof window === "undefined") return;
-    const origin = window.location.origin;
-    const scopeParam = inviteScope === "all" ? "&scope=all" : "&scope=walima";
-    const url = guestName.trim()
-      ? `${origin}/?to=${encodeURIComponent(guestName.trim())}${scopeParam}#card`
-      : `${origin}/?scope=${inviteScope}#card`;
-
-    navigator.clipboard.writeText(url);
-    setCopiedLink(true);
-    setTimeout(() => setCopiedLink(false), 2500);
   };
 
   // Smart WhatsApp & Direct Web Share
@@ -276,40 +262,32 @@ export default function InvitationCardSection({
           </h2>
           <p className="text-stone-300 text-xs sm:text-sm max-w-xl mx-auto mt-2 leading-relaxed">
             {cardLang === "en"
-              ? "Each guest receives a unique, beautifully crafted digital wedding card. You can customize the name and download it instantly in high-definition JPEG format."
-              : "প্রতিটি সম্মানিত অতিথির জন্য তৈরি আমাদের বিশেষ রাজকীয় নিমন্ত্রণপত্র। আপনার নাম যুক্ত করে সরাসরি হাই-কোয়ালিটি JPEG ছবি হিসেবে ডাউনলোড করুন।"}
+              ? "Your personalized royal wedding invitation card. Download it directly in high-definition JPEG format."
+              : "আপনার জন্য বিশেষভাবে সংরক্ষিত রাজকীয় ডিজিটাল নিমন্ত্রণপত্র। সরাসরি হাই-কোয়ালিটি JPEG ছবি হিসেবে ডাউনলোড করুন।"}
           </p>
         </div>
 
         {/* Customization Toolbar */}
         <div className="mb-8 p-5 sm:p-6 rounded-3xl royal-glass border border-[#d4af37]/35 shadow-xl">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
-            {/* Guest Name Input */}
+            {/* Official Invited Guest Badge (Locked & Tamper-proof) */}
             <div className="md:col-span-1">
-              <label className="block text-xs font-medium text-stone-300 mb-1.5 flex items-center gap-1.5">
-                <User className="w-3.5 h-3.5 text-[#d4af37]" />
-                {cardLang === "en" ? "Guest / Family Name:" : "কার্ডে অতিথির নাম:"}
-              </label>
-              <div className="relative">
-                <input
-                  type="text"
-                  value={guestName}
-                  onChange={(e) => setGuestName(e.target.value)}
-                  placeholder={cardLang === "en" ? "e.g. Mr. Rafiq & Family" : "যেমন: জনাব মোঃ রফিক ও পরিবার"}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#0b1411] border border-[#d4af37]/40 text-white placeholder-stone-500 text-xs sm:text-sm focus:outline-none focus:border-[#d4af37] transition"
-                />
-                {guestName && (
-                  <button
-                    onClick={() => setGuestName("")}
-                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-white text-xs px-1"
-                  >
-                    ✕
-                  </button>
-                )}
+              <span className="block text-xs font-medium text-stone-300 mb-1.5 flex items-center gap-1.5">
+                <UserCheck className="w-3.5 h-3.5 text-[#d4af37]" />
+                {cardLang === "en" ? "Invited Guest (Official):" : "আমন্ত্রিত সম্মানিত অতিথি:"}
+              </span>
+              <div className="px-3.5 py-2.5 rounded-xl bg-[#0b1411] border border-[#d4af37]/40 flex items-center justify-between gap-2 shadow-inner">
+                <span className="font-serif font-bold text-xs sm:text-sm text-[#fce09b] truncate">
+                  {displayName}
+                </span>
+                <span className="text-[10px] text-emerald-400 font-semibold px-2 py-0.5 rounded-full bg-emerald-950/70 border border-emerald-500/30 flex items-center gap-1 shrink-0">
+                  <Lock className="w-2.5 h-2.5 text-emerald-400" />
+                  {cardLang === "en" ? "Reserved" : "সংরক্ষিত"}
+                </span>
               </div>
             </div>
 
-            {/* Language & Theme Selectors */}
+            {/* Language & Theme Selectors + Invitation Scope */}
             <div className="md:col-span-2 flex flex-wrap items-center justify-between gap-3">
               {/* Language Switch */}
               <div>
@@ -385,34 +363,18 @@ export default function InvitationCardSection({
                 </div>
               </div>
 
-              {/* Scope Switch: Walima Only vs All Ceremonies */}
+              {/* Invitation Scope Badge (Locked & Read-only) */}
               <div>
-                <span className="block text-xs font-medium text-stone-300 mb-1.5">
-                  {cardLang === "en" ? "Invitation Scope:" : "দাওয়াতের পরিধি:"}
+                <span className="block text-xs font-medium text-stone-300 mb-1.5 flex items-center gap-1">
+                  <Sparkles className="w-3.5 h-3.5 text-[#d4af37]" />
+                  {cardLang === "en" ? "Invitation Access:" : "দাওয়াতের আমন্ত্রণ:"}
                 </span>
-                <div className="inline-flex rounded-xl bg-[#0b1411] p-1 border border-[#d4af37]/30 gap-1">
-                  <button
-                    onClick={() => setInviteScope("walima")}
-                    title="Walima Feast Only"
-                    className={`px-2.5 py-1.5 rounded-lg text-xs font-medium transition ${
-                      inviteScope === "walima"
-                        ? "bg-[#d4af37] text-[#0b1411] shadow-md font-semibold"
-                        : "text-stone-300 hover:text-white"
-                    }`}
-                  >
-                    {cardLang === "en" ? "Walima (Feast)" : "ওয়ালিমা ও প্রীতিভোজ"}
-                  </button>
-                  <button
-                    onClick={() => setInviteScope("all")}
-                    title="All Ceremonies (Nikah & Walima)"
-                    className={`px-2.5 py-1.5 rounded-lg text-xs font-medium transition ${
-                      inviteScope === "all"
-                        ? "bg-[#d4af37] text-[#0b1411] shadow-md font-semibold"
-                        : "text-stone-300 hover:text-white"
-                    }`}
-                  >
-                    {cardLang === "en" ? "Akd + Walima" : "আকদ ও ওয়ালিমা"}
-                  </button>
+                <div className="px-3.5 py-1.5 rounded-xl bg-[#0b1411] border border-[#d4af37]/35 text-xs font-semibold text-[#fce09b] flex items-center gap-1.5 shadow-inner">
+                  <span>
+                    {inviteScope === "all"
+                      ? (cardLang === "en" ? "Akd + Walima" : "আকদ ও ওয়ালিমা")
+                      : (cardLang === "en" ? "Walima (Feast)" : "ওয়ালিমা ও প্রীতিভোজ")}
+                  </span>
                 </div>
               </div>
             </div>
@@ -436,24 +398,6 @@ export default function InvitationCardSection({
                   ? (cardLang === "en" ? "Preparing Card..." : "কার্ড প্রস্তুত হচ্ছে...")
                   : (cardLang === "en" ? "Share on WhatsApp" : "হোয়াটসঅ্যাপে পাঠান")}
               </span>
-            </button>
-
-            {/* Custom Link Generator Modal Opener */}
-            <button
-              onClick={() => setIsLinkModalOpen(true)}
-              className="px-3.5 py-2.5 rounded-xl bg-[#13241f] hover:bg-[#1a352c] text-[#fce09b] border border-[#d4af37]/35 text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer"
-            >
-              <LinkIcon className="w-3.5 h-3.5 text-[#d4af37]" />
-              <span>{cardLang === "en" ? "Create Custom Link" : "কাস্টম লিংক তৈরি"}</span>
-            </button>
-
-            {/* Copy Card Link */}
-            <button
-              onClick={handleCopyLink}
-              className="px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-stone-200 border border-white/10 text-xs font-medium flex items-center gap-1.5 transition cursor-pointer"
-            >
-              {copiedLink ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Share2 className="w-3.5 h-3.5 text-[#d4af37]" />}
-              <span>{copiedLink ? (cardLang === "en" ? "Link Copied!" : "লিংক কপি হয়েছে!") : (cardLang === "en" ? "Copy Link" : "লিংক কপি")}</span>
             </button>
 
             {/* DOWNLOAD JPEG BUTTON */}
@@ -756,18 +700,11 @@ export default function InvitationCardSection({
           <span>•</span>
           <span>
             {cardLang === "en"
-              ? "Share link directly to invite specific guests by name"
-              : "মেহমানের নাম দিয়ে লিংক শেয়ার করতে পারেন"}
+              ? "Save or download your exclusive invitation to keep as a cherished keepsake"
+              : "স্মৃতি হিসেবে আপনার সংরক্ষিত নিমন্ত্রণপত্রটি এখনই ডাউনলোড করে রাখুন"}
           </span>
         </div>
       </div>
-
-      {/* Link Generator Modal */}
-      <LinkGeneratorModal
-        isOpen={isLinkModalOpen}
-        onClose={() => setIsLinkModalOpen(false)}
-        groomName={config.couple.groom.name}
-      />
     </section>
   );
 }

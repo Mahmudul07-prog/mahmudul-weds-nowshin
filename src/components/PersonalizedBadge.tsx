@@ -1,14 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { UserCheck, Share2, Globe, Volume2, VolumeX, Menu, X, Calendar, Send, CheckCircle2, Sparkles, Award, Camera } from "lucide-react";
-import LinkGeneratorModal from "./LinkGeneratorModal";
+import { UserCheck, Globe, Volume2, VolumeX, Menu, X, Calendar, Send, CheckCircle2, Sparkles, Award, Camera } from "lucide-react";
 
 interface PersonalizedBadgeProps {
   guestName: string;
   lang: "en" | "bn";
   onToggleLang: () => void;
-  groomName: string;
+  groomName?: string;
   isMuted?: boolean;
   onToggleMute?: () => void;
 }
@@ -17,11 +16,9 @@ export default function PersonalizedBadge({
   guestName,
   lang,
   onToggleLang,
-  groomName,
   isMuted,
   onToggleMute,
 }: PersonalizedBadgeProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
@@ -155,18 +152,6 @@ export default function PersonalizedBadge({
               </button>
             )}
 
-            {/* Create Link for another guest */}
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-[#13241f] hover:bg-[#1a332c] text-[#fce09b] border border-[#d4af37]/35 transition shadow-sm"
-              title="Generate a custom link for any guest"
-            >
-              <Share2 className="w-3.5 h-3.5 text-[#d4af37]" />
-              <span className="hidden sm:inline">
-                {lang === "en" ? "Create Link" : "লিংক বানান"}
-              </span>
-            </button>
-
             {/* Language Switcher */}
             <button
               onClick={onToggleLang}
@@ -214,12 +199,6 @@ export default function PersonalizedBadge({
           </div>
         )}
       </header>
-
-      <LinkGeneratorModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        groomName={groomName}
-      />
     </>
   );
 }
