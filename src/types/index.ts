@@ -112,7 +112,7 @@ export interface WeddingConfig {
   contact: {
     phone: string;
     whatsapp: string;
-    email: string;
+    email?: string;
   };
   music: {
     title: string;

@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Heart, Phone, MessageCircle, Mail, Lock } from "lucide-react";
+import { Heart, Phone, MessageCircle, Lock } from "lucide-react";
 import { WeddingConfig } from "@/types";
 
 interface FooterProps {
@@ -51,13 +51,6 @@ export default function Footer({ config, lang }: FooterProps) {
           >
             <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" />
             <span>WhatsApp Helpline</span>
-          </a>
-          <a
-            href={`mailto:${config.contact.email}`}
-            className="flex items-center gap-1.5 hover:text-[#d4af37] transition"
-          >
-            <Mail className="w-3.5 h-3.5 text-[#d4af37]" />
-            <span>{config.contact.email}</span>
           </a>
         </div>
 

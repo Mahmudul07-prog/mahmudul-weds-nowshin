@@ -238,7 +238,6 @@ export const weddingData: WeddingConfig = {
   contact: {
     phone: "+880 1863-846300",
     whatsapp: "+880 1863-846300",
-    email: "invitation@example.com",
   },
 
   music: {
