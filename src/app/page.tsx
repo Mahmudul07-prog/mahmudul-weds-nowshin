@@ -11,8 +11,8 @@ import DuaBlessingsSection from "@/components/DuaBlessingsSection";
 import InvitationCardSection from "@/components/InvitationCardSection";
 // import StoryTimeline from "@/components/StoryTimeline";
 import EventsSection from "@/components/EventsSection";
-import GallerySection from "@/components/GallerySection";
-import RsvpSection from "@/components/RsvpSection";
+// import GallerySection from "@/components/GallerySection";
+// import RsvpSection from "@/components/RsvpSection";
 import WishesSection from "@/components/WishesSection";
 import Footer from "@/components/Footer";
 import PetalsEffect from "@/components/PetalsEffect";
@@ -122,17 +122,21 @@ function WeddingContent() {
             lang={lang}
           />
 
-          {/* Wedding Photo Memories & Guest Selfie Gallery Wall */}
+          {/* Wedding Photo Memories & Guest Selfie Gallery Wall (Hidden from UI as requested, kept commented in code) */}
+          {/* 
           <GallerySection
             initialGuestName={guestName}
             lang={lang}
           />
+          */}
 
-          {/* RSVP Attendance Form */}
+          {/* RSVP Attendance Form (Hidden from UI as requested, kept commented in code) */}
+          {/* 
           <RsvpSection
             initialGuestName={guestName}
             lang={lang}
           />
+          */}
 
           {/* Wishes & Feedback Guestbook Wall */}
           <WishesSection

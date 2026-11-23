@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Calendar, Clock, MapPin, Send, CheckCircle2, Download } from "lucide-react";
+import { Calendar, Clock, MapPin, Send, Download } from "lucide-react";
 import { WeddingConfig } from "@/types";
 
 interface HeroSectionProps {
@@ -153,6 +153,7 @@ export default function HeroSection({ config, lang, guestName }: HeroSectionProp
             <Download className="w-4 h-4 text-[#061a14]" />
             {lang === "en" ? "Download Invitation Card" : "নিমন্ত্রণপত্র ডাউনলোড করুন"}
           </a>
+          {/* 
           <a
             href="#rsvp"
             className="px-6 py-3 rounded-full royal-glass hover:bg-[#1a352c] text-[#fce09b] border border-[#d4af37]/40 font-semibold text-xs sm:text-sm transition flex items-center gap-2"
@@ -160,6 +161,7 @@ export default function HeroSection({ config, lang, guestName }: HeroSectionProp
             <CheckCircle2 className="w-4 h-4 text-[#d4af37]" />
             {lang === "en" ? "Confirm Attendance (RSVP)" : "উপস্থিতি নিশ্চিত করুন (RSVP)"}
           </a>
+          */}
           <a
             href="#events"
             className="px-6 py-3 rounded-full royal-glass hover:bg-[#1a352c] text-stone-200 border border-white/10 text-xs sm:text-sm font-medium transition flex items-center gap-2"

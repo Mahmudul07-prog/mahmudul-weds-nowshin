@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { UserCheck, Globe, Volume2, VolumeX, Menu, X, Calendar, Send, CheckCircle2, Sparkles, Award, Camera } from "lucide-react";
+import { UserCheck, Globe, Volume2, VolumeX, Menu, X, Calendar, Send, Sparkles, Award } from "lucide-react";
 
 interface PersonalizedBadgeProps {
   guestName: string;
@@ -42,6 +42,7 @@ export default function PersonalizedBadge({
       highlight: false,
       icon: <Calendar className="w-3.5 h-3.5" />,
     },
+    /*
     {
       href: "#gallery",
       labelEn: "Gallery",
@@ -54,6 +55,7 @@ export default function PersonalizedBadge({
       labelBn: "উপস্থিতি (RSVP)",
       icon: <CheckCircle2 className="w-3.5 h-3.5" />,
     },
+    */
     {
       href: "#wishes",
       labelEn: "Wishes",
