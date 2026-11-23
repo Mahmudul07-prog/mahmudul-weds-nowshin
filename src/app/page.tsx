@@ -9,7 +9,7 @@ import HeroSection from "@/components/HeroSection";
 import CoupleSection from "@/components/CoupleSection";
 import DuaBlessingsSection from "@/components/DuaBlessingsSection";
 import InvitationCardSection from "@/components/InvitationCardSection";
-import StoryTimeline from "@/components/StoryTimeline";
+// import StoryTimeline from "@/components/StoryTimeline";
 import EventsSection from "@/components/EventsSection";
 import GallerySection from "@/components/GallerySection";
 import RsvpSection from "@/components/RsvpSection";
@@ -108,11 +108,13 @@ function WeddingContent() {
             initialScope={initialScope}
           />
 
-          {/* Story & Journey Milestones (Modular with upcoming locks) */}
+          {/* Story & Journey Milestones (Hidden from UI as requested, kept commented in code) */}
+          {/* 
           <StoryTimeline
             milestones={weddingData.story}
             lang={lang}
           />
+          */}
 
           {/* Ceremony Schedule & Venue Locations */}
           <EventsSection
