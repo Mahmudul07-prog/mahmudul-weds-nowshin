@@ -140,7 +140,8 @@ export default function CoupleSection({ config, lang }: CoupleSectionProps) {
               {bride.bio}
             </p>
 
-            {/* Milestone note */}
+            {/* Milestone note (Hidden from UI as requested, kept commented in code) */}
+            {/* 
             {bride.isRevealed ? (
               <div className="mt-4 p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-[11px] text-emerald-300 max-w-xs text-center shadow-sm">
                 🌸 {lang === "en" 
@@ -154,6 +155,7 @@ export default function CoupleSection({ config, lang }: CoupleSectionProps) {
                   : "কনের সাথে প্রথম দেখার পর সুন্দর ছবি ও বিস্তারিত তথ্য এই কার্ডে যুক্ত করা হবে ইনশাআল্লাহ!"}
               </div>
             )}
+            */}
           </div>
         </div>
       </div>
